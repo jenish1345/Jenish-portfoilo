@@ -14,31 +14,32 @@ const Portfolio = () => {
 
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with payment integration and admin dashboard",
-      tech: ["React", "Node.js", "MongoDB", "Stripe"],
-      image: "🛒",
-      link: "#"
-    },
-    {
-      title: "Task Management App",
-      description: "Collaborative task management tool with real-time updates",
-      tech: ["Vue.js", "Firebase", "Tailwind"],
+      title: "Habit Tracker Application",
+      description: "Object-oriented habit tracking application built with Java, implementing OOP concepts for efficient habit management and progress tracking",
+      tech: ["Java", "OOP", "GUI Design", "Data Structures"],
       image: "📋",
       link: "#"
     },
     {
-      title: "Weather Dashboard",
-      description: "Beautiful weather app with location-based forecasts",
-      tech: ["React", "API Integration", "CSS3"],
-      image: "🌤️",
+      title: "News Scraping & Analysis",
+      description: "Data science project using Python for web scraping news articles and performing sentiment analysis and trend detection",
+      tech: ["Python", "Data Science", "Web Scraping", "Analytics"],
+      image: "📰",
+      link: "#"
+    },
+    {
+      title: "IoT Smart Solutions",
+      description: "Exploring Internet of Things applications with sensor integration and real-time data monitoring systems",
+      tech: ["IoT", "Sensors", "Real-time Data", "Arduino"],
+      image: "🌐",
       link: "#"
     }
   ];
 
   const skills = [
-    "JavaScript", "TypeScript", "React", "Vue.js", "Node.js", 
-    "Python", "MongoDB", "PostgreSQL", "AWS", "Docker"
+    "Java", "Python", "Web Design", "Data Science", "Machine Learning", 
+    "Artificial Intelligence", "IoT", "Blockchain", "Big Data Analytics", 
+    "Graphic Design", "Branding", "Marketing"
   ];
 
   return (
@@ -52,16 +53,16 @@ const Portfolio = () => {
         }`}>
           <div className="mb-8">
             <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-6xl animate-pulse-glow">
-              👨‍💻
+              👨‍🎓
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-              John Developer
+              Antony Jenish Fernando J
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in-up">
-              Full-Stack Developer & UI/UX Enthusiast
+              Computer Science Student & Tech Enthusiast
             </p>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-              Crafting beautiful, functional, and user-centered digital experiences with modern technologies and creative problem-solving.
+              Enthusiastic and detail-oriented computer science student with a strong foundation in programming, software development, and problem-solving. Passionate about AI, machine learning, and creating innovative solutions.
             </p>
           </div>
           
@@ -99,7 +100,7 @@ const Portfolio = () => {
               About Me
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Passionate developer with 5+ years of experience building scalable web applications
+              B.Tech Information Technology Student at Loyola-ICAM College of Engineering and Technology
             </p>
           </div>
           
@@ -107,28 +108,56 @@ const Portfolio = () => {
             <Card className="glass-card hover-glow p-8">
               <h3 className="text-2xl font-semibold mb-4">My Journey</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Started as a curious computer science student and evolved into a passionate full-stack developer. 
-                I love turning complex problems into simple, beautiful solutions that make a difference.
+                Currently pursuing B.Tech in Information Technology at Loyola-ICAM College of Engineering and Technology (2023-2027). 
+                Completed Computer Science stream at BNC Matriculation Higher Secondary School (2016-2023).
               </p>
-              <p className="text-muted-foreground leading-relaxed">
-                When I'm not coding, you'll find me exploring new technologies, contributing to open source, 
-                or sharing knowledge with the developer community.
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                I am eager to apply my technical skills and gain hands-on experience through internships. 
+                My interests include artificial intelligence, machine learning, and full-stack web development.
               </p>
+              <div className="space-y-2">
+                <p className="text-sm text-muted-foreground">
+                  <strong>Languages:</strong> English, Tamil
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  <strong>Location:</strong> Nungambakkam, Chennai
+                </p>
+              </div>
             </Card>
             
             <Card className="glass-card hover-glow p-8">
-              <h3 className="text-2xl font-semibold mb-6">Skills & Technologies</h3>
-              <div className="flex flex-wrap gap-2">
-                {skills.map((skill, index) => (
-                  <Badge 
-                    key={skill} 
-                    variant="secondary" 
-                    className="hover-glow transition-all duration-300 hover:scale-105"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    {skill}
-                  </Badge>
-                ))}
+              <h3 className="text-2xl font-semibold mb-6">Skills & Areas of Interest</h3>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-medium mb-3 text-primary">Core Skills</h4>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {skills.slice(0, 6).map((skill, index) => (
+                      <Badge 
+                        key={skill} 
+                        variant="secondary" 
+                        className="hover-glow transition-all duration-300 hover:scale-105"
+                        style={{ animationDelay: `${index * 0.1}s` }}
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-lg font-medium mb-3 text-primary">Areas of Interest</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {skills.slice(6).map((skill, index) => (
+                      <Badge 
+                        key={skill} 
+                        variant="outline" 
+                        className="hover-glow transition-all duration-300 hover:scale-105"
+                        style={{ animationDelay: `${(index + 6) * 0.1}s` }}
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
               </div>
             </Card>
           </div>
@@ -144,7 +173,7 @@ const Portfolio = () => {
               Featured Projects
             </h2>
             <p className="text-muted-foreground text-lg">
-              Some of my recent work that I'm proud of
+              Academic and personal projects showcasing technical skills and innovation
             </p>
           </div>
           
@@ -189,20 +218,25 @@ const Portfolio = () => {
           <Card className="glass-card hover-glow p-12">
             <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
               <Code className="h-8 w-8 text-primary" />
-              Let's Build Something Amazing
+              Let's Connect & Collaborate
             </h2>
             <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-              Have a project in mind? I'd love to hear about it and help bring your ideas to life.
+              Interested in internships, projects, or tech discussions? I'd love to connect and explore opportunities together.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4 mb-8">
               <Button size="lg" className="hover-glow group">
                 <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                Start a Conversation
+                antonyjenish745@gmail.com
               </Button>
               <Button variant="outline" size="lg" className="hover-glow group">
-                <Github className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                View GitHub
+                <span className="mr-2">📱</span>
+                +91 9962397434
               </Button>
+            </div>
+            <div className="text-center">
+              <p className="text-sm text-muted-foreground">
+                Nungambakkam, Chennai | Open to opportunities and collaborations
+              </p>
             </div>
           </Card>
         </div>
