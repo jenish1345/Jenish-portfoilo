@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AnimatedBackground from "./AnimatedBackground";
 import { Github, Linkedin, Mail, ExternalLink, Code, Briefcase, User, Download } from "lucide-react";
+import antonyPhoto from "@/assets/antony-photo.jpg";
 
 const Portfolio = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -52,8 +53,12 @@ const Portfolio = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <div className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center text-6xl animate-pulse-glow">
-              👨‍🎓
+            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center animate-pulse-glow overflow-hidden">
+              <img 
+                src={antonyPhoto} 
+                alt="Antony Jenish Fernando J" 
+                className="w-full h-full object-cover rounded-full hover:scale-110 transition-transform duration-500"
+              />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               Antony Jenish Fernando J
@@ -224,14 +229,14 @@ const Portfolio = () => {
               Interested in internships, projects, or tech discussions? I'd love to connect and explore opportunities together.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <Button size="lg" className="hover-glow group">
-                <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-                antonyjenish745@gmail.com
-              </Button>
-              <Button variant="outline" size="lg" className="hover-glow group">
-                <span className="mr-2">📱</span>
-                +91 9962397434
-              </Button>
+            <Button size="lg" className="hover-glow group">
+              <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+              jenfdo134@gmail.com
+            </Button>
+            <Button variant="outline" size="lg" className="hover-glow group">
+              <span className="mr-2">📱</span>
+              +91 9042679134
+            </Button>
             </div>
             <div className="text-center">
               <p className="text-sm text-muted-foreground">
