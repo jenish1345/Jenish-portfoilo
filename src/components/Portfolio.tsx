@@ -47,14 +47,32 @@ const Portfolio = () => {
     <div className="bg-animated min-h-screen relative">
       <AnimatedBackground />
       
+      {/* Enhanced Background Elements */}
+      <div className="geometric-shapes">
+        <div className="geometric-shape shape-1"></div>
+        <div className="geometric-shape shape-2"></div>
+        <div className="geometric-shape shape-3"></div>
+        <div className="geometric-shape shape-4"></div>
+      </div>
+      
+      <div className="floating-orb orb-1"></div>
+      <div className="floating-orb orb-2"></div>
+      <div className="floating-orb orb-3"></div>
+      
+      <div className="wave-background"></div>
+      
       {/* Hero Section */}
       <section className="relative z-10 min-h-screen flex items-center justify-center px-6">
         <div className={`text-center max-w-4xl mx-auto transition-all duration-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <div className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full flex items-center justify-center animate-pulse-glow text-6xl">
-              👨‍🎓
+            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full flex items-center justify-center animate-pulse-glow overflow-hidden">
+              <img 
+                src="/lovable-uploads/d737aef4-76c3-4c23-ab88-26d76a8d4b78.png" 
+                alt="Antony Jenish Fernando J" 
+                className="w-full h-full object-cover rounded-full hover:scale-110 transition-transform duration-500"
+              />
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
               Antony Jenish Fernando J
