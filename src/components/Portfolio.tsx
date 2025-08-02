@@ -53,10 +53,10 @@ const Portfolio = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <div className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center animate-pulse-glow text-6xl">
+            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full flex items-center justify-center animate-pulse-glow text-6xl">
               👨‍🎓
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
               Antony Jenish Fernando J
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in-up">

@@ -28,44 +28,44 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 26% 14%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 5%;
+    --foreground: 60 100% 90%;
 
-    --card: 224 71.4% 4.1%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 8%;
+    --card-foreground: 60 100% 90%;
 
-    --popover: 224 71.4% 4.1%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 60 100% 90%;
 
-    --primary: 263 70% 50%;
-    --primary-foreground: 210 40% 98%;
-    --primary-glow: 263 70% 65%;
+    --primary: 60 100% 50%;
+    --primary-foreground: 0 0% 0%;
+    --primary-glow: 60 100% 65%;
 
-    --secondary: 215 27.9% 16.9%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 60 100% 90%;
 
-    --muted: 215 27.9% 16.9%;
-    --muted-foreground: 217.9 10.6% 64.9%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 60 20% 70%;
 
-    --accent: 215 27.9% 16.9%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 60 100% 50%;
+    --accent-foreground: 0 0% 0%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 60 100% 90%;
 
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 263 70% 50%;
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    --ring: 60 100% 50%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-hero: linear-gradient(135deg, hsl(220 26% 14%) 0%, hsl(224 71.4% 4.1%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(224 71.4% 4.1% / 0.8), hsl(215 27.9% 16.9% / 0.4));
+    --gradient-primary: linear-gradient(135deg, hsl(60 100% 50%), hsl(60 100% 65%));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 5%) 0%, hsl(0 0% 8%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 8% / 0.8), hsl(0 0% 15% / 0.4));
 
     /* Animation colors */
-    --particle-1: 263 70% 50%;
-    --particle-2: 280 100% 70%;
-    --particle-3: 200 100% 60%;
+    --particle-1: 60 100% 50%;
+    --particle-2: 50 100% 60%;
+    --particle-3: 45 100% 55%;
 
     --radius: 0.5rem;
 
