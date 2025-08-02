@@ -74,36 +74,36 @@ const Portfolio = () => {
                 className="w-full h-full object-cover rounded-full hover:scale-110 transition-transform duration-500"
               />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent shimmer-text">
               Antony Jenish Fernando J
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in-up">
-              Computer Science Student & Tech Enthusiast
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+              Information Technology Student & Tech Enthusiast
             </p>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-              Enthusiastic and detail-oriented computer science student with a strong foundation in programming, software development, and problem-solving. Passionate about AI, machine learning, and creating innovative solutions.
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+              Enthusiastic and detail-oriented Information Technology student with a strong foundation in programming, software development, and problem-solving. Passionate about AI, machine learning, and creating innovative solutions.
             </p>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
-            <Button className="hover-glow group" size="lg">
+          <div className="flex flex-wrap justify-center gap-4 mb-12 animate-bounce-in" style={{ animationDelay: '0.9s' }}>
+            <Button className="hover-glow group animate-slide-in-left" style={{ animationDelay: '1.2s' }} size="lg">
               <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Get In Touch
             </Button>
-            <Button variant="outline" className="hover-glow group" size="lg">
+            <Button variant="outline" className="hover-glow group animate-slide-in-right" style={{ animationDelay: '1.2s' }} size="lg">
               <Download className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Download CV
             </Button>
           </div>
           
-          <div className="flex justify-center gap-6">
-            <Button variant="ghost" size="icon" className="hover-glow rounded-full">
+          <div className="flex justify-center gap-6 animate-fade-in-up" style={{ animationDelay: '1.5s' }}>
+            <Button variant="ghost" size="icon" className="hover-glow rounded-full animate-bounce-in" style={{ animationDelay: '1.6s' }}>
               <Github className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover-glow rounded-full">
+            <Button variant="ghost" size="icon" className="hover-glow rounded-full animate-bounce-in" style={{ animationDelay: '1.7s' }}>
               <Linkedin className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover-glow rounded-full">
+            <Button variant="ghost" size="icon" className="hover-glow rounded-full animate-bounce-in" style={{ animationDelay: '1.8s' }}>
               <Mail className="h-6 w-6" />
             </Button>
           </div>
