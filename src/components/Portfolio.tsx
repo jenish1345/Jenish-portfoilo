@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AnimatedBackground from "./AnimatedBackground";
 import { Github, Linkedin, Mail, ExternalLink, Code, Briefcase, User, Download } from "lucide-react";
-import antonyPhoto from "@/assets/antony-photo.jpg";
+
 
 const Portfolio = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -53,12 +53,8 @@ const Portfolio = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <div className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center animate-pulse-glow overflow-hidden">
-              <img 
-                src={antonyPhoto} 
-                alt="Antony Jenish Fernando J" 
-                className="w-full h-full object-cover rounded-full hover:scale-110 transition-transform duration-500"
-              />
+            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center animate-pulse-glow text-6xl">
+              👨‍🎓
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               Antony Jenish Fernando J
