@@ -184,24 +184,48 @@ const Portfolio = () => {
           </div>
           
           <div className="hero-buttons flex flex-wrap justify-center gap-4 mb-12">
-            <Button className="hover-glow group" size="lg">
+            <Button 
+              className="hover-glow group" 
+              size="lg"
+              onClick={() => window.location.href = 'mailto:jenfdo134@gmail.com'}
+            >
               <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Get In Touch
             </Button>
-            <Button variant="outline" className="hover-glow group" size="lg">
+            <Button 
+              variant="outline" 
+              className="hover-glow group" 
+              size="lg"
+              onClick={() => window.open('#', '_blank')}
+            >
               <Download className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Download CV
             </Button>
           </div>
           
           <div className="hero-social flex justify-center gap-6">
-            <Button variant="ghost" size="icon" className="hover-glow rounded-full">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover-glow rounded-full"
+              onClick={() => window.open('https://github.com/your-username', '_blank')}
+            >
               <Github className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover-glow rounded-full">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover-glow rounded-full"
+              onClick={() => window.open('https://linkedin.com/in/your-profile', '_blank')}
+            >
               <Linkedin className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover-glow rounded-full">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover-glow rounded-full"
+              onClick={() => window.location.href = 'mailto:jenfdo134@gmail.com'}
+            >
               <Mail className="h-6 w-6" />
             </Button>
           </div>
@@ -340,11 +364,20 @@ const Portfolio = () => {
               Interested in internships, projects, or tech discussions? I'd love to connect and explore opportunities together.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Button size="lg" className="hover-glow group">
+            <Button 
+              size="lg" 
+              className="hover-glow group"
+              onClick={() => window.location.href = 'mailto:jenfdo134@gmail.com'}
+            >
               <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               jenfdo134@gmail.com
             </Button>
-            <Button variant="outline" size="lg" className="hover-glow group">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="hover-glow group"
+              onClick={() => window.location.href = 'tel:+919042679134'}
+            >
               <span className="mr-2">📱</span>
               +91 9042679134
             </Button>
