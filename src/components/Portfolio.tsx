@@ -1,16 +1,114 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AnimatedBackground from "./AnimatedBackground";
 import { Github, Linkedin, Mail, ExternalLink, Code, Briefcase, User, Download } from "lucide-react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 const Portfolio = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const heroRef = useRef(null);
+  const aboutRef = useRef(null);
+  const projectsRef = useRef(null);
+  const contactRef = useRef(null);
 
   useEffect(() => {
     setIsVisible(true);
+    
+    // GSAP Hero animations
+    const tl = gsap.timeline();
+    
+    tl.fromTo(".hero-avatar", 
+      { scale: 0, rotation: -180, opacity: 0 },
+      { scale: 1, rotation: 0, opacity: 1, duration: 1, ease: "back.out(1.7)" }
+    )
+    .fromTo(".hero-title", 
+      { y: 100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" }, "-=0.5"
+    )
+    .fromTo(".hero-subtitle", 
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, ease: "power2.out" }, "-=0.3"
+    )
+    .fromTo(".hero-description", 
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, "-=0.2"
+    )
+    .fromTo(".hero-buttons", 
+      { y: 20, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.4, ease: "power2.out" }, "-=0.1"
+    )
+    .fromTo(".hero-social", 
+      { scale: 0, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)", stagger: 0.1 }, "-=0.2"
+    );
+
+    // GSAP ScrollTrigger animations for sections
+    gsap.fromTo(".about-card", 
+      { y: 100, opacity: 0, scale: 0.8 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        scale: 1, 
+        duration: 0.8, 
+        ease: "power3.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: ".about-section",
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    gsap.fromTo(".project-card", 
+      { y: 80, opacity: 0, rotationY: 45 },
+      { 
+        y: 0, 
+        opacity: 1, 
+        rotationY: 0, 
+        duration: 0.7, 
+        ease: "power2.out",
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: ".projects-section",
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    gsap.fromTo(".contact-card", 
+      { scale: 0.8, opacity: 0, y: 50 },
+      { 
+        scale: 1, 
+        opacity: 1, 
+        y: 0, 
+        duration: 0.8, 
+        ease: "elastic.out(1, 0.5)",
+        scrollTrigger: {
+          trigger: ".contact-section",
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Floating animation for cards
+    gsap.to(".floating-card", {
+      y: -10,
+      duration: 2,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1,
+      stagger: 0.5
+    });
+
   }, []);
 
   const projects = [
@@ -67,43 +165,43 @@ const Portfolio = () => {
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           <div className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full flex items-center justify-center animate-pulse-glow overflow-hidden">
+            <div className="hero-avatar w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full flex items-center justify-center overflow-hidden">
               <img 
                 src="/lovable-uploads/d737aef4-76c3-4c23-ab88-26d76a8d4b78.png" 
                 alt="Antony Jenish Fernando J" 
-                className="w-full h-full object-cover rounded-full hover:scale-110 transition-transform duration-500"
+                className="w-full h-full object-cover rounded-full"
               />
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent shimmer-text">
+            <h1 className="hero-title text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent shimmer-text">
               Antony Jenish Fernando J
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 animate-fade-in-up" style={{ animationDelay: '0.3s' }}>
+            <p className="hero-subtitle text-xl md:text-2xl text-muted-foreground mb-8">
               Information Technology Student & Tech Enthusiast
             </p>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+            <p className="hero-description text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
               Enthusiastic and detail-oriented Information Technology student with a strong foundation in programming, software development, and problem-solving. Passionate about AI, machine learning, and creating innovative solutions.
             </p>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-4 mb-12 animate-bounce-in" style={{ animationDelay: '0.9s' }}>
-            <Button className="hover-glow group animate-slide-in-left" style={{ animationDelay: '1.2s' }} size="lg">
+          <div className="hero-buttons flex flex-wrap justify-center gap-4 mb-12">
+            <Button className="hover-glow group" size="lg">
               <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Get In Touch
             </Button>
-            <Button variant="outline" className="hover-glow group animate-slide-in-right" style={{ animationDelay: '1.2s' }} size="lg">
+            <Button variant="outline" className="hover-glow group" size="lg">
               <Download className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
               Download CV
             </Button>
           </div>
           
-          <div className="flex justify-center gap-6 animate-fade-in-up" style={{ animationDelay: '1.5s' }}>
-            <Button variant="ghost" size="icon" className="hover-glow rounded-full animate-bounce-in" style={{ animationDelay: '1.6s' }}>
+          <div className="hero-social flex justify-center gap-6">
+            <Button variant="ghost" size="icon" className="hover-glow rounded-full">
               <Github className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover-glow rounded-full animate-bounce-in" style={{ animationDelay: '1.7s' }}>
+            <Button variant="ghost" size="icon" className="hover-glow rounded-full">
               <Linkedin className="h-6 w-6" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover-glow rounded-full animate-bounce-in" style={{ animationDelay: '1.8s' }}>
+            <Button variant="ghost" size="icon" className="hover-glow rounded-full">
               <Mail className="h-6 w-6" />
             </Button>
           </div>
@@ -111,7 +209,7 @@ const Portfolio = () => {
       </section>
 
       {/* About Section */}
-      <section className="relative z-10 py-20 px-6">
+      <section className="about-section relative z-10 py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
@@ -124,7 +222,7 @@ const Portfolio = () => {
           </div>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <Card className="glass-card hover-glow p-8">
+            <Card className="about-card floating-card glass-card hover-glow p-8">
               <h3 className="text-2xl font-semibold mb-4">My Journey</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Currently pursuing B.Tech in Information Technology at Loyola-ICAM College of Engineering and Technology (2023-2027). 
@@ -144,7 +242,7 @@ const Portfolio = () => {
               </div>
             </Card>
             
-            <Card className="glass-card hover-glow p-8">
+            <Card className="about-card floating-card glass-card hover-glow p-8">
               <h3 className="text-2xl font-semibold mb-6">Skills & Areas of Interest</h3>
               <div className="space-y-4">
                 <div>
@@ -184,7 +282,7 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Section */}
-      <section className="relative z-10 py-20 px-6">
+      <section className="projects-section relative z-10 py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
@@ -200,8 +298,7 @@ const Portfolio = () => {
             {projects.map((project, index) => (
               <Card 
                 key={project.title} 
-                className="glass-card hover-glow group cursor-pointer transition-all duration-500"
-                style={{ animationDelay: `${index * 0.2}s` }}
+                className="project-card floating-card glass-card hover-glow group cursor-pointer transition-all duration-500"
               >
                 <div className="p-6">
                   <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
@@ -232,9 +329,9 @@ const Portfolio = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="relative z-10 py-20 px-6">
+      <section className="contact-section relative z-10 py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <Card className="glass-card hover-glow p-12">
+          <Card className="contact-card floating-card glass-card hover-glow p-12">
             <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
               <Code className="h-8 w-8 text-primary" />
               Let's Connect & Collaborate
