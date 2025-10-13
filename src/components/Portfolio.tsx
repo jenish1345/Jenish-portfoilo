@@ -127,10 +127,10 @@ const Portfolio = () => {
       link: "#"
     },
     {
-      title: "IoT Smart Solutions",
-      description: "Exploring Internet of Things applications with sensor integration and real-time data monitoring systems",
-      tech: ["IoT", "Sensors", "Real-time Data", "Arduino"],
-      image: "🌐",
+      title: "Sportizen",
+      description: "A sports-based social application that enables athletes and sports enthusiasts to share their achievements, connect with like-minded individuals, and celebrate sporting milestones",
+      tech: ["Mobile App", "Social Media", "Sports Tech", "Community"],
+      image: "🏆",
       link: "#"
     }
   ];
@@ -302,6 +302,43 @@ const Portfolio = () => {
               </div>
             </Card>
           </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section className="relative z-10 py-20 px-6 bg-gradient-to-b from-background to-background/50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
+              <Briefcase className="h-8 w-8 text-primary" />
+              Experience
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Professional internships and hands-on experience
+            </p>
+          </div>
+          
+          <Card className="about-card floating-card glass-card hover-glow p-8 max-w-3xl mx-auto">
+            <div className="flex items-start gap-6">
+              <div className="text-5xl">🚢</div>
+              <div className="flex-1">
+                <div className="flex items-center justify-between mb-2">
+                  <h3 className="text-2xl font-semibold">Intern</h3>
+                  <Badge variant="secondary" className="hover-glow">Internship</Badge>
+                </div>
+                <p className="text-primary font-medium text-lg mb-2">V.O. Chidambaranar Port Trust</p>
+                <p className="text-muted-foreground mb-4">
+                  Gained hands-on experience in port operations, logistics management, and maritime technology systems at one of India's major ports.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline">Port Operations</Badge>
+                  <Badge variant="outline">Logistics</Badge>
+                  <Badge variant="outline">Maritime Tech</Badge>
+                  <Badge variant="outline">Industrial Training</Badge>
+                </div>
+              </div>
+            </div>
+          </Card>
         </div>
       </section>
 
