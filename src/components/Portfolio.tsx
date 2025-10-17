@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AnimatedBackground from "./AnimatedBackground";
-import { Github, Linkedin, Mail, ExternalLink, Code, Briefcase, User, Download } from "lucide-react";
+import { Linkedin, Mail, ExternalLink, Code, Briefcase, User, Download } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -208,15 +208,7 @@ const Portfolio = () => {
               variant="ghost" 
               size="icon" 
               className="hover-glow rounded-full"
-              onClick={() => window.open('https://github.com/your-username', '_blank')}
-            >
-              <Github className="h-6 w-6" />
-            </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
-              className="hover-glow rounded-full"
-              onClick={() => window.open('https://linkedin.com/in/your-profile', '_blank')}
+              onClick={() => window.open('https://www.linkedin.com/in/antony-jenish-5188ba290', '_blank')}
             >
               <Linkedin className="h-6 w-6" />
             </Button>
@@ -250,7 +242,7 @@ const Portfolio = () => {
               <h3 className="text-2xl font-semibold mb-4">My Journey</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
                 Currently pursuing B.Tech in Information Technology at Loyola-ICAM College of Engineering and Technology (2023-2027). 
-                Completed Computer Science stream at BNC Matriculation Higher Secondary School (2016-2023).
+                Completed Computer Science stream at BMC Matriculation Higher Secondary School (2016-2023).
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
                 I am eager to apply my technical skills and gain hands-on experience through internships. 
