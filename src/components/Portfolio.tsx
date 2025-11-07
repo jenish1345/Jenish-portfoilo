@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import AnimatedBackground from "./AnimatedBackground";
+import ProjectCard from "./project/ProjectCard";
+import { portfolioData } from "@/data/portfolioData";
 import { Linkedin, Mail, Code, Briefcase, User, Download } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,6 +18,9 @@ const Portfolio = () => {
   const aboutRef = useRef(null);
   const projectsRef = useRef(null);
   const contactRef = useRef(null);
+
+  // Destructure data from portfolioData
+  const { personal, education, skills, areasOfInterest, languages, projects, contact } = portfolioData;
 
   useEffect(() => {
     setIsVisible(true);
@@ -111,35 +116,7 @@ const Portfolio = () => {
 
   }, []);
 
-  const projects = [
-    {
-      title: "Habit Tracker Application",
-      description: "Object-oriented habit tracking application built with Java, implementing OOP concepts for efficient habit management and progress tracking",
-      tech: ["Java", "OOP", "GUI Design", "Data Structures"],
-      image: "📋",
-      link: "#"
-    },
-    {
-      title: "News Scraping & Analysis",
-      description: "Data science project using Python for web scraping news articles and performing sentiment analysis and trend detection",
-      tech: ["Python", "Data Science", "Web Scraping", "Analytics"],
-      image: "📰",
-      link: "#"
-    },
-    {
-      title: "Sportizen",
-      description: "A sports-based social application that enables athletes and sports enthusiasts to share their achievements, connect with like-minded individuals, and celebrate sporting milestones",
-      tech: ["Mobile App", "Social Media", "Sports Tech", "Community"],
-      image: "🏆",
-      link: "#"
-    }
-  ];
 
-  const skills = [
-    "Java", "Python", "Web Design", "Data Science", "Machine Learning", 
-    "Artificial Intelligence", "IoT", "Blockchain", "Big Data Analytics", 
-    "Graphic Design", "Branding", "Marketing"
-  ];
 
   return (
     <div className="bg-animated min-h-screen relative">
@@ -167,19 +144,19 @@ const Portfolio = () => {
           <div className="mb-8">
             <div className="hero-avatar w-32 h-32 mx-auto mb-6 bg-gradient-to-r from-yellow-500 to-yellow-400 rounded-full flex items-center justify-center overflow-hidden">
               <img 
-                src="/lovable-uploads/d737aef4-76c3-4c23-ab88-26d76a8d4b78.png" 
-                alt="Antony Jenish Fernando J" 
+                src={personal.profileImage} 
+                alt={personal.name} 
                 className="w-full h-full object-cover rounded-full"
               />
             </div>
             <h1 className="hero-title text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent shimmer-text">
-              Antony Jenish Fernando J
+              {personal.name}
             </h1>
             <p className="hero-subtitle text-xl md:text-2xl text-muted-foreground mb-8">
-              Information Technology Student & Tech Enthusiast
+              {personal.title}
             </p>
             <p className="hero-description text-lg text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
-              Enthusiastic and detail-oriented Information Technology student with a strong foundation in programming, software development, and problem-solving. Passionate about AI, machine learning, and creating innovative solutions.
+              {personal.summary}
             </p>
           </div>
           
@@ -187,19 +164,19 @@ const Portfolio = () => {
             <Button 
               className="hover-glow group" 
               size="lg"
-              onClick={() => window.location.href = 'mailto:jenfdo134@gmail.com'}
+              onClick={() => window.open(contact.linkedIn, '_blank', 'noopener,noreferrer')}
             >
-              <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              Get In Touch
+              <Linkedin className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+              Connect on LinkedIn
             </Button>
             <Button 
               variant="outline" 
               className="hover-glow group" 
               size="lg"
-              onClick={() => window.open('#', '_blank')}
+              onClick={() => window.location.href = `mailto:${contact.email}`}
             >
-              <Download className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              Download CV
+              <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+              Get In Touch
             </Button>
           </div>
           
@@ -208,7 +185,7 @@ const Portfolio = () => {
               variant="ghost" 
               size="icon" 
               className="hover-glow rounded-full"
-              onClick={() => window.open('https://www.linkedin.com/in/antony-jenish-5188ba290', '_blank')}
+              onClick={() => window.open(contact.linkedIn, '_blank', 'noopener,noreferrer')}
             >
               <Linkedin className="h-6 w-6" />
             </Button>
@@ -216,7 +193,7 @@ const Portfolio = () => {
               variant="ghost" 
               size="icon" 
               className="hover-glow rounded-full"
-              onClick={() => window.location.href = 'mailto:jenfdo134@gmail.com'}
+              onClick={() => window.location.href = `mailto:${contact.email}`}
             >
               <Mail className="h-6 w-6" />
             </Button>
@@ -233,7 +210,7 @@ const Portfolio = () => {
               About Me
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              B.Tech Information Technology Student at Loyola-ICAM College of Engineering and Technology
+              {education[0].degree} Student at {education[0].institution}
             </p>
           </div>
           
@@ -241,19 +218,18 @@ const Portfolio = () => {
             <Card className="about-card floating-card glass-card hover-glow p-8">
               <h3 className="text-2xl font-semibold mb-4">My Journey</h3>
               <p className="text-muted-foreground leading-relaxed mb-6">
-                Currently pursuing B.Tech in Information Technology at Loyola-ICAM College of Engineering and Technology (2023-2027). 
-                Completed Computer Science stream at BMC Matriculation Higher Secondary School (2016-2023).
+                Currently pursuing {education[0].degree} at {education[0].institution} ({education[0].years}). 
+                Completed {education[1].stream} at {education[1].institution} ({education[1].years}).
               </p>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                I am eager to apply my technical skills and gain hands-on experience through internships. 
-                My interests include artificial intelligence, machine learning, and full-stack web development.
+                {personal.summary}
               </p>
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">
-                  <strong>Languages:</strong> English, Tamil
+                  <strong>Languages:</strong> {languages.join(", ")}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  <strong>Location:</strong> Nungambakkam, Chennai
+                  <strong>Location:</strong> {contact.location}
                 </p>
               </div>
             </Card>
@@ -264,7 +240,7 @@ const Portfolio = () => {
                 <div>
                   <h4 className="text-lg font-medium mb-3 text-primary">Core Skills</h4>
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {skills.slice(0, 6).map((skill, index) => (
+                    {skills.map((skill, index) => (
                       <Badge 
                         key={skill} 
                         variant="secondary" 
@@ -279,14 +255,14 @@ const Portfolio = () => {
                 <div>
                   <h4 className="text-lg font-medium mb-3 text-primary">Areas of Interest</h4>
                   <div className="flex flex-wrap gap-2">
-                    {skills.slice(6).map((skill, index) => (
+                    {areasOfInterest.map((interest, index) => (
                       <Badge 
-                        key={skill} 
+                        key={interest} 
                         variant="outline" 
                         className="hover-glow transition-all duration-300 hover:scale-105"
-                        style={{ animationDelay: `${(index + 6) * 0.1}s` }}
+                        style={{ animationDelay: `${(index + skills.length) * 0.1}s` }}
                       >
-                        {skill}
+                        {interest}
                       </Badge>
                     ))}
                   </div>
@@ -347,31 +323,13 @@ const Portfolio = () => {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             {projects.map((project, index) => (
-              <Card 
-                key={project.title} 
-                className="project-card floating-card glass-card hover-glow group cursor-pointer transition-all duration-500"
-              >
-                <div className="p-6">
-                  <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {project.image}
-                  </div>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4 text-sm leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-xs">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </Card>
+              <ProjectCard 
+                key={project.id} 
+                project={project}
+                index={index}
+              />
             ))}
           </div>
         </div>
@@ -392,24 +350,24 @@ const Portfolio = () => {
             <Button 
               size="lg" 
               className="hover-glow group"
-              onClick={() => window.location.href = 'mailto:jenfdo134@gmail.com'}
+              onClick={() => window.location.href = `mailto:${contact.email}`}
             >
               <Mail className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
-              jenfdo134@gmail.com
+              {contact.email}
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
               className="hover-glow group"
-              onClick={() => window.location.href = 'tel:+919042679134'}
+              onClick={() => window.location.href = `tel:${contact.phone.replace(/\s/g, '')}`}
             >
               <span className="mr-2">📱</span>
-              +91 9042679134
+              {contact.phone}
             </Button>
             </div>
             <div className="text-center">
               <p className="text-sm text-muted-foreground">
-                Nungambakkam, Chennai | Open to opportunities and collaborations
+                {contact.location} | Open to opportunities and collaborations
               </p>
             </div>
           </Card>
