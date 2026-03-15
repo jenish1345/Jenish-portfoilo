@@ -2,9 +2,9 @@ import { PortfolioData } from "@/types/portfolio.types";
 
 export const portfolioData: PortfolioData = {
   personal: {
-    name: "Antony Jenish Fernando J",
-    title: "Information Technology Student & Tech Enthusiast",
-    summary: "Enthusiastic and detail-oriented Information Technology student with a strong foundation in programming, software development, and problem-solving. Passionate about AI, machine learning, and creating innovative solutions.",
+    name: "Antony Jenish Fernando",
+    title: "Full Stack Developer & Machine Learning Enthusiast",
+    summary: "Information Technology student passionate about building scalable applications and exploring AI-driven solutions.",
     profileImage: "/lovable-uploads/d737aef4-76c3-4c23-ab88-26d76a8d4b78.png"
   },
   education: [
@@ -42,44 +42,94 @@ export const portfolioData: PortfolioData = {
   languages: ["English", "Tamil"],
   projects: [
     {
-      id: "habit-tracker",
-      title: "Habit Tracker Application",
-      description: "Object-oriented habit tracking application built with Java, implementing OOP concepts for efficient habit management and progress tracking",
-      technologies: ["Java", "OOP", "GUI Design", "Data Structures"],
-      githubUrl: "https://github.com/antonyjenish/habit-tracker",
-      emoji: "📋",
+      id: "timetable-generator",
+      title: "Timetable Generator",
+      description: "Automated timetable generation system that creates optimized schedules for educational institutions, handling constraints and preferences efficiently",
+      technologies: ["Algorithm Design", "Scheduling", "Optimization", "Web Development"],
+      githubUrl: "https://github.com/jenish1345/timetable-generator",
+      emoji: "📅",
       featured: true,
       order: 1
     },
     {
-      id: "quiz-generator",
-      title: "Quiz Generator",
-      description: "Intelligent quiz generation system that automatically creates quizzes when notes are uploaded, using NLP and content analysis to generate relevant questions",
-      technologies: ["Python", "NLP", "Machine Learning", "Web Development"],
-      githubUrl: "https://github.com/antonyjenish/quiz-generator",
-      emoji: "📝",
+      id: "course-registration-system",
+      title: "Course Registration System",
+      description: "Comprehensive course registration platform enabling students to browse, select, and enroll in courses with real-time availability tracking and conflict detection",
+      technologies: ["Database Management", "Web Development", "User Authentication", "Real-time Updates"],
+      githubUrl: "https://github.com/jenish1345/course-registration-system",
+      emoji: "📚",
       featured: true,
       order: 2
     },
     {
-      id: "sportizen",
-      title: "Sportizen",
-      description: "A sports-based social application that enables athletes and sports enthusiasts to share their achievements, connect with like-minded individuals, and celebrate sporting milestones",
-      technologies: ["Mobile App", "Social Media", "Sports Tech", "Community"],
-      githubUrl: "https://github.com/antonyjenish/sportizen",
-      emoji: "🏆",
+      id: "quiz-app",
+      title: "Quiz App",
+      description: "Interactive quiz application with dynamic question generation, scoring system, and performance analytics for enhanced learning experiences",
+      technologies: ["React", "JavaScript", "UI/UX Design", "State Management"],
+      githubUrl: "https://github.com/jenish1345/quiz-app",
+      emoji: "❓",
       featured: true,
       order: 3
     },
     {
-      id: "customer-churn-prediction",
-      title: "Customer Churn Prediction",
-      description: "Machine learning model predicting customer churn with business context analysis, helping companies retain customers through data-driven insights and predictive analytics",
-      technologies: ["Python", "Scikit-learn", "Data Analysis", "Business Intelligence"],
-      githubUrl: "https://github.com/antonyjenish/customer-churn-prediction",
-      emoji: "📊",
+      id: "acds-platform",
+      title: "ACDS Platform",
+      description: "Advanced Course Delivery System providing a comprehensive learning management solution with content delivery, assessment tools, and progress tracking",
+      technologies: ["Full Stack", "LMS", "Cloud Integration", "Analytics"],
+      githubUrl: "https://github.com/jenish1345/acds_platform",
+      emoji: "🎓",
       featured: true,
       order: 4
+    },
+    {
+      id: "sportizen",
+      title: "SportiZen",
+      description: "A sports-based social application that enables athletes and sports enthusiasts to share their achievements, connect with like-minded individuals, and celebrate sporting milestones",
+      technologies: ["Mobile App", "Social Media", "Sports Tech", "Community"],
+      githubUrl: "https://github.com/KEERTHIVASAN-SKVS/SportiZen",
+      emoji: "🏆",
+      featured: true,
+      order: 5
+    },
+    {
+      id: "notes-app",
+      title: "Notes App",
+      description: "Feature-rich note-taking application with organization tools, search functionality, and cloud sync for seamless productivity across devices",
+      technologies: ["React", "Local Storage", "Cloud Sync", "Markdown Support"],
+      githubUrl: "https://github.com/jenish1345/notes-app",
+      emoji: "📝",
+      featured: true,
+      order: 6
+    },
+    {
+      id: "bus-ticket-booking",
+      title: "Bus Ticket Booking System",
+      description: "Online bus ticket reservation platform with seat selection, payment integration, and booking management for seamless travel planning",
+      technologies: ["Payment Gateway", "Booking System", "Database Design", "API Integration"],
+      githubUrl: "https://github.com/jenish1345/BUS-TICKET-BOOKING",
+      emoji: "🚌",
+      featured: true,
+      order: 7
+    },
+    {
+      id: "course-connect",
+      title: "Course Connect",
+      description: "Platform connecting students with courses and instructors, facilitating seamless communication and collaborative learning experiences",
+      technologies: ["Social Learning", "Real-time Chat", "Course Management", "Networking"],
+      githubUrl: "https://github.com/jenish1345/course-connect",
+      emoji: "🔗",
+      featured: true,
+      order: 8
+    },
+    {
+      id: "customer-churn-dashboard",
+      title: "Customer Churn Prediction & Retention Dashboard",
+      description: "Machine learning-powered dashboard predicting customer churn with actionable insights, retention strategies, and business intelligence analytics",
+      technologies: ["Python", "Machine Learning", "Data Visualization", "Business Intelligence", "Dashboard"],
+      githubUrl: "https://github.com/jenish1345/customer-churn-prediction-retention-dashboard",
+      emoji: "📊",
+      featured: true,
+      order: 9
     }
   ],
   contact: {
