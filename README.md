@@ -1,73 +1,135 @@
-# Welcome to your Lovable project
+# 🌟 Antony Jenish Fernando - Portfolio
 
-## Project info
+A modern, elegant portfolio website featuring a stunning **Glassmorphism Aurora** theme with frosted glass effects and soft pastel gradients.
 
-**URL**: https://lovable.dev/projects/d5a993ce-1333-4731-bc69-d47a6ecf8014
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://antonyjenish.vercel.app)
+[![GitHub](https://img.shields.io/badge/github-jenish1345-blue)](https://github.com/jenish1345)
 
-## How can I edit this code?
+## ✨ Features
 
-There are several ways of editing your application.
+- 🎨 **Glassmorphism Aurora Theme** - Soft pastel gradients with frosted glass effects
+- 🌊 **Animated Background** - Floating particles with smooth animations
+- 💬 **AI Chat Assistant** - Interactive chatbot to learn about me
+- 📱 **Fully Responsive** - Works seamlessly on all devices
+- ⚡ **Fast Performance** - Built with Vite for lightning-fast load times
+- 🎭 **Smooth Animations** - Framer Motion for elegant transitions
+- 🎯 **Single Page Design** - Smooth scrolling between sections
 
-**Use Lovable**
+## 🛠️ Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/d5a993ce-1333-4731-bc69-d47a6ecf8014) and start prompting.
+### Frontend
+- **React 18** - Modern UI library
+- **TypeScript** - Type-safe development
+- **Vite** - Next-generation frontend tooling
+- **Tailwind CSS** - Utility-first CSS framework
 
-Changes made via Lovable will be committed automatically to this repo.
+### UI Components
+- **shadcn/ui** - Beautiful, accessible components
+- **Radix UI** - Unstyled, accessible primitives
+- **Lucide React** - Clean, consistent icons
 
-**Use your preferred IDE**
+### Animations
+- **Framer Motion** - Production-ready motion library
+- **React Type Animation** - Typing effect animations
+- **GSAP** - Professional-grade animation
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Styling
+- **Glassmorphism** - Frosted glass aesthetic
+- **Custom Animations** - Smooth transitions and effects
+- **Responsive Design** - Mobile-first approach
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🚀 Getting Started
 
-Follow these steps:
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Installation
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+# Clone the repository
+git clone https://github.com/jenish1345/Jenish-portfoilo.git
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Navigate to project directory
+cd Jenish-portfoilo
+
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
-**Edit a file directly in GitHub**
+## 📂 Project Structure
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```
+├── src/
+│   ├── components/       # Reusable UI components
+│   │   ├── ui/          # shadcn/ui components
+│   │   ├── AIAssistant.tsx
+│   │   ├── AnimatedBackground.tsx
+│   │   ├── ContactForm.tsx
+│   │   └── ProjectCard.tsx
+│   ├── pages/           # Page components
+│   │   └── Home.tsx     # Main portfolio page
+│   ├── data/            # Portfolio data
+│   ├── lib/             # Utility functions
+│   └── types/           # TypeScript types
+├── public/              # Static assets
+└── index.html          # Entry HTML
+```
 
-**Use GitHub Codespaces**
+## 🎨 Color Palette
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- **Purple**: `#a78bfa` - Primary accent
+- **Pink**: `#ec4899` - Secondary accent
+- **Blue**: `#93c5fd` - Tertiary accent
+- **Background**: Animated aurora gradient
+- **Glass**: White with 60-70% opacity + backdrop blur
 
-## What technologies are used for this project?
 
-This project is built with:
+## 📦 Key Dependencies
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```json
+{
+  "react": "^18.3.1",
+  "typescript": "^5.6.2",
+  "vite": "^5.4.10",
+  "tailwindcss": "^3.4.1",
+  "framer-motion": "^11.11.17",
+  "react-type-animation": "^3.2.0",
+  "@radix-ui/react-*": "Latest",
+  "lucide-react": "^0.344.0"
+}
+```
 
-## How can I deploy this project?
+## 🌐 Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/d5a993ce-1333-4731-bc69-d47a6ecf8014) and click on Share -> Publish.
+Deployed on **Vercel** with automatic deployments from the main branch.
 
-## Can I connect a custom domain to my Lovable project?
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/jenish1345/Jenish-portfoilo)
 
-Yes, you can!
+## 📧 Contact
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- **Email**: antonyjenish1345@gmail.com
+- **LinkedIn**: [Antony Jenish Fernando](https://linkedin.com/in/antony-jenish-fernando)
+- **GitHub**: [@jenish1345](https://github.com/jenish1345)
+- **Portfolio**: [antonyjenish.vercel.app](https://antonyjenish.vercel.app)
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 🙏 Acknowledgments
+
+- Design inspiration from modern glassmorphism trends
+- Icons by [Lucide](https://lucide.dev)
+- UI components by [shadcn/ui](https://ui.shadcn.com)
+
+---
+
+Made with ❤️ by Antony Jenish Fernando
