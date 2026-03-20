@@ -115,7 +115,7 @@ Deployed on **Vercel** with automatic deployments from the main branch.
 
 ## 📧 Contact
 
-- **Email**: antonyjenish1345@gmail.com
+- **Email**: antonyjenishfernando.27it@licet.ac.in
 - **LinkedIn**: [Antony Jenish Fernando](https://linkedin.com/in/antony-jenish-fernando)
 - **GitHub**: [@jenish1345](https://github.com/jenish1345)
 - **Portfolio**: [antonyjenish.vercel.app](https://antonyjenish.vercel.app)

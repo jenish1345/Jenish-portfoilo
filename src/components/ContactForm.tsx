@@ -13,7 +13,7 @@ const ContactForm = () => {
     e.preventDefault();
     const subject = encodeURIComponent(`Portfolio Contact from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-    window.location.href = `mailto:antonyjenish1345@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:antonyjenishfernando.27it@licet.ac.in?subject=${subject}&body=${body}`;
     toast({ title: "Opening email client...", description: "Your message will be sent via your default email app." });
     setFormData({ name: "", email: "", message: "" });
   };
