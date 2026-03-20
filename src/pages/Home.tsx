@@ -45,9 +45,6 @@ const Home = () => {
     Tools: ["Git", "Docker", "VS Code", "Figma"]
   };
 
-  const featuredProject = projects.find(p => p.id === "customer-churn-dashboard");
-  const otherProjects = projects.filter(p => p.id !== "customer-churn-dashboard");
-
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -605,93 +602,18 @@ console.log(jenish.passion); // 🚀`}
             </p>
           </motion.div>
 
-          {/* Featured Project */}
-          {featuredProject && (
-            <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="mb-32"
-            >
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, index) => (
               <motion.div
-                whileHover={{ scale: 1.02, y: -10 }}
-                className="relative group"
+                key={project.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
               >
-                <div className="absolute -inset-4 bg-gradient-to-r from-purple-300/40 via-pink-300/40 to-blue-300/40 rounded-3xl blur-3xl"></div>
-                
-                <div className="relative bg-white/60 backdrop-blur-2xl rounded-3xl p-12 border-2 border-white/50 shadow-2xl overflow-hidden">
-                  <div className="relative z-10">
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      whileInView={{ opacity: 1 }}
-                      className="inline-block px-6 py-2 bg-purple-100/80 border-2 border-purple-300/60 rounded-full mb-6"
-                    >
-                      <span className="text-purple-700 font-semibold text-sm tracking-wider">FEATURED PROJECT</span>
-                    </motion.div>
-                    
-                    <h4 className="text-4xl md:text-6xl font-black text-gray-800 mb-6 leading-tight">
-                      {featuredProject.title}
-                    </h4>
-                    <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-3xl">{featuredProject.description}</p>
-                    
-                    <div className="flex flex-wrap gap-3 mb-8">
-                      {featuredProject.technologies.map((tech, i) => (
-                        <motion.span
-                          key={tech}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          whileHover={{ scale: 1.1, y: -5 }}
-                          transition={{ delay: i * 0.05 }}
-                          className={`px-5 py-2 rounded-full text-sm font-semibold border-2 ${
-                            i % 3 === 0 ? 'bg-purple-100/80 border-purple-300/60 text-purple-700' :
-                            i % 3 === 1 ? 'bg-pink-100/80 border-pink-300/60 text-pink-700' :
-                            'bg-blue-100/80 border-blue-300/60 text-blue-700'
-                          }`}
-                        >
-                          {tech}
-                        </motion.span>
-                      ))}
-                    </div>
-                    
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button 
-                        className="bg-white/70 backdrop-blur-xl hover:bg-white/90 text-purple-700 rounded-full px-10 py-7 text-lg shadow-xl border-2 border-white/50 hover:shadow-2xl hover:shadow-purple-300/50 font-bold transition-all"
-                        onClick={() => window.open(featuredProject.githubUrl, '_blank')}
-                      >
-                        <Github className="h-6 w-6 mr-3" />
-                        Explore Project
-                      </Button>
-                    </motion.div>
-                  </div>
-                </div>
+                <ProjectCard project={project} index={index} />
               </motion.div>
-            </motion.div>
-          )}
-
-          {/* Other Projects */}
-          <div>
-            <motion.h3
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-4xl font-bold mb-12 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500"
-            >
-              More Projects
-            </motion.h3>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {otherProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, type: "spring", stiffness: 100 }}
-                >
-                  <ProjectCard project={project} index={index} />
-                </motion.div>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </section>

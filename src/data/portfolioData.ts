@@ -73,9 +73,9 @@ export const portfolioData: PortfolioData = {
     },
     {
       id: "acds-platform",
-      title: "ACDS Platform",
-      description: "Advanced Course Delivery System providing a comprehensive learning management solution with content delivery, assessment tools, and progress tracking",
-      technologies: ["Full Stack", "LMS", "Cloud Integration", "Analytics"],
+      title: "ACDS - Autonomous Company Diagnostic System",
+      description: "AI-powered SaaS platform that monitors organizational health, detects risks, and provides strategic recommendations using Groq Llama 3.3 70B for automated anomaly detection and root cause analysis",
+      technologies: ["AI/ML", "SaaS", "Business Intelligence", "Groq Llama 3.3", "Data Analytics"],
       githubUrl: "https://github.com/jenish1345/acds_platform",
       emoji: "🎓",
       featured: true,
