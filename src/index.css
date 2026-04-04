@@ -19,26 +19,27 @@
 
 @layer base {
   :root {
-    --background: 240 100% 98%;
-    --foreground: 240 10% 15%;
+    /* Monochrome Elegant Theme - Pure Black & White */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 15%;
+    --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 15%;
-    --primary: 270 80% 70%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 5% 96%;
-    --secondary-foreground: 240 10% 15%;
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 4% 46%;
-    --accent: 280 70% 75%;
-    --accent-foreground: 240 10% 15%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 6% 90%;
-    --input: 240 6% 90%;
-    --ring: 270 80% 70%;
-    --radius: 1.5rem;
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 95%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 0 0% 0%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 0% 0%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 0%;
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
+    --radius: 0rem;
   }
 }
 
@@ -48,16 +49,17 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #f5f3ff 0%, #fce7f3 25%, #dbeafe 50%, #e0e7ff 75%, #fce7f3 100%);
-    background-size: 400% 400%;
-    animation: aurora-shift 15s ease infinite;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+    background: #ffffff;
+    font-weight: 400;
+    letter-spacing: -0.02em;
   }
   html {
     scroll-behavior: smooth;
   }
 }
 
+/* Remove aurora animation */
 @keyframes aurora-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -86,8 +88,8 @@ nav button::after {
   bottom: -4px;
   left: 0;
   width: 0;
-  height: 2px;
-  background: linear-gradient(to right, rgba(167, 139, 250, 0.8), rgba(236, 72, 153, 0.8));
+  height: 3px;
+  background: #000;
   transition: width 0.3s ease;
 }
 
@@ -95,10 +97,11 @@ nav button:hover::after {
   width: 100%;
 }
 
-/* Navbar blur on scroll */
+/* Navbar on scroll */
 .nav-scrolled {
-  backdrop-filter: blur(20px);
-  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 2px solid #000;
 }
 
 .project-card {
