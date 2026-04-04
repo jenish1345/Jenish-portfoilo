@@ -7,6 +7,7 @@ import { GraduationCap, Briefcase, Github, Linkedin, Mail, ArrowRight } from "lu
 import ProjectCard from "@/components/project/ProjectCard";
 import AIAssistant from "@/components/AIAssistant";
 import ContactForm from "@/components/ContactForm";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 const greetings = ["Hello", "Vanakkam", "Hola", "Bonjour", "Hallo"];
 
@@ -57,6 +58,8 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-white text-black relative overflow-x-hidden">
+      
+      <ThemeSwitcher />
       
       {/* Navigation */}
       <motion.nav 
