@@ -19,27 +19,27 @@
 
 @layer base {
   :root {
-    /* Monochrome Elegant Theme - Pure Black & White */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    /* Gradient Mesh Modern - Default Theme */
+    --background: 270 50% 98%;
+    --foreground: 270 10% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 270 10% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 0 0% 0%;
+    --popover-foreground: 270 10% 10%;
+    --primary: 270 80% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 95%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 0 0% 95%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 0 0% 0%;
+    --secondary: 270 30% 95%;
+    --secondary-foreground: 270 10% 10%;
+    --muted: 270 30% 95%;
+    --muted-foreground: 270 10% 45%;
+    --accent: 330 80% 60%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 0% 0%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 0%;
-    --input: 0 0% 0%;
-    --ring: 0 0% 0%;
-    --radius: 0rem;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 270 30% 85%;
+    --input: 270 30% 85%;
+    --ring: 270 80% 60%;
+    --radius: 1.5rem;
   }
 }
 
@@ -49,18 +49,19 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Helvetica Neue', 'Arial', sans-serif;
-    background: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #f5f3ff 0%, #fce7f3 25%, #dbeafe 50%, #e0e7ff 75%, #fce7f3 100%);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
     font-weight: 400;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
   }
   html {
     scroll-behavior: smooth;
   }
 }
 
-/* Remove aurora animation */
-@keyframes aurora-shift {
+@keyframes gradient-shift {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
@@ -88,8 +89,8 @@ nav button::after {
   bottom: -4px;
   left: 0;
   width: 0;
-  height: 3px;
-  background: #000;
+  height: 2px;
+  background: linear-gradient(to right, #8b5cf6, #ec4899);
   transition: width 0.3s ease;
 }
 
@@ -100,8 +101,8 @@ nav button:hover::after {
 /* Navbar on scroll */
 .nav-scrolled {
   backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.95);
-  border-bottom: 2px solid #000;
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
 }
 
 .project-card {
