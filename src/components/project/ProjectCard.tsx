@@ -24,8 +24,8 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateXValue = (y - centerY) / 10;
-    const rotateYValue = (centerX - x) / 10;
+    const rotateXValue = ((y - centerY) / centerY) * -8; // Max 8 degrees
+    const rotateYValue = ((x - centerX) / centerX) * 8; // Max 8 degrees
     setRotateX(rotateXValue);
     setRotateY(rotateYValue);
   };
@@ -52,46 +52,69 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
   return (
     <motion.div
+      data-project-card
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       animate={{ rotateX, rotateY }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      style={{ transformStyle: 'preserve-3d' }}
-      className="relative group"
+      transition={{ 
+        type: "spring", 
+        stiffness: 300, 
+        damping: 30,
+        duration: 0.3 
+      }}
+      style={{ 
+        transformStyle: 'preserve-3d',
+        perspective: '1000px'
+      }}
+      className="relative group h-full"
     >
-      {/* Soft glow */}
-      <div className="absolute -inset-2 bg-gradient-to-br from-purple-300/30 via-pink-300/30 to-blue-300/30 rounded-3xl blur-xl"></div>
+      {/* Glow effect */}
+      <div className="absolute -inset-1 bg-gradient-to-br from-[#00F5FF]/20 via-[#8A2BE2]/20 to-[#00F5FF]/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       
-      <Card className="relative cursor-pointer transition-all duration-500 border-2 border-white/50 bg-white/60 backdrop-blur-2xl rounded-3xl overflow-hidden shadow-2xl hover:shadow-purple-300/50" style={{ transform: 'translateZ(50px)' }}>
-        <div className="p-8 relative z-10">
+      <Card 
+        className="relative cursor-pointer h-full transition-all duration-300 border border-white/10 bg-white/5 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-[#00F5FF]/10" 
+        style={{ transform: 'translateZ(20px)' }}
+      >
+        <div className="p-6 relative z-10 h-full flex flex-col">
           <div className="flex items-center justify-between mb-4">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold">{index + 1}</span>
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00F5FF] to-[#8A2BE2] flex items-center justify-center shadow-lg">
+              <span className="text-white font-bold text-lg">{project.emoji}</span>
             </div>
-            <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse shadow-lg"></div>
+            <div className="w-2 h-2 bg-[#00F5FF] rounded-full animate-pulse shadow-lg shadow-[#00F5FF]/50" />
           </div>
           
-          <h3 className="text-2xl font-bold mb-4 text-gray-800 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-600 group-hover:to-pink-600 transition-all">
+          <h3 className="text-xl font-bold mb-3 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#00F5FF] group-hover:to-[#8A2BE2] transition-all">
             {project.title}
           </h3>
-          <p className="text-gray-600 mb-6 leading-relaxed font-light">
+          
+          <p className="text-gray-400 mb-4 leading-relaxed text-sm flex-grow">
             {project.description}
           </p>
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.technologies.slice(0, 3).map((tech, i) => (
-              <Badge key={tech} className={`text-xs px-3 py-1 rounded-full font-medium border-2 ${
-                i % 2 === 0 ? 'bg-purple-100/80 text-purple-700 border-purple-300/60' : 'bg-pink-100/80 text-pink-700 border-pink-300/60'
-              }`}>
+          
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.technologies.slice(0, 3).map((tech) => (
+              <Badge 
+                key={tech} 
+                className="text-xs px-3 py-1 rounded-full font-medium bg-white/5 text-[#00F5FF] border border-[#00F5FF]/30 hover:bg-[#00F5FF]/10 transition-colors"
+              >
                 {tech}
               </Badge>
             ))}
+            {project.technologies.length > 3 && (
+              <Badge className="text-xs px-3 py-1 rounded-full font-medium bg-white/5 text-gray-400 border border-white/10">
+                +{project.technologies.length - 3}
+              </Badge>
+            )}
           </div>
+          
           <Button 
             onClick={handleViewProject}
-            className="w-full bg-white/70 backdrop-blur-xl hover:bg-white/90 text-purple-700 rounded-full py-6 font-semibold transition-all hover:scale-105 shadow-lg border-2 border-white/50 hover:shadow-xl hover:shadow-purple-300/50"
+            className="w-full bg-white/5 backdrop-blur-xl hover:bg-gradient-to-r hover:from-[#00F5FF] hover:to-[#8A2BE2] text-white rounded-full py-5 font-semibold transition-all hover:scale-105 shadow-lg border border-white/10 hover:border-transparent group/btn"
           >
-            View Project
-            <ExternalLink className="ml-2 h-4 w-4" />
+            <span className="group-hover/btn:scale-110 transition-transform inline-flex items-center gap-2">
+              View Project
+              <ExternalLink className="h-4 w-4" />
+            </span>
           </Button>
         </div>
       </Card>
