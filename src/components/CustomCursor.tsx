@@ -32,7 +32,7 @@ const CustomCursor = () => {
     <>
       {/* Main cursor */}
       <motion.div
-        className="fixed w-4 h-4 rounded-full bg-purple-500 pointer-events-none z-[9999] mix-blend-difference"
+        className="fixed w-4 h-4 rounded-full bg-gray-900 pointer-events-none z-[9999] mix-blend-difference"
         animate={{
           x: mousePosition.x - 8,
           y: mousePosition.y - 8,
@@ -43,7 +43,7 @@ const CustomCursor = () => {
       
       {/* Cursor trail */}
       <motion.div
-        className="fixed w-8 h-8 rounded-full border-2 border-purple-400 pointer-events-none z-[9998] mix-blend-difference"
+        className="fixed w-8 h-8 rounded-full border-2 border-gray-900 pointer-events-none z-[9998] mix-blend-difference"
         animate={{
           x: mousePosition.x - 16,
           y: mousePosition.y - 16,

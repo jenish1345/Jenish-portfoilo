@@ -37,10 +37,22 @@ const Home = () => {
   const { personal, education, projects, contact } = portfolioData;
 
   const skillCategories = {
-    Frontend: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS"],
-    Backend: ["Java", "Spring Boot", "Node.js", "Python"],
-    "AI/ML": ["Python", "Machine Learning", "Data Science", "Deep Learning"],
-    Tools: ["Git", "Docker", "VS Code", "Figma"]
+    Frontend: {
+      icon: "🎨",
+      skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS"]
+    },
+    Backend: {
+      icon: "⚙️",
+      skills: ["Java", "Spring Boot", "Node.js", "Python"]
+    },
+    "AI/ML": {
+      icon: "🤖",
+      skills: ["Python", "Machine Learning", "Data Science", "Deep Learning"]
+    },
+    Tools: {
+      icon: "🛠️",
+      skills: ["Git", "Docker", "VS Code", "Figma"]
+    }
   };
 
   const scrollToSection = (id: string) => {
@@ -57,24 +69,19 @@ const Home = () => {
       <CustomCursor />
       <ThemeSwitcher />
       
-      {/* Animated gradient background */}
+      {/* Animated gradient background - Minimalistic */}
       <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50" />
+        <div className="absolute inset-0 bg-white" />
         <motion.div
           animate={{
-            background: [
-              "radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 50%, rgba(236, 72, 153, 0.1) 0%, transparent 50%)",
-              "radial-gradient(circle at 50% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%)",
-            ]
+            opacity: [0.03, 0.05, 0.03]
           }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-0"
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 bg-gradient-to-br from-gray-100 via-gray-50 to-gray-100"
         />
       </div>
 
-      {/* Parallax mouse effect */}
+      {/* Parallax mouse effect - Subtle */}
       <motion.div
         className="fixed w-96 h-96 rounded-full pointer-events-none z-10 blur-3xl"
         animate={{
@@ -83,22 +90,22 @@ const Home = () => {
         }}
         transition={{ type: "spring", stiffness: 50, damping: 20 }}
         style={{
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(0, 0, 0, 0.03) 0%, transparent 70%)',
         }}
       />
 
-      {/* Navigation with glass effect */}
+      {/* Navigation with glass effect - Minimalistic */}
       <motion.nav 
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-white/40 backdrop-blur-2xl border-b border-white/20 shadow-xl"
+        className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200"
       >
         <div className="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
           <motion.h1 
             whileHover={{ scale: 1.05, rotate: [0, -2, 2, 0] }}
             transition={{ duration: 0.3 }}
-            className="text-2xl font-black bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent cursor-pointer" 
+            className="text-2xl font-black text-gray-900 cursor-pointer" 
             onClick={() => scrollToSection('hero')}
           >
             JENISH ANTONY
@@ -113,11 +120,11 @@ const Home = () => {
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="text-sm font-bold text-gray-700 hover:text-purple-600 transition-colors relative group"
+                className="text-sm font-bold text-gray-600 hover:text-gray-900 transition-colors relative group"
               >
                 {item}
                 <motion.span 
-                  className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500"
+                  className="absolute -bottom-1 left-0 h-0.5 bg-gray-900"
                   initial={{ width: 0 }}
                   whileHover={{ width: "100%" }}
                   transition={{ duration: 0.3 }}
@@ -170,7 +177,7 @@ const Home = () => {
           transition={{ duration: 1, delay: 0.5 }}
           className="text-center max-w-6xl mx-auto relative z-10"
         >
-          {/* Animated icon */}
+          {/* Animated icon - Minimalistic */}
           <motion.div
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
@@ -184,11 +191,11 @@ const Home = () => {
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              <Sparkles className="h-20 w-20 text-purple-500 mx-auto drop-shadow-2xl" />
+              <Sparkles className="h-20 w-20 text-gray-900 mx-auto" />
             </motion.div>
           </motion.div>
 
-          {/* Main heading with stagger animation */}
+          {/* Main heading with stagger animation - BIGGER */}
           <div className="mb-8">
             {["ANTONY", "JENISH", "FERNANDO"].map((word, i) => (
               <motion.h1
@@ -201,34 +208,21 @@ const Home = () => {
                   type: "spring",
                   stiffness: 100
                 }}
-                className="text-7xl md:text-9xl font-black bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 bg-clip-text text-transparent leading-tight"
-                style={{
-                  textShadow: "0 0 80px rgba(139, 92, 246, 0.3)"
-                }}
+                className="text-8xl md:text-[12rem] lg:text-[14rem] font-black text-gray-900 leading-none tracking-tighter"
               >
                 {word}
               </motion.h1>
             ))}
           </div>
 
-          {/* Subtitle with typing effect */}
+          {/* Subtitle - Simple */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.7 }}
             className="mb-6"
           >
-            <motion.p
-              className="text-3xl md:text-5xl font-bold text-gray-800"
-              animate={{ backgroundPosition: ["0%", "100%", "0%"] }}
-              transition={{ duration: 5, repeat: Infinity }}
-              style={{
-                backgroundImage: "linear-gradient(90deg, #8b5cf6, #ec4899, #3b82f6, #8b5cf6)",
-                backgroundSize: "200% auto",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent"
-              }}
-            >
+            <motion.p className="text-3xl md:text-5xl font-bold text-gray-700">
               Full Stack Developer
             </motion.p>
           </motion.div>
@@ -242,7 +236,7 @@ const Home = () => {
             Information Technology student passionate about building scalable applications and exploring AI-driven solutions.
           </motion.p>
 
-          {/* CTA Buttons with micro-interactions */}
+          {/* CTA Buttons - Minimalistic Black */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -255,7 +249,7 @@ const Home = () => {
             >
               <Button
                 onClick={() => scrollToSection('projects')}
-                className="group px-10 py-7 text-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 rounded-full shadow-2xl hover:shadow-purple-500/50 transition-all relative overflow-hidden"
+                className="group px-10 py-7 text-lg bg-gray-900 hover:bg-gray-800 text-white rounded-full shadow-2xl hover:shadow-gray-900/50 transition-all relative overflow-hidden"
               >
                 <motion.span
                   className="absolute inset-0 bg-white"
@@ -277,7 +271,7 @@ const Home = () => {
               <Button
                 onClick={() => scrollToSection('contact')}
                 variant="outline"
-                className="px-10 py-7 text-lg border-2 border-purple-500 text-purple-600 hover:bg-purple-50 rounded-full shadow-xl backdrop-blur-sm"
+                className="px-10 py-7 text-lg border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white rounded-full shadow-xl transition-all"
               >
                 Contact Me
               </Button>
@@ -319,18 +313,9 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-            <motion.h2 
-              className="text-7xl md:text-9xl font-black mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent"
-              whileInView={{ 
-                backgroundPosition: ["0%", "100%"],
-              }}
-              transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-              style={{
-                backgroundSize: "200% auto"
-              }}
-            >
+            <h2 className="text-7xl md:text-9xl font-black mb-6 text-gray-900">
               ABOUT ME
-            </motion.h2>
+            </h2>
           </motion.div>
 
           <div className="grid md:grid-cols-2 gap-12">
@@ -340,10 +325,10 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               whileHover={{ scale: 1.02, rotateY: 2 }}
-              className="bg-white/60 backdrop-blur-2xl rounded-3xl p-10 border-2 border-purple-200 shadow-2xl hover:shadow-purple-300/50 transition-all"
+              className="bg-white/80 backdrop-blur-xl rounded-3xl p-10 border border-gray-200 shadow-xl hover:shadow-2xl transition-all"
               style={{ transformStyle: "preserve-3d" }}
             >
-              <Brain className="w-12 h-12 text-purple-600 mb-6" />
+              <Brain className="w-12 h-12 text-gray-900 mb-6" />
               <h3 className="text-4xl font-bold mb-6 text-gray-800">Who I Am</h3>
               <p className="text-lg text-gray-700 leading-relaxed">
                 {personal.summary}
@@ -365,12 +350,12 @@ const Home = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2 }}
                   whileHover={{ scale: 1.05, x: 10 }}
-                  className="bg-gradient-to-br from-purple-500 to-pink-500 text-white rounded-3xl p-8 shadow-2xl hover:shadow-purple-500/50 transition-all cursor-pointer"
+                  className="bg-gray-900 text-white rounded-3xl p-8 shadow-2xl hover:shadow-gray-900/50 transition-all cursor-pointer"
                 >
                   <GraduationCap className="w-12 h-12 mb-4" />
                   <h4 className="text-2xl font-bold mb-2">{edu.degree}</h4>
-                  <p className="font-semibold text-purple-100">{edu.institution}</p>
-                  <p className="text-sm mt-2 text-purple-100">{edu.years}</p>
+                  <p className="font-semibold text-gray-200">{edu.institution}</p>
+                  <p className="text-sm mt-2 text-gray-300">{edu.years}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -378,7 +363,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Skills Section with 3D cards */}
+      {/* Skills Section with icons and quote */}
       <section id="skills" className="py-32 px-8 relative">
         <div className="max-w-6xl mx-auto">
           <motion.div
@@ -388,13 +373,39 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-            <h2 className="text-7xl md:text-9xl font-black mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h2 className="text-7xl md:text-9xl font-black mb-6 text-gray-900">
               SKILLS
             </h2>
           </motion.div>
 
+          {/* Engaging Quote */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mb-20 text-center"
+          >
+            <motion.blockquote
+              whileHover={{ scale: 1.02 }}
+              className="text-3xl md:text-5xl font-bold text-gray-800 italic max-w-4xl mx-auto relative"
+            >
+              <span className="text-6xl text-gray-300 absolute -top-8 -left-4">"</span>
+              Code is like humor. When you have to explain it, it's bad.
+              <span className="text-6xl text-gray-300 absolute -bottom-8 -right-4">"</span>
+            </motion.blockquote>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="mt-8 text-xl text-gray-600"
+            >
+              — Cory House
+            </motion.p>
+          </motion.div>
+
           <div className="grid md:grid-cols-2 gap-8">
-            {Object.entries(skillCategories).map(([category, items], i) => (
+            {Object.entries(skillCategories).map(([category, data], i) => (
               <motion.div
                 key={category}
                 initial={{ opacity: 0, y: 100, rotateX: -45 }}
@@ -404,23 +415,23 @@ const Home = () => {
                 whileHover={{ 
                   scale: 1.05, 
                   rotateY: 5,
-                  boxShadow: "0 25px 50px -12px rgba(139, 92, 246, 0.5)"
+                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
                 }}
-                className="bg-white/60 backdrop-blur-2xl rounded-3xl p-10 border-2 border-purple-200 shadow-2xl transition-all"
+                className="bg-white/80 backdrop-blur-xl rounded-3xl p-10 border border-gray-200 shadow-xl transition-all"
                 style={{ transformStyle: "preserve-3d" }}
               >
                 <div className="flex items-center gap-4 mb-6">
                   <motion.div
-                    whileHover={{ rotate: 360 }}
+                    whileHover={{ rotate: 360, scale: 1.2 }}
                     transition={{ duration: 0.6 }}
-                    className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-lg"
+                    className="text-6xl"
                   >
-                    <Zap className="w-7 h-7 text-white" />
+                    {data.icon}
                   </motion.div>
                   <h3 className="text-3xl font-bold text-gray-800">{category}</h3>
                 </div>
                 <div className="flex flex-wrap gap-3">
-                  {items.map((skill, idx) => (
+                  {data.skills.map((skill, idx) => (
                     <motion.div
                       key={skill}
                       initial={{ opacity: 0, scale: 0 }}
@@ -429,7 +440,7 @@ const Home = () => {
                       transition={{ delay: i * 0.15 + idx * 0.05 }}
                       whileHover={{ scale: 1.15, y: -5 }}
                     >
-                      <Badge className="px-5 py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-sm font-semibold shadow-lg">
+                      <Badge className="px-5 py-2 bg-gray-900 text-white border-0 text-sm font-semibold shadow-lg hover:bg-gray-800">
                         {skill}
                       </Badge>
                     </motion.div>
@@ -450,7 +461,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-7xl md:text-9xl font-black mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h2 className="text-7xl md:text-9xl font-black mb-6 text-gray-900">
               PROJECTS
             </h2>
           </motion.div>
@@ -495,7 +506,7 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-20"
           >
-            <h2 className="text-7xl md:text-9xl font-black mb-6 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <h2 className="text-7xl md:text-9xl font-black mb-6 text-gray-900">
               GET IN TOUCH
             </h2>
           </motion.div>
@@ -522,10 +533,10 @@ const Home = () => {
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
                   whileHover={{ scale: 1.05, x: 10 }}
-                  className="flex items-center gap-4 p-6 bg-white/60 backdrop-blur-2xl rounded-2xl border-2 border-purple-200 hover:shadow-2xl hover:shadow-purple-300/50 transition-all group"
+                  className="flex items-center gap-4 p-6 bg-white/80 backdrop-blur-xl rounded-2xl border border-gray-200 hover:shadow-xl transition-all group"
                 >
-                  <item.icon className="w-6 h-6 text-purple-600 group-hover:scale-125 transition-transform" />
-                  <span className="font-semibold text-gray-800 group-hover:text-purple-600 transition-colors">{item.label}</span>
+                  <item.icon className="w-6 h-6 text-gray-900 group-hover:scale-125 transition-transform" />
+                  <span className="font-semibold text-gray-800 group-hover:text-gray-900 transition-colors">{item.label}</span>
                 </motion.a>
               ))}
             </motion.div>
@@ -546,12 +557,12 @@ const Home = () => {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        className="py-16 px-8 border-t-2 border-purple-200 bg-white/50 backdrop-blur-2xl"
+        className="py-16 px-8 border-t border-gray-200 bg-white/80 backdrop-blur-xl"
       >
         <div className="max-w-7xl mx-auto text-center">
           <motion.p 
             whileHover={{ scale: 1.05 }}
-            className="text-2xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2"
+            className="text-2xl font-black text-gray-900 mb-2"
           >
             © 2026 ANTONY JENISH FERNANDO
           </motion.p>

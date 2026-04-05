@@ -24,7 +24,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed inset-0 z-[10000] bg-gradient-to-br from-purple-900 via-black to-pink-900 flex items-center justify-center"
+      className="fixed inset-0 z-[10000] bg-gray-900 flex items-center justify-center"
     >
       <div className="text-center">
         <motion.div
@@ -33,7 +33,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-6xl md:text-8xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent mb-4">
+          <h1 className="text-6xl md:text-8xl font-black text-white mb-4">
             JENISH
           </h1>
           <p className="text-white/60 text-lg">Loading Experience...</p>
@@ -42,7 +42,7 @@ const LoadingScreen = ({ onComplete }: { onComplete: () => void }) => {
         {/* Progress Bar */}
         <div className="w-64 h-2 bg-white/10 rounded-full overflow-hidden mx-auto">
           <motion.div
-            className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
+            className="h-full bg-white"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
             transition={{ duration: 0.1 }}

@@ -19,27 +19,27 @@
 
 @layer base {
   :root {
-    /* Gradient Mesh Modern - Default Theme */
-    --background: 270 50% 98%;
-    --foreground: 270 10% 10%;
+    /* Minimalistic Clean Theme */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 270 10% 10%;
+    --card-foreground: 0 0% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 270 10% 10%;
-    --primary: 270 80% 60%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 0% 10%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 270 30% 95%;
-    --secondary-foreground: 270 10% 10%;
-    --muted: 270 30% 95%;
-    --muted-foreground: 270 10% 45%;
-    --accent: 330 80% 60%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 10%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 270 30% 85%;
-    --input: 270 30% 85%;
-    --ring: 270 80% 60%;
-    --radius: 1.5rem;
+    --destructive: 0 0% 10%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 10%;
+    --radius: 0.75rem;
   }
 }
 
@@ -50,9 +50,7 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #f5f3ff 0%, #fce7f3 25%, #dbeafe 50%, #e0e7ff 75%, #fce7f3 100%);
-    background-size: 400% 400%;
-    animation: gradient-shift 15s ease infinite;
+    background: #ffffff;
     font-weight: 400;
     letter-spacing: -0.01em;
   }
