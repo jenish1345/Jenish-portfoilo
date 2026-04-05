@@ -1,35 +1,45 @@
 import { useState, useEffect, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { portfolioData } from "@/data/portfolioData";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { GraduationCap, Mail, ArrowRight, Brain, Github as GithubIcon, Linkedin as LinkedinIcon } from "lucide-react";
-import ProjectCard from "@/components/project/ProjectCard";
-import AIAssistant from "@/components/AIAssistant";
-import ContactForm from "@/components/ContactForm";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
-import CustomCursor from "@/components/CustomCursor";
-import LoadingScreen from "@/components/LoadingScreen";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Mail, Github, Linkedin, ExternalLink, ArrowRight, Briefcase, Code2, Sparkles } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
-  const [navBlurred, setNavBlurred] = useState(false);
-  const heroRef = useRef<HTMLDivElement>(null);
-  const lenisRef = useRef<Lenis | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [cursorVariant, setCursorVariant] = useState("default");
+  const [scrolled, setScrolled] = useState(false);
   
+  const lenisRef = useRef<Lenis | null>(null);
   const { scrollYProgress } = useScroll();
-  const scaleProgress = useTransform(scrollYProgress, [0, 0.5], [1, 0.8]);
-  const opacityProgress = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   const { personal, education, projects, contact } = portfolioData;
 
-  // Initialize Lenis smooth scrolling
+  // Loading animation
   useEffect(() => {
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          setTimeout(() => setLoading(false), 500);
+          return 100;
+        }
+        return prev + 2;
+      });
+    }, 30);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Lenis smooth scroll
+  useEffect(() => {
+    if (loading) return;
+    
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -45,27 +55,16 @@ const Home = () => {
 
     requestAnimationFrame(raf);
 
-    // Navbar blur on scroll
-    const handleScroll = () => {
-      setNavBlurred(window.scrollY > 50);
-    };
+    return () => lenis.destroy();
+  }, [loading]);
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      lenis.destroy();
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  // GSAP ScrollTrigger animations
+  // GSAP ScrollTrigger
   useEffect(() => {
     if (loading) return;
 
-    // Animate sections on scroll
-    gsap.utils.toArray<HTMLElement>(".scroll-reveal").forEach((element) => {
+    gsap.utils.toArray<HTMLElement>(".reveal").forEach((elem) => {
       gsap.fromTo(
-        element,
+        elem,
         { opacity: 0, y: 60 },
         {
           opacity: 1,
@@ -73,52 +72,71 @@ const Home = () => {
           duration: 1,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: element,
+            trigger: elem,
             start: "top 80%",
-            end: "top 50%",
             toggleActions: "play none none reverse",
           },
         }
       );
     });
 
-    // Parallax background elements
-    gsap.utils.toArray<HTMLElement>(".parallax-bg").forEach((element) => {
-      gsap.to(element, {
-        y: -100,
-        ease: "none",
-        scrollTrigger: {
-          trigger: element,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
+    // Timeline animation
+    const timelineItems = gsap.utils.toArray<HTMLElement>(".timeline-item");
+    timelineItems.forEach((item, i) => {
+      gsap.fromTo(
+        item,
+        { opacity: 0, x: i % 2 === 0 ? -60 : 60 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+    });
+
+    return () => ScrollTrigger.getAll().forEach((t) => t.kill());
+  }, [loading]);
+
+  // Custom cursor
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseEnter = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest(".cursor-hover")) {
+        setCursorVariant("hover");
+      }
+    };
+
+    const handleMouseLeave = () => {
+      setCursorVariant("default");
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    document.querySelectorAll(".cursor-hover").forEach((el) => {
+      el.addEventListener("mouseenter", handleMouseEnter as EventListener);
+      el.addEventListener("mouseleave", handleMouseLeave);
     });
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, [loading]);
 
-  const skillCategories = {
-    Frontend: {
-      icon: "🎨",
-      skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS"]
-    },
-    Backend: {
-      icon: "⚙️",
-      skills: ["Java", "Spring Boot", "Node.js", "Python"]
-    },
-    "AI/ML": {
-      icon: "🤖",
-      skills: ["Python", "Machine Learning", "Data Science", "Deep Learning"]
-    },
-    Tools: {
-      icon: "🛠️",
-      skills: ["Git", "Docker", "VS Code", "Figma"]
-    }
-  };
+  // Scroll detection
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -128,51 +146,122 @@ const Home = () => {
   };
 
   if (loading) {
-    return <LoadingScreen onComplete={() => setLoading(false)} />;
+    return (
+      <motion.div
+        exit={{ y: "-100%" }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        className="fixed inset-0 z-[9999] bg-[#0B0F19] flex items-center justify-center"
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0B0F19] via-[#1a1f3a] to-[#0B0F19]" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#00F5FF]/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#8A2BE2]/10 rounded-full blur-[120px] animate-pulse" />
+        
+        <div className="relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="text-7xl md:text-9xl font-black bg-gradient-to-r from-[#00F5FF] via-white to-[#8A2BE2] bg-clip-text text-transparent mb-6">
+              JA
+            </h1>
+            <p className="text-gray-400 text-lg mb-8">Loading Experience</p>
+          </motion.div>
+          
+          <div className="w-64 h-1 bg-white/10 rounded-full overflow-hidden mx-auto">
+            <motion.div
+              className="h-full bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2]"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          
+          <motion.p
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="text-gray-500 mt-4 text-sm"
+          >
+            {progress}%
+          </motion.p>
+        </div>
+      </motion.div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-white relative overflow-x-hidden cursor-none">
+    <div className="min-h-screen bg-[#0B0F19] text-[#E6EDF3] relative overflow-hidden cursor-none">
       
-      <CustomCursor />
-      <ThemeSwitcher />
+      {/* Custom Cursor */}
+      <motion.div
+        className="fixed w-4 h-4 rounded-full pointer-events-none z-[9999] mix-blend-difference"
+        animate={{
+          x: mousePosition.x - 8,
+          y: mousePosition.y - 8,
+          scale: cursorVariant === "hover" ? 2 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+        style={{ background: "rgba(0, 245, 255, 0.8)" }}
+      />
+      
+      <motion.div
+        className="fixed w-10 h-10 rounded-full border-2 border-[#00F5FF]/50 pointer-events-none z-[9998]"
+        animate={{
+          x: mousePosition.x - 20,
+          y: mousePosition.y - 20,
+          scale: cursorVariant === "hover" ? 1.5 : 1,
+        }}
+        transition={{ type: "spring", stiffness: 150, damping: 20 }}
+      />
 
-      {/* Parallax Background */}
-      <div className="fixed inset-0 z-0 parallax-bg">
+      {/* Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] origin-left z-50"
+        style={{ scaleX }}
+      />
+
+      {/* Background */}
+      <div className="fixed inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0B0F19] via-[#1a1f3a] to-[#0B0F19]" />
-        <div className="absolute top-20 left-10 w-96 h-96 bg-[#00F5FF]/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#8A2BE2]/10 rounded-full blur-[120px]" />
+        <motion.div
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute top-20 left-20 w-[500px] h-[500px] bg-[#00F5FF]/10 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, delay: 1 }}
+          className="absolute bottom-20 right-20 w-[500px] h-[500px] bg-[#8A2BE2]/10 rounded-full blur-[120px]"
+        />
       </div>
 
-      {/* Navigation */}
-      <motion.nav 
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          navBlurred 
-            ? "bg-[#0B0F19]/80 backdrop-blur-xl border-b border-white/10 shadow-lg" 
-            : "bg-transparent"
+      {/* Navbar */}
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
+          scrolled ? "bg-[#0B0F19]/80 backdrop-blur-xl border-b border-white/10 shadow-lg" : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-8 py-5 flex justify-between items-center">
-          <motion.h1 
+        <div className="max-w-7xl mx-auto px-6 md:px-8 py-6 flex justify-between items-center">
+          <motion.div
             whileHover={{ scale: 1.05 }}
-            className="text-xl font-black text-white cursor-pointer" 
-            onClick={() => scrollToSection('hero')}
+            className="text-2xl font-black cursor-pointer cursor-hover"
+            onClick={() => scrollToSection("hero")}
           >
-            JENISH ANTONY
-          </motion.h1>
+            <span className="bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] bg-clip-text text-transparent">
+              JA
+            </span>
+          </motion.div>
+          
           <div className="hidden md:flex gap-8">
-            {['About', 'Skills', 'Projects', 'Contact'].map((item, i) => (
+            {["About", "Experience", "Projects", "Contact"].map((item, i) => (
               <motion.button
                 key={item}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 + i * 0.1 }}
-                whileHover={{ y: -2 }}
+                transition={{ delay: 0.3 + i * 0.1 }}
                 onClick={() => scrollToSection(item.toLowerCase())}
-                className="text-sm font-semibold text-gray-400 hover:text-[#00F5FF] transition-colors relative group"
+                className="text-sm font-medium text-gray-400 hover:text-[#00F5FF] transition-colors relative group cursor-hover"
               >
                 {item}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] group-hover:w-full transition-all duration-300" />
@@ -183,293 +272,250 @@ const Home = () => {
       </motion.nav>
 
       {/* Hero Section */}
-      <motion.section 
-        ref={heroRef}
-        id="hero" 
-        style={{ scale: scaleProgress, opacity: opacityProgress }}
-        className="relative min-h-screen flex items-center justify-center px-6 md:px-8 pt-24 pb-16 z-10"
-      >
-        <div className="max-w-5xl mx-auto text-center">
-          
-          {/* Animated greeting */}
+      <section id="hero" className="relative min-h-screen flex items-center justify-center px-6 md:px-8 pt-20 z-10">
+        <div className="max-w-6xl mx-auto text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-6"
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <motion.p 
-              className="text-lg md:text-xl text-gray-400 font-medium"
+            <motion.p
+              className="text-[#00F5FF] text-sm md:text-base font-medium mb-4 tracking-wider uppercase"
               animate={{ opacity: [0.5, 1, 0.5] }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              Hi, I'm
+              Welcome to my portfolio
             </motion.p>
-          </motion.div>
-
-          {/* Name with gradient */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mb-8"
-          >
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black bg-gradient-to-r from-[#00F5FF] via-white to-[#8A2BE2] bg-clip-text text-transparent leading-none tracking-tight mb-4">
-              JENISH ANTONY
+            
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 leading-none">
+              <span className="bg-gradient-to-r from-[#00F5FF] via-white to-[#8A2BE2] bg-clip-text text-transparent">
+                JENISH ANTONY
+              </span>
             </h1>
             
-            {/* Animated underline */}
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 1, delay: 1 }}
-              className="h-1 bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] mx-auto max-w-md"
-            />
-          </motion.div>
-
-          {/* Rotating titles */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-            className="mb-8 h-16 flex items-center justify-center"
-          >
             <motion.p
-              key="title"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              className="text-2xl md:text-4xl font-bold text-gray-300"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="text-xl md:text-3xl text-gray-400 mb-4 font-light"
             >
-              Full Stack Developer
+              Full Stack Developer & AI Enthusiast
             </motion.p>
-          </motion.div>
-
-          {/* Description */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.4 }}
-            className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed"
-          >
-            Building scalable applications and exploring AI-driven solutions
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.6 }}
-            className="flex flex-wrap justify-center gap-4"
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                onClick={() => scrollToSection('projects')}
-                className="px-8 py-6 text-base bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] hover:opacity-90 text-white rounded-full shadow-lg shadow-[#00F5FF]/20 group"
-              >
-                View Projects
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
             
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                onClick={() => scrollToSection('contact')}
-                variant="outline"
-                className="px-8 py-6 text-base border-2 border-[#00F5FF] text-[#00F5FF] hover:bg-[#00F5FF] hover:text-[#0B0F19] rounded-full"
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="text-base md:text-lg text-gray-500 max-w-2xl mx-auto mb-12"
+            >
+              Crafting scalable applications and exploring the frontiers of artificial intelligence
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 1.2 }}
+              className="flex flex-wrap justify-center gap-4"
+            >
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection("projects")}
+                className="px-8 py-4 bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] rounded-full text-white font-semibold shadow-lg shadow-[#00F5FF]/20 cursor-hover flex items-center gap-2"
+              >
+                View My Work
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection("contact")}
+                className="px-8 py-4 border-2 border-[#00F5FF] rounded-full text-[#00F5FF] font-semibold hover:bg-[#00F5FF]/10 transition-colors cursor-hover"
               >
                 Get in Touch
-              </Button>
+              </motion.button>
             </motion.div>
           </motion.div>
-
-          {/* Scroll indicator */}
+          
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 2 }}
-            className="absolute bottom-8 left-1/2 -translate-x-1/2"
+            transition={{ delay: 1.5 }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2"
           >
             <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="flex flex-col items-center gap-2 text-gray-500"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="flex flex-col items-center gap-2 text-gray-600"
             >
               <span className="text-xs uppercase tracking-wider">Scroll</span>
-              <div className="w-6 h-10 border-2 border-gray-500 rounded-full flex justify-center p-2">
-                <motion.div 
+              <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center p-2">
+                <motion.div
                   animate={{ y: [0, 12, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="w-1 h-2 bg-gray-500 rounded-full" 
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-1 h-2 bg-gray-600 rounded-full"
                 />
               </div>
             </motion.div>
           </motion.div>
         </div>
-      </motion.section>
+      </section>
 
       {/* About Section */}
-      <section id="about" className="relative py-24 px-6 md:px-8 z-10">
-        <div className="max-w-6xl mx-auto scroll-reveal">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-4">
-              About Me
+      <section id="about" className="relative py-32 px-6 md:px-8 z-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="reveal text-center mb-20">
+            <motion.div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 mb-6">
+              <Sparkles className="w-4 h-4 text-[#00F5FF]" />
+              <span className="text-sm text-gray-400">About Me</span>
+            </motion.div>
+            <h2 className="text-5xl md:text-7xl font-black mb-6">
+              <span className="bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] bg-clip-text text-transparent">
+                Who I Am
+              </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] mx-auto" />
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              {personal.summary}
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <motion.div
-              whileHover={{ y: -5, scale: 1.02 }}
-              className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-xl"
-            >
-              <Brain className="w-12 h-12 text-[#00F5FF] mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">Who I Am</h3>
-              <p className="text-gray-300 leading-relaxed">
-                {personal.summary}
-              </p>
-            </motion.div>
-
-            <div className="space-y-4">
-              {education.map((edu, index) => (
-                <motion.div
-                  key={index}
-                  whileHover={{ x: 5, scale: 1.02 }}
-                  className="bg-gradient-to-br from-[#00F5FF]/10 to-[#8A2BE2]/10 backdrop-blur-xl rounded-2xl p-6 border border-white/10 shadow-xl"
-                >
-                  <GraduationCap className="w-10 h-10 text-[#00F5FF] mb-3" />
-                  <h4 className="text-xl font-bold text-white mb-2">{edu.degree}</h4>
-                  <p className="text-gray-300 font-medium">{edu.institution}</p>
-                  <p className="text-sm text-gray-400 mt-1">{edu.years}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills Section with Quote */}
-      <section id="skills" className="relative py-24 px-6 md:px-8 z-10">
-        <div className="max-w-6xl mx-auto scroll-reveal">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-4">
-              Skills
-            </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] mx-auto" />
-          </div>
-
-          {/* Quote */}
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="mb-16 text-center max-w-3xl mx-auto"
-          >
-            <blockquote className="text-2xl md:text-3xl font-semibold text-gray-300 italic relative py-8">
-              <span className="text-6xl text-[#00F5FF]/30 absolute top-0 left-0">"</span>
-              Code is like humor. When you have to explain it, it's bad.
-              <span className="text-6xl text-[#8A2BE2]/30 absolute bottom-0 right-0">"</span>
-            </blockquote>
-            <p className="text-gray-400 mt-4">— Cory House</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {Object.entries(skillCategories).map(([category, data], i) => (
+            {education.map((edu, i) => (
               <motion.div
-                key={category}
+                key={i}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-xl"
+                className="reveal p-8 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 cursor-hover"
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <motion.span
-                    whileHover={{ rotate: 360, scale: 1.2 }}
-                    transition={{ duration: 0.5 }}
-                    className="text-5xl"
-                  >
-                    {data.icon}
-                  </motion.span>
-                  <h3 className="text-2xl font-bold text-white">{category}</h3>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00F5FF] to-[#8A2BE2] flex items-center justify-center mb-4">
+                  <Code2 className="w-6 h-6 text-white" />
                 </div>
-                <div className="flex flex-wrap gap-2">
-                  {data.skills.map((skill) => (
-                    <motion.div
-                      key={skill}
-                      whileHover={{ scale: 1.1, y: -2 }}
-                    >
-                      <Badge className="px-4 py-2 bg-gradient-to-r from-[#00F5FF]/20 to-[#8A2BE2]/20 border border-[#00F5FF]/30 text-white text-sm font-medium">
-                        {skill}
-                      </Badge>
-                    </motion.div>
-                  ))}
-                </div>
+                <h3 className="text-2xl font-bold mb-2">{edu.degree}</h3>
+                <p className="text-gray-400 mb-2">{edu.institution}</p>
+                <p className="text-sm text-gray-500">{edu.years}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="relative py-24 px-6 md:px-8 z-10">
-        <div className="max-w-7xl mx-auto scroll-reveal">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-4">
-              Projects
+      {/* Experience Timeline */}
+      <section id="experience" className="relative py-32 px-6 md:px-8 z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="reveal text-center mb-20">
+            <motion.div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 mb-6">
+              <Briefcase className="w-4 h-4 text-[#00F5FF]" />
+              <span className="text-sm text-gray-400">Experience</span>
+            </motion.div>
+            <h2 className="text-5xl md:text-7xl font-black">
+              <span className="bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] bg-clip-text text-transparent">
+                My Journey
+              </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] mx-auto" />
+          </div>
+
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#00F5FF] to-[#8A2BE2]" />
+            
+            {education.map((edu, i) => (
+              <div
+                key={i}
+                className={`timeline-item relative mb-16 ${
+                  i % 2 === 0 ? "md:pr-1/2 md:text-right" : "md:pl-1/2 md:ml-auto"
+                }`}
+              >
+                <div className="absolute left-1/2 top-8 w-4 h-4 bg-[#00F5FF] rounded-full -translate-x-1/2 shadow-lg shadow-[#00F5FF]/50" />
+                
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="p-6 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 cursor-hover"
+                >
+                  <span className="text-sm text-[#00F5FF] font-medium">{edu.years}</span>
+                  <h3 className="text-xl font-bold mt-2 mb-1">{edu.degree}</h3>
+                  <p className="text-gray-400">{edu.institution}</p>
+                </motion.div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Grid */}
+      <section id="projects" className="relative py-32 px-6 md:px-8 z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="reveal text-center mb-20">
+            <motion.div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 mb-6">
+              <Code2 className="w-4 h-4 text-[#00F5FF]" />
+              <span className="text-sm text-gray-400">Portfolio</span>
+            </motion.div>
+            <h2 className="text-5xl md:text-7xl font-black mb-6">
+              <span className="bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] bg-clip-text text-transparent">
+                Featured Projects
+              </span>
+            </h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                whileHover={{ y: -10, scale: 1.02 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <ProjectCard project={project} index={index} />
-              </motion.div>
+            {projects.slice(0, 6).map((project, i) => (
+              <ProjectCard key={project.id} project={project} index={i} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* AI Chat Section */}
-      <section id="ai-chat" className="relative py-24 px-6 md:px-8 z-10">
-        <div className="max-w-4xl mx-auto scroll-reveal">
-          <AIAssistant />
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="relative py-24 px-6 md:px-8 z-10">
-        <div className="max-w-4xl mx-auto scroll-reveal">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-4">
-              Get in Touch
+      <section id="contact" className="relative py-32 px-6 md:px-8 z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="reveal text-center mb-20">
+            <motion.div className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 backdrop-blur-xl rounded-full border border-white/10 mb-6">
+              <Mail className="w-4 h-4 text-[#00F5FF]" />
+              <span className="text-sm text-gray-400">Get in Touch</span>
+            </motion.div>
+            <h2 className="text-5xl md:text-7xl font-black mb-6">
+              <span className="bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] bg-clip-text text-transparent">
+                Let's Connect
+              </span>
             </h2>
-            <div className="w-24 h-1 bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] mx-auto" />
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-12">
+              Have a project in mind? Let's build something amazing together.
+            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="space-y-4">
-              {[
-                { icon: Mail, label: contact.email, href: `mailto:${contact.email}` },
-                { icon: LinkedinIcon, label: "LinkedIn", href: contact.linkedIn },
-                { icon: GithubIcon, label: "GitHub", href: `https://github.com/${personal.name.toLowerCase().replace(/\s+/g, '')}` }
-              ].map((item, i) => (
-                <motion.a
-                  key={i}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ x: 5, scale: 1.02 }}
-                  className="flex items-center gap-4 p-5 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 shadow-xl group"
-                >
-                  <item.icon className="w-6 h-6 text-[#00F5FF] group-hover:scale-110 transition-transform" />
-                  <span className="font-semibold text-white">{item.label}</span>
-                </motion.a>
-              ))}
-            </div>
+          <div className="reveal grid md:grid-cols-3 gap-6">
+            <motion.a
+              href={`mailto:${contact.email}`}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="p-6 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 text-center cursor-hover group"
+            >
+              <Mail className="w-8 h-8 text-[#00F5FF] mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="font-semibold mb-2">Email</h3>
+              <p className="text-sm text-gray-400">Send me a message</p>
+            </motion.a>
 
-            <div>
-              <ContactForm />
-            </div>
+            <motion.a
+              href={contact.linkedIn}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="p-6 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 text-center cursor-hover group"
+            >
+              <Linkedin className="w-8 h-8 text-[#00F5FF] mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="font-semibold mb-2">LinkedIn</h3>
+              <p className="text-sm text-gray-400">Connect with me</p>
+            </motion.a>
+
+            <motion.a
+              href={`https://github.com/${personal.name.toLowerCase().replace(/\s+/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="p-6 bg-white/5 backdrop-blur-xl rounded-xl border border-white/10 text-center cursor-hover group"
+            >
+              <Github className="w-8 h-8 text-[#00F5FF] mx-auto mb-4 group-hover:scale-110 transition-transform" />
+              <h3 className="font-semibold mb-2">GitHub</h3>
+              <p className="text-sm text-gray-400">View my code</p>
+            </motion.a>
           </div>
         </div>
       </section>
@@ -477,13 +523,90 @@ const Home = () => {
       {/* Footer */}
       <footer className="relative py-12 px-6 md:px-8 border-t border-white/10 z-10">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-lg font-bold text-white mb-2">
-            © 2026 ANTONY JENISH FERNANDO
+          <p className="text-gray-400">
+            © 2026 Jenish Antony. Crafted with passion and precision.
           </p>
-          <p className="text-gray-400">Crafted with passion</p>
         </div>
       </footer>
     </div>
+  );
+};
+
+// Project Card Component
+const ProjectCard = ({ project, index }: { project: any; index: number }) => {
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    setRotateX(((y - centerY) / centerY) * -8);
+    setRotateY(((x - centerX) / centerX) * 8);
+  };
+
+  const handleMouseLeave = () => {
+    setRotateX(0);
+    setRotateY(0);
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{ rotateX, rotateY }}
+      style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+      className="reveal group cursor-hover"
+    >
+      <div className="relative h-full">
+        <div className="absolute -inset-1 bg-gradient-to-r from-[#00F5FF] to-[#8A2BE2] rounded-2xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+        
+        <div className="relative h-full p-6 bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 hover:border-white/20 transition-all">
+          <div className="flex items-center justify-between mb-4">
+            <div className="text-4xl">{project.emoji}</div>
+            <div className="w-2 h-2 bg-[#00F5FF] rounded-full animate-pulse" />
+          </div>
+          
+          <h3 className="text-xl font-bold mb-3 group-hover:text-[#00F5FF] transition-colors">
+            {project.title}
+          </h3>
+          
+          <p className="text-sm text-gray-400 mb-4 line-clamp-3">
+            {project.description}
+          </p>
+          
+          <div className="flex flex-wrap gap-2 mb-4">
+            {project.technologies.slice(0, 3).map((tech: string) => (
+              <span
+                key={tech}
+                className="text-xs px-3 py-1 bg-white/5 border border-white/10 rounded-full text-gray-400"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+          
+          <motion.a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-2 text-[#00F5FF] text-sm font-medium group-hover:gap-3 transition-all"
+          >
+            View Project
+            <ExternalLink className="w-4 h-4" />
+          </motion.a>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
