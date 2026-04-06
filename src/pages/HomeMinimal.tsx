@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { portfolioData } from "@/data/portfolioData";
 import { ExternalLink, ArrowRight } from "lucide-react";
 import Lenis from "lenis";
+import ScrollFrameAnimation from "@/components/ScrollFrameAnimation";
 
 const HomeMinimal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -161,6 +162,9 @@ const HomeMinimal = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* GTA 6 Style Scroll Frame Animation */}
+      <ScrollFrameAnimation />
 
       {/* Trusted By Section */}
       <section className="py-20 px-6 border-t border-black/10">
