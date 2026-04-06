@@ -80,7 +80,7 @@ const HomeMinimal = () => {
               transition={{ delay: 0.5 }}
               className="text-xl md:text-2xl text-black/70 mb-8 max-w-xl leading-relaxed"
             >
-              Full Stack Developer crafting digital experiences that merge technical excellence with functional design.
+              Data Scientist & AI/ML Engineer crafting intelligent solutions that transform data into actionable insights.
             </motion.p>
 
             <motion.div
@@ -101,20 +101,78 @@ const HomeMinimal = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right: Image */}
+          {/* Right: Bitmoji Avatar */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
             className="relative"
           >
-            <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden bg-gradient-to-br from-black/5 to-black/10">
-              <img
-                src="/profile-photo.jpg"
-                alt="Antony Jenish"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden bg-gradient-to-br from-purple-100 via-blue-50 to-pink-100 flex items-center justify-center">
+              {/* Bitmoji-style illustration */}
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Background circles */}
+                <div className="absolute inset-0">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+                    transition={{ duration: 20, repeat: Infinity }}
+                    className="absolute top-10 left-10 w-32 h-32 bg-purple-200/30 rounded-full blur-2xl"
+                  />
+                  <motion.div
+                    animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
+                    transition={{ duration: 15, repeat: Infinity }}
+                    className="absolute bottom-10 right-10 w-40 h-40 bg-blue-200/30 rounded-full blur-2xl"
+                  />
+                </div>
+
+                {/* Avatar container with photo */}
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative z-10"
+                >
+                  <div className="relative w-64 h-64 rounded-full overflow-hidden border-8 border-white shadow-2xl">
+                    <img
+                      src="/profile-photo.jpg"
+                      alt="Antony Jenish"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Floating emojis around avatar */}
+                  <motion.div
+                    animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, delay: 0 }}
+                    className="absolute -top-4 -right-4 text-5xl"
+                  >
+                    🤖
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                    className="absolute -bottom-4 -left-4 text-5xl"
+                  >
+                    📊
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ x: [0, 15, 0], rotate: [0, 15, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
+                    className="absolute top-1/4 -right-8 text-4xl"
+                  >
+                    🧠
+                  </motion.div>
+
+                  <motion.div
+                    animate={{ x: [0, -15, 0], rotate: [0, -15, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, delay: 1.5 }}
+                    className="absolute top-1/2 -left-8 text-4xl"
+                  >
+                    💡
+                  </motion.div>
+                </motion.div>
+              </div>
             </div>
 
             {/* Floating badge */}
@@ -134,10 +192,10 @@ const HomeMinimal = () => {
       <section className="py-20 px-6 border-t border-black/10">
         <div className="max-w-7xl mx-auto">
           <p className="text-sm uppercase tracking-wider text-black/40 text-center mb-12">
-            Trusted by Industry Leaders
+            Tech Stack & Tools
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-40">
-            {["React", "Node.js", "Python", "AWS"].map((tech) => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60">
+            {["Python", "TensorFlow", "Scikit-learn", "Pandas"].map((tech) => (
               <div key={tech} className="text-center text-2xl font-bold">{tech}</div>
             ))}
           </div>
@@ -174,12 +232,21 @@ const HomeMinimal = () => {
                 whileHover={{ y: -10 }}
                 className="group"
               >
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-black/5 to-black/10 mb-4">
-                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
-                    {project.emoji}
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 via-blue-50 to-pink-100 mb-4">
+                  {/* Project visual representation */}
+                  <div className="absolute inset-0 p-8 flex flex-col items-center justify-center">
+                    <div className="text-7xl mb-4">{project.emoji}</div>
+                    <div className="w-full h-2 bg-white/50 rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "85%" }}
+                        transition={{ delay: i * 0.1 + 0.5, duration: 1 }}
+                        className="h-full bg-gradient-to-r from-purple-500 to-blue-500"
+                      />
+                    </div>
                   </div>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
-                  <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors" />
+                  <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
                     <ExternalLink className="w-5 h-5" />
                   </div>
                 </div>
@@ -191,6 +258,7 @@ const HomeMinimal = () => {
                   <h3 className="text-xl font-semibold group-hover:opacity-60 transition-opacity">
                     {project.title}
                   </h3>
+                  <p className="text-sm text-black/60 line-clamp-2">{project.description}</p>
                 </div>
               </motion.a>
             ))}
@@ -207,26 +275,83 @@ const HomeMinimal = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <p className="text-sm uppercase tracking-wider text-black/40 mb-8">Experience</p>
+            <p className="text-sm uppercase tracking-wider text-black/40 mb-8">About Me</p>
             <h2 className="text-4xl md:text-5xl font-bold mb-12 leading-tight">
-              A journey of collaborating with forward-thinking companies to build products that matter.
+              Passionate about transforming raw data into meaningful insights that drive decision-making and innovation.
             </h2>
 
+            {/* Detailed Bio */}
+            <div className="prose prose-lg max-w-none mb-16">
+              <p className="text-xl text-black/70 leading-relaxed mb-6">
+                I'm Antony Jenish Fernando, a Data Science enthusiast and AI/ML engineer currently pursuing B.Tech in Information Technology at Loyola-ICAM College of Engineering and Technology in Chennai, India.
+              </p>
+              <p className="text-lg text-black/60 leading-relaxed mb-6">
+                My journey into data science began with a fascination for how data can tell stories and solve real-world problems. I specialize in building predictive models, analyzing complex datasets, and creating intelligent systems that learn and adapt. From customer churn prediction to autonomous diagnostic systems, I love working on projects that have tangible impact.
+              </p>
+              <p className="text-lg text-black/60 leading-relaxed mb-6">
+                I'm proficient in Python, machine learning frameworks like TensorFlow and Scikit-learn, and data manipulation tools like Pandas and NumPy. I also have experience with data visualization using Matplotlib and building end-to-end ML pipelines. Beyond technical skills, I'm passionate about communicating insights effectively and collaborating with teams to turn data into actionable strategies.
+              </p>
+              <p className="text-lg text-black/60 leading-relaxed">
+                When I'm not analyzing data or training models, you'll find me exploring new AI research papers, contributing to open-source projects, or working on personal projects that push the boundaries of what's possible with machine learning.
+              </p>
+            </div>
+
+            {/* Skills Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+              {[
+                {
+                  title: "Machine Learning",
+                  skills: ["Supervised Learning", "Unsupervised Learning", "Deep Learning", "Neural Networks", "Model Optimization"]
+                },
+                {
+                  title: "Data Analysis",
+                  skills: ["Data Cleaning", "EDA", "Statistical Analysis", "Feature Engineering", "Data Visualization"]
+                },
+                {
+                  title: "Tools & Frameworks",
+                  skills: ["Python", "TensorFlow", "Scikit-learn", "Pandas", "Jupyter", "Git"]
+                }
+              ].map((category, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-2xl p-6 border border-black/5"
+                >
+                  <h3 className="text-lg font-semibold mb-4">{category.title}</h3>
+                  <ul className="space-y-2">
+                    {category.skills.map((skill) => (
+                      <li key={skill} className="text-sm text-black/60 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 bg-black/30 rounded-full" />
+                        {skill}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Experience Timeline */}
+            <p className="text-sm uppercase tracking-wider text-black/40 mb-8">Experience & Education</p>
             <div className="space-y-6">
               {[
                 {
-                  role: "Full Stack Developer",
-                  company: "Personal Projects",
+                  role: "Data Science & AI/ML Projects",
+                  company: "Independent Research & Development",
                   period: "2023 — Present",
                   location: "Chennai, India",
-                  tags: ["Web", "AI/ML", "Design"]
+                  description: "Building predictive models, analyzing datasets, and creating intelligent systems. Focused on customer churn prediction, autonomous diagnostics, and machine learning applications.",
+                  tags: ["Python", "ML", "Data Analysis", "AI"]
                 },
                 {
                   role: "B.Tech Information Technology",
-                  company: "Loyola-ICAM College",
+                  company: "Loyola-ICAM College of Engineering",
                   period: "2023 — 2027",
                   location: "Chennai, India",
-                  tags: ["Education", "Development"]
+                  description: "Specializing in Data Science, Machine Learning, and AI. Active participant in tech events, hackathons, and collaborative projects. Strong foundation in algorithms, data structures, and statistical analysis.",
+                  tags: ["Education", "AI/ML", "Data Science"]
                 }
               ].map((exp, i) => (
                 <motion.div
@@ -238,17 +363,18 @@ const HomeMinimal = () => {
                   whileHover={{ x: 10 }}
                   className="bg-white rounded-2xl p-8 border border-black/5 hover:border-black/20 transition-all"
                 >
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
-                    <div>
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                    <div className="flex-1">
                       <h3 className="text-2xl font-semibold mb-1">{exp.role}</h3>
-                      <p className="text-black/60">{exp.company}</p>
+                      <p className="text-black/60 mb-3">{exp.company}</p>
+                      <p className="text-sm text-black/60 leading-relaxed">{exp.description}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="font-medium">{exp.period}</p>
+                    <div className="text-right flex-shrink-0">
+                      <p className="font-medium whitespace-nowrap">{exp.period}</p>
                       <p className="text-sm text-black/60">{exp.location}</p>
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex flex-wrap gap-2">
                     {exp.tags.map((tag) => (
                       <span key={tag} className="text-xs px-3 py-1 bg-black/5 rounded-full">
                         {tag}
