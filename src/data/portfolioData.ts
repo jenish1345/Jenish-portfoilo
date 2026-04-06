@@ -146,6 +146,6 @@ export const portfolioData: PortfolioData = {
     email: "antonyjenishfernando.27it@licet.ac.in",
     phone: "+91 9042679134",
     location: "Lionstown, Thoothukudi, Chennai",
-    linkedIn: "https://www.linkedin.com/in/antony-jenish-5188ba290"
+    linkedIn: "https://www.linkedin.com/in/antony-jenish-fernando"
   }
 };
