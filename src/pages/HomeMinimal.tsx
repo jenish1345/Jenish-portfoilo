@@ -133,7 +133,7 @@ const HomeMinimal = () => {
               <img
                 src="/Profile-photoNEW.JPG"
                 alt="Antony Jenish"
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
               />
               
               {/* Subtle gradient overlay */}
