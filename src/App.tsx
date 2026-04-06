@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomeMinimal from "./pages/HomeMinimal";
 import NotFound from "./pages/NotFound";
+import Analytics from "./components/Analytics";
 
 const queryClient = new QueryClient();
 
@@ -14,6 +15,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Analytics />
         <Routes>
           <Route path="/" element={<HomeMinimal />} />
           <Route path="*" element={<NotFound />} />
