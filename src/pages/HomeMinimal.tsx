@@ -112,7 +112,7 @@ const HomeMinimal = () => {
             <div className="relative w-full max-w-[500px] aspect-[3/4] rounded-[3rem] overflow-hidden bg-white shadow-2xl">
               {/* Photo */}
               <img
-                src="/profile-photoNEW.jpg"
+                src="/Profile-photoNEW.JPG"
                 alt="Antony Jenish"
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
