@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { portfolioData } from "@/data/portfolioData";
 import { ExternalLink, ArrowRight } from "lucide-react";
+import Lenis from "lenis";
 
 const HomeMinimal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -9,8 +10,26 @@ const HomeMinimal = () => {
   const { projects, contact } = portfolioData;
 
   useEffect(() => {
-    // Smooth scroll behavior
-    document.documentElement.style.scrollBehavior = "smooth";
+    // Initialize Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
   }, []);
 
   return (
@@ -109,16 +128,16 @@ const HomeMinimal = () => {
             className="relative flex items-center justify-center"
           >
             {/* Main Card Container */}
-            <div className="relative w-full max-w-[500px] aspect-[3/4] rounded-[3rem] overflow-hidden bg-white shadow-2xl">
+            <div className="relative w-full max-w-[500px] aspect-[3/4] rounded-[3rem] overflow-hidden bg-white shadow-2xl group cursor-pointer">
               {/* Photo */}
               <img
                 src="/Profile-photoNEW.JPG"
                 alt="Antony Jenish"
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
               />
               
               {/* Subtle gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
             </div>
 
             {/* Floating "Scroll down" Badge */}
