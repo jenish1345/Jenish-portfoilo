@@ -101,88 +101,46 @@ const HomeMinimal = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right: Bitmoji Avatar */}
+          {/* Right: Large Card Image (Julian Vance Style) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="relative"
+            className="relative flex items-center justify-center"
           >
-            <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden bg-gradient-to-br from-purple-100 via-blue-50 to-pink-100 flex items-center justify-center">
-              {/* Bitmoji-style illustration */}
-              <div className="relative w-full h-full flex items-center justify-center">
-                {/* Background circles */}
-                <div className="absolute inset-0">
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-                    transition={{ duration: 20, repeat: Infinity }}
-                    className="absolute top-10 left-10 w-32 h-32 bg-purple-200/30 rounded-full blur-2xl"
-                  />
-                  <motion.div
-                    animate={{ scale: [1.2, 1, 1.2], rotate: [360, 180, 0] }}
-                    transition={{ duration: 15, repeat: Infinity }}
-                    className="absolute bottom-10 right-10 w-40 h-40 bg-blue-200/30 rounded-full blur-2xl"
-                  />
-                </div>
-
-                {/* Avatar container with photo */}
-                <motion.div
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative z-10"
-                >
-                  <div className="relative w-64 h-64 rounded-full overflow-hidden border-8 border-white shadow-2xl">
-                    <img
-                      src="/profile-photo.jpg"
-                      alt="Antony Jenish"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-
-                  {/* Floating emojis around avatar */}
-                  <motion.div
-                    animate={{ y: [0, -15, 0], rotate: [0, 10, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, delay: 0 }}
-                    className="absolute -top-4 -right-4 text-5xl"
-                  >
-                    🤖
-                  </motion.div>
-
-                  <motion.div
-                    animate={{ y: [0, -15, 0], rotate: [0, -10, 0] }}
-                    transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-                    className="absolute -bottom-4 -left-4 text-5xl"
-                  >
-                    📊
-                  </motion.div>
-
-                  <motion.div
-                    animate={{ x: [0, 15, 0], rotate: [0, 15, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
-                    className="absolute top-1/4 -right-8 text-4xl"
-                  >
-                    🧠
-                  </motion.div>
-
-                  <motion.div
-                    animate={{ x: [0, -15, 0], rotate: [0, -15, 0] }}
-                    transition={{ duration: 2.5, repeat: Infinity, delay: 1.5 }}
-                    className="absolute top-1/2 -left-8 text-4xl"
-                  >
-                    💡
-                  </motion.div>
-                </motion.div>
-              </div>
+            {/* Main Card Container */}
+            <div className="relative w-full max-w-[500px] aspect-[3/4] rounded-[3rem] overflow-hidden bg-white shadow-2xl">
+              {/* Photo */}
+              <img
+                src="/profile-photo.jpg"
+                alt="Antony Jenish"
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              />
+              
+              {/* Subtle gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
             </div>
 
-            {/* Floating badge */}
+            {/* Floating "Scroll down" Badge */}
             <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="absolute bottom-8 left-8 bg-white rounded-full px-6 py-3 shadow-xl flex items-center gap-3"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white rounded-full px-6 py-3 shadow-xl flex items-center gap-3 border border-black/5"
             >
-              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-sm font-medium">Scroll down to explore</span>
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                className="w-8 h-8 rounded-full border-2 border-black flex items-center justify-center"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </motion.div>
+              <div className="text-left">
+                <div className="text-xs font-medium">Scroll down</div>
+                <div className="text-xs text-black/50">to explore</div>
+              </div>
             </motion.div>
           </motion.div>
         </div>
