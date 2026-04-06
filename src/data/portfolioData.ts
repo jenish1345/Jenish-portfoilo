@@ -42,6 +42,16 @@ export const portfolioData: PortfolioData = {
   languages: ["English", "Tamil"],
   projects: [
     {
+      id: "house-of-elleora",
+      title: "House of Elleora",
+      description: "Premium e-commerce platform for luxury fashion and lifestyle products. Full-stack freelance project featuring modern UI/UX, secure payment integration, and seamless shopping experience",
+      technologies: ["React", "Next.js", "E-commerce", "Full Stack", "Freelance"],
+      githubUrl: "https://houseofelleora.vercel.app",
+      emoji: "🛍️",
+      featured: true,
+      order: 0
+    },
+    {
       id: "timetable-generator",
       title: "Timetable Generator",
       description: "Automated timetable generation system that creates optimized schedules for educational institutions, handling constraints and preferences efficiently",
