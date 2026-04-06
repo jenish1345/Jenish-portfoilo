@@ -411,7 +411,7 @@ const Home = () => {
                     name="name"
                     required
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
-                    placeholder="John Doe"
+                    placeholder="Enter your name"
                   />
                 </div>
 
@@ -423,7 +423,7 @@ const Home = () => {
                     name="email"
                     required
                     className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-zinc-500 focus:outline-none focus:border-white/30 focus:bg-white/10 transition-all"
-                    placeholder="john@example.com"
+                    placeholder="Enter your email"
                   />
                 </div>
 
