@@ -124,72 +124,145 @@ const Hero3D = () => {
                   transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <img
-                    src="/lovable-uploads/d737aef4-76c3-4c23-ab88-26d76a8d4b78.png"
+                    src="/profile-photo.jpg"
                     alt="Antony Jenish"
                     className="w-full h-full object-cover"
                   />
 
-                  {/* Sunglasses Overlay */}
+                  {/* Sunglasses Overlay - Animated removal */}
                   <motion.div
-                    className="absolute inset-0 flex items-center justify-center"
-                    initial={{ opacity: 1, y: 0 }}
-                    animate={animationStage >= 1 ? { opacity: 0, y: -100, rotate: -20 } : {}}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="absolute top-[35%] left-1/2 -translate-x-1/2 w-48 h-24"
+                    initial={{ opacity: 1, y: 0, scale: 1 }}
+                    animate={animationStage >= 1 ? { 
+                      opacity: 0, 
+                      y: -150, 
+                      rotate: -45,
+                      scale: 0.5,
+                      x: -100
+                    } : {}}
+                    transition={{ duration: 1, ease: [0.34, 1.56, 0.64, 1] }}
                   >
-                    <div className="text-9xl">🕶️</div>
+                    <div className="text-8xl filter drop-shadow-2xl">🕶️</div>
                   </motion.div>
 
-                  {/* Wink Effect */}
+                  {/* Wink Effect - Big animated wink */}
                   {animationStage === 2 && (
                     <motion.div
-                      className="absolute top-1/3 left-1/2 -translate-x-1/2 text-6xl"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: [0, 1.5, 0] }}
-                      transition={{ duration: 0.6 }}
+                      className="absolute top-[38%] left-[55%] -translate-x-1/2 text-7xl z-20"
+                      initial={{ scale: 0, rotate: -20 }}
+                      animate={{ 
+                        scale: [0, 1.8, 1.5, 0],
+                        rotate: [-20, 10, -10, 20]
+                      }}
+                      transition={{ duration: 0.8, ease: "easeOut" }}
                     >
                       😉
                     </motion.div>
                   )}
 
-                  {/* Wave Hand */}
+                  {/* Wave Hand - Matches the photo's wave gesture */}
                   <motion.div
-                    className="absolute bottom-10 right-10 text-7xl"
-                    initial={{ opacity: 0, rotate: 0 }}
+                    className="absolute bottom-[15%] right-[20%] text-8xl z-20 filter drop-shadow-2xl"
+                    initial={{ opacity: 0, scale: 0.5, rotate: 0 }}
                     animate={animationStage >= 3 ? {
-                      opacity: [0, 1, 1, 0],
-                      rotate: [0, 20, -20, 20, -20, 0],
-                      scale: [0.8, 1.2, 1.2, 0.8],
+                      opacity: [0, 1, 1, 1, 0],
+                      scale: [0.5, 1.3, 1.2, 1.3, 0.8],
+                      rotate: [0, -15, 15, -15, 15, 0],
                     } : {}}
-                    transition={{ duration: 2, ease: "easeInOut" }}
+                    transition={{ duration: 2.5, ease: "easeInOut" }}
                   >
                     👋
                   </motion.div>
 
-                  {/* Sparkles */}
+                  {/* Cool Emoji Reactions */}
+                  {animationStage >= 3 && (
+                    <>
+                      <motion.div
+                        className="absolute top-[20%] left-[15%] text-4xl z-20"
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{
+                          opacity: [0, 1, 1, 0],
+                          scale: [0, 1.5, 1.5, 0],
+                          y: [0, -40],
+                          rotate: [0, 360]
+                        }}
+                        transition={{ duration: 2, delay: 0.5 }}
+                      >
+                        😎
+                      </motion.div>
+
+                      <motion.div
+                        className="absolute top-[25%] right-[15%] text-4xl z-20"
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{
+                          opacity: [0, 1, 1, 0],
+                          scale: [0, 1.5, 1.5, 0],
+                          y: [0, -40],
+                          rotate: [0, -360]
+                        }}
+                        transition={{ duration: 2, delay: 0.8 }}
+                      >
+                        🔥
+                      </motion.div>
+                    </>
+                  )}
+
+                  {/* Sparkles - More dynamic */}
                   {animationStage >= 1 && (
                     <>
-                      {[...Array(6)].map((_, i) => (
+                      {[...Array(12)].map((_, i) => (
                         <motion.div
                           key={i}
-                          className="absolute text-3xl"
+                          className="absolute text-3xl z-10"
                           style={{
-                            left: `${20 + i * 15}%`,
-                            top: `${30 + (i % 2) * 40}%`,
+                            left: `${10 + (i % 4) * 25}%`,
+                            top: `${20 + Math.floor(i / 4) * 25}%`,
                           }}
                           initial={{ opacity: 0, scale: 0 }}
                           animate={{
-                            opacity: [0, 1, 0],
-                            scale: [0, 1.5, 0],
-                            y: [0, -50],
+                            opacity: [0, 1, 1, 0],
+                            scale: [0, 1.8, 1.5, 0],
+                            y: [0, -60],
+                            rotate: [0, 180],
                           }}
                           transition={{
-                            duration: 1.5,
-                            delay: i * 0.1,
+                            duration: 2,
+                            delay: 0.5 + i * 0.15,
                             repeat: Infinity,
-                            repeatDelay: 3,
+                            repeatDelay: 4,
                           }}
                         >
                           ✨
+                        </motion.div>
+                      ))}
+                    </>
+                  )}
+
+                  {/* Hearts floating up */}
+                  {animationStage >= 4 && (
+                    <>
+                      {[...Array(3)].map((_, i) => (
+                        <motion.div
+                          key={`heart-${i}`}
+                          className="absolute text-4xl z-10"
+                          style={{
+                            left: `${30 + i * 20}%`,
+                            bottom: '10%',
+                          }}
+                          initial={{ opacity: 0, scale: 0 }}
+                          animate={{
+                            opacity: [0, 1, 1, 0],
+                            scale: [0, 1.2, 1, 0],
+                            y: [0, -150],
+                          }}
+                          transition={{
+                            duration: 3,
+                            delay: i * 0.5,
+                            repeat: Infinity,
+                            repeatDelay: 5,
+                          }}
+                        >
+                          ❤️
                         </motion.div>
                       ))}
                     </>
@@ -200,10 +273,11 @@ const Hero3D = () => {
 
             {/* Floating Icons */}
             <motion.div
-              className="absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl"
+              className="absolute -top-8 -right-8 w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl border-2 border-white/20"
               animate={{
                 y: [0, -15, 0],
                 rotate: [0, 10, 0],
+                scale: [1, 1.1, 1],
               }}
               transition={{ duration: 3, repeat: Infinity }}
             >
@@ -211,10 +285,11 @@ const Hero3D = () => {
             </motion.div>
 
             <motion.div
-              className="absolute -bottom-8 -left-8 w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl"
+              className="absolute -bottom-8 -left-8 w-16 h-16 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl border-2 border-white/20"
               animate={{
                 y: [0, -15, 0],
                 rotate: [0, -10, 0],
+                scale: [1, 1.1, 1],
               }}
               transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
             >
@@ -222,14 +297,39 @@ const Hero3D = () => {
             </motion.div>
 
             <motion.div
-              className="absolute top-1/2 -right-12 w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-2xl"
+              className="absolute top-1/2 -right-12 w-14 h-14 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl flex items-center justify-center shadow-2xl border-2 border-white/20"
               animate={{
                 x: [0, 10, 0],
                 rotate: [0, 15, 0],
+                scale: [1, 1.1, 1],
               }}
               transition={{ duration: 2.5, repeat: Infinity, delay: 1 }}
             >
               <span className="text-2xl">⚡</span>
+            </motion.div>
+
+            <motion.div
+              className="absolute top-1/4 -left-10 w-14 h-14 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-2xl border-2 border-white/20"
+              animate={{
+                x: [0, -10, 0],
+                rotate: [0, -15, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ duration: 2.8, repeat: Infinity, delay: 0.3 }}
+            >
+              <span className="text-2xl">🎯</span>
+            </motion.div>
+
+            <motion.div
+              className="absolute bottom-1/4 -right-10 w-14 h-14 bg-gradient-to-br from-red-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl border-2 border-white/20"
+              animate={{
+                y: [0, 12, 0],
+                rotate: [0, 20, 0],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{ duration: 3.2, repeat: Infinity, delay: 0.8 }}
+            >
+              <span className="text-2xl">🔥</span>
             </motion.div>
           </motion.div>
         </div>
