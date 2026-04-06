@@ -1,0 +1,330 @@
+import { useEffect, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { portfolioData } from "@/data/portfolioData";
+import { ExternalLink, ArrowRight } from "lucide-react";
+
+const HomeMinimal = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll();
+  const { projects, contact } = portfolioData;
+
+  useEffect(() => {
+    // Smooth scroll behavior
+    document.documentElement.style.scrollBehavior = "smooth";
+  }, []);
+
+  return (
+    <div ref={containerRef} className="bg-[#f5f5f0] text-[#1a1a1a]">
+      {/* Navigation */}
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className="fixed top-0 left-0 right-0 z-50 bg-[#f5f5f0]/80 backdrop-blur-md border-b border-black/5"
+      >
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 border-2 border-black rounded-lg flex items-center justify-center">
+              <span className="text-sm font-bold">AJ</span>
+            </div>
+            <span className="text-lg font-semibold tracking-tight">ANTONY JENISH</span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-8 text-sm">
+            <a href="#work" className="hover:opacity-60 transition-opacity">Work</a>
+            <a href="#about" className="hover:opacity-60 transition-opacity">About</a>
+            <a href="#contact" className="hover:opacity-60 transition-opacity">Contact</a>
+          </div>
+
+          <motion.a
+            href="#contact"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-black text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black/80 transition-colors flex items-center gap-2"
+          >
+            Let's Talk
+            <ArrowRight className="w-4 h-4" />
+          </motion.a>
+        </div>
+      </motion.nav>
+
+      {/* Hero Section */}
+      <section className="min-h-screen flex items-center justify-center px-6 pt-24 pb-12">
+        <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Text */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-sm uppercase tracking-wider text-black/60 mb-6"
+            >
+              Available for Work
+            </motion.p>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-6xl md:text-8xl font-bold mb-6 leading-none"
+            >
+              Antony<br />Jenish.
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="text-xl md:text-2xl text-black/70 mb-8 max-w-xl leading-relaxed"
+            >
+              Full Stack Developer crafting digital experiences that merge technical excellence with functional design.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7 }}
+              className="flex items-center gap-6"
+            >
+              <div>
+                <div className="text-4xl font-bold">9+</div>
+                <div className="text-sm text-black/60">Projects Delivered</div>
+              </div>
+              <div className="w-px h-12 bg-black/20" />
+              <div>
+                <div className="text-4xl font-bold">3+</div>
+                <div className="text-sm text-black/60">Years Experience</div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right: Image */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="relative"
+          >
+            <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden bg-gradient-to-br from-black/5 to-black/10">
+              <img
+                src="/profile-photo.jpg"
+                alt="Antony Jenish"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+            </div>
+
+            {/* Floating badge */}
+            <motion.div
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
+              className="absolute bottom-8 left-8 bg-white rounded-full px-6 py-3 shadow-xl flex items-center gap-3"
+            >
+              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-sm font-medium">Scroll down to explore</span>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Trusted By Section */}
+      <section className="py-20 px-6 border-t border-black/10">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-sm uppercase tracking-wider text-black/40 text-center mb-12">
+            Trusted by Industry Leaders
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-40">
+            {["React", "Node.js", "Python", "AWS"].map((tech) => (
+              <div key={tech} className="text-center text-2xl font-bold">{tech}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Selected Works */}
+      <section id="work" className="py-24 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-16">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 border-2 border-black rounded-lg flex items-center justify-center">
+                <span className="text-xs">📁</span>
+              </div>
+              <h2 className="text-sm uppercase tracking-wider">Selected Works</h2>
+            </div>
+            <a href="#contact" className="text-sm hover:opacity-60 transition-opacity flex items-center gap-2">
+              View All
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.slice(0, 6).map((project, i) => (
+              <motion.a
+                key={project.id}
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                className="group"
+              >
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-black/5 to-black/10 mb-4">
+                  <div className="absolute inset-0 flex items-center justify-center text-6xl">
+                    {project.emoji}
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                  <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ExternalLink className="w-5 h-5" />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <p className="text-xs uppercase tracking-wider text-black/40">
+                    {project.technologies[0]}
+                  </p>
+                  <h3 className="text-xl font-semibold group-hover:opacity-60 transition-opacity">
+                    {project.title}
+                  </h3>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-24 px-6 bg-[#f5f5f0]">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-sm uppercase tracking-wider text-black/40 mb-8">Experience</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 leading-tight">
+              A journey of collaborating with forward-thinking companies to build products that matter.
+            </h2>
+
+            <div className="space-y-6">
+              {[
+                {
+                  role: "Full Stack Developer",
+                  company: "Personal Projects",
+                  period: "2023 — Present",
+                  location: "Chennai, India",
+                  tags: ["Web", "AI/ML", "Design"]
+                },
+                {
+                  role: "B.Tech Information Technology",
+                  company: "Loyola-ICAM College",
+                  period: "2023 — 2027",
+                  location: "Chennai, India",
+                  tags: ["Education", "Development"]
+                }
+              ].map((exp, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.2, duration: 0.6 }}
+                  viewport={{ once: true }}
+                  whileHover={{ x: 10 }}
+                  className="bg-white rounded-2xl p-8 border border-black/5 hover:border-black/20 transition-all"
+                >
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                    <div>
+                      <h3 className="text-2xl font-semibold mb-1">{exp.role}</h3>
+                      <p className="text-black/60">{exp.company}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-medium">{exp.period}</p>
+                      <p className="text-sm text-black/60">{exp.location}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    {exp.tags.map((tag) => (
+                      <span key={tag} className="text-xs px-3 py-1 bg-black/5 rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact Section - Full Screen */}
+      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-24 bg-black text-white">
+        <div className="max-w-4xl mx-auto w-full text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-sm uppercase tracking-wider text-white/40 mb-8 flex items-center justify-center gap-2">
+              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+              Available for Work
+            </p>
+
+            <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+              Let's create<br />something<br />extraordinary<br />together.
+            </h2>
+
+            <motion.a
+              href={`mailto:${contact.email}`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-3 text-2xl md:text-3xl hover:opacity-60 transition-opacity mb-16"
+            >
+              {contact.email}
+              <ArrowRight className="w-8 h-8" />
+            </motion.a>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-20 text-left">
+              <div>
+                <h3 className="text-sm uppercase tracking-wider text-white/40 mb-6">Navigation</h3>
+                <div className="space-y-3">
+                  <a href="#work" className="block hover:opacity-60 transition-opacity">Work</a>
+                  <a href="#about" className="block hover:opacity-60 transition-opacity">About</a>
+                  <a href="#contact" className="block hover:opacity-60 transition-opacity">Contact</a>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-sm uppercase tracking-wider text-white/40 mb-6">Socials</h3>
+                <div className="space-y-3">
+                  <a href="https://github.com/jenish1345" target="_blank" rel="noopener noreferrer" className="block hover:opacity-60 transition-opacity">
+                    GitHub
+                  </a>
+                  <a href={contact.linkedIn} target="_blank" rel="noopener noreferrer" className="block hover:opacity-60 transition-opacity">
+                    LinkedIn
+                  </a>
+                  <a href={`mailto:${contact.email}`} className="block hover:opacity-60 transition-opacity">
+                    Email
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-20 pt-12 border-t border-white/10 text-sm text-white/40">
+              <p>© 2026 Antony Jenish. All rights reserved.</p>
+              <p className="mt-2">Designed in Chennai</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+};
+
+export default HomeMinimal;
