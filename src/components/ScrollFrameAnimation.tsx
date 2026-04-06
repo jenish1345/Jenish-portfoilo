@@ -1,191 +1,73 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
 const ScrollFrameAnimation = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const currentFrame = useTransform(scrollYProgress, [0, 1], [0, 3]);
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [0, 1, 1, 0]);
-
-  // Load images
-  useEffect(() => {
-    const frameCount = 4;
-    const loadedImages: HTMLImageElement[] = [];
-    let loadedCount = 0;
-
-    for (let i = 1; i <= frameCount; i++) {
-      const img = new Image();
-      img.src = `/scroll-frames/photo${i}.png`;
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === frameCount) {
-          setImagesLoaded(true);
-        }
-      };
-      loadedImages.push(img);
-    }
-
-    setImages(loadedImages);
-  }, []);
-
-  // Render frame on canvas
-  useEffect(() => {
-    if (!imagesLoaded || !canvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // Set initial canvas size
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const renderFrame = (frameIndex: number) => {
-      const index = Math.min(Math.max(0, Math.floor(frameIndex)), images.length - 1);
-      const img = images[index];
-
-      if (img && img.complete) {
-        // Calculate dimensions to cover the canvas
-        const scale = Math.max(
-          canvas.width / img.width,
-          canvas.height / img.height
-        );
-        const x = (canvas.width - img.width * scale) / 2;
-        const y = (canvas.height - img.height * scale) / 2;
-
-        // Clear and draw
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-
-        // Add film grain effect
-        ctx.globalAlpha = 0.03;
-        for (let i = 0; i < 3000; i++) {
-          const grainX = Math.random() * canvas.width;
-          const grainY = Math.random() * canvas.height;
-          ctx.fillStyle = Math.random() > 0.5 ? "#fff" : "#000";
-          ctx.fillRect(grainX, grainY, 1, 1);
-        }
-        ctx.globalAlpha = 1;
-
-        // Add vignette
-        const gradient = ctx.createRadialGradient(
-          canvas.width / 2,
-          canvas.height / 2,
-          0,
-          canvas.width / 2,
-          canvas.height / 2,
-          canvas.width / 1.5
-        );
-        gradient.addColorStop(0, "rgba(0,0,0,0)");
-        gradient.addColorStop(1, "rgba(0,0,0,0.6)");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-      }
-    };
-
-    // Render initial frame
-    renderFrame(0);
-
-    // Subscribe to scroll changes
-    const unsubscribe = currentFrame.on("change", renderFrame);
-
-    return () => unsubscribe();
-  }, [currentFrame, images, imagesLoaded]);
-
-  // Handle resize
-  useEffect(() => {
-    const handleResize = () => {
-      if (canvasRef.current) {
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const photos = [
+    { src: "/scroll-frames/photo1.png", title: "ANTONY", subtitle: "JENISH" },
+    { src: "/scroll-frames/photo2.png", title: "DATA", subtitle: "SCIENTIST" },
+    { src: "/scroll-frames/photo3.png", title: "AI/ML", subtitle: "ENGINEER" },
+    { src: "/scroll-frames/photo4.png", title: "PORTFOLIO", subtitle: "2026" }
+  ];
 
   return (
-    <div ref={containerRef} className="relative h-[500vh] bg-black">
-      {/* Fixed Canvas */}
-      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden">
-        <canvas
-          ref={canvasRef}
-          className="w-full h-full object-cover"
-        />
-
-        {/* Overlay Content */}
-        <motion.div
-          style={{ opacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center text-white z-10 pointer-events-none"
+    <>
+      {photos.map((photo, index) => (
+        <section
+          key={index}
+          className="relative h-screen w-full overflow-hidden snap-start snap-always"
         >
-          {/* Title Animation */}
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            viewport={{ once: false }}
-            className="text-center mb-8"
-          >
-            <h1 className="text-7xl md:text-9xl font-bold mb-4 tracking-tight">
-              ANTONY
-            </h1>
-            <h2 className="text-5xl md:text-7xl font-bold text-white/80 tracking-tight">
-              JENISH
-            </h2>
-          </motion.div>
-
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            viewport={{ once: false }}
-            className="text-xl md:text-2xl text-white/70 font-light tracking-wider"
-          >
-            DATA SCIENTIST & AI/ML ENGINEER
-          </motion.p>
-
-          {/* Scroll Progress Bar */}
-          <motion.div
-            className="absolute bottom-12 left-1/2 -translate-x-1/2 w-64 h-1 bg-white/20 rounded-full overflow-hidden"
-          >
-            <motion.div
-              style={{ scaleX: scrollYProgress }}
-              className="h-full bg-white origin-left"
+          {/* Full Screen Image */}
+          <div className="absolute inset-0">
+            <img
+              src={photo.src}
+              alt={`${photo.title} ${photo.subtitle}`}
+              className="w-full h-full object-cover"
             />
-          </motion.div>
+            {/* Dark overlay */}
+            <div className="absolute inset-0 bg-black/40" />
+            {/* Vignette effect */}
+            <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/60" />
+          </div>
 
-          {/* Scroll Indicator */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 1.5, repeat: Infinity, repeatType: "reverse" }}
-            className="absolute bottom-24 left-1/2 -translate-x-1/2 text-white/50 text-sm"
-          >
-            SCROLL TO EXPLORE
-          </motion.div>
-        </motion.div>
+          {/* Text Overlay */}
+          <div className="relative z-10 h-full flex flex-col items-center justify-center text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-center"
+            >
+              <h1 className="text-7xl md:text-9xl font-bold mb-4 tracking-tight drop-shadow-2xl">
+                {photo.title}
+              </h1>
+              <h2 className="text-5xl md:text-7xl font-bold text-white/90 tracking-tight drop-shadow-2xl">
+                {photo.subtitle}
+              </h2>
+            </motion.div>
 
-        {/* Loading State */}
-        {!imagesLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black text-white">
-            <div className="text-center">
-              <div className="w-16 h-16 border-4 border-white/20 border-t-white rounded-full animate-spin mx-auto mb-4" />
-              <p className="text-xl">Loading Experience...</p>
+            {/* Scroll Indicator - Only on first slide */}
+            {index === 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 1, repeat: Infinity, repeatType: "reverse" }}
+                className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/70 text-sm flex flex-col items-center gap-2"
+              >
+                <span>SCROLL DOWN</span>
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </motion.div>
+            )}
+
+            {/* Slide Number */}
+            <div className="absolute bottom-8 right-8 text-white/50 text-sm font-mono">
+              {String(index + 1).padStart(2, '0')} / {String(photos.length).padStart(2, '0')}
             </div>
           </div>
-        )}
-      </div>
-    </div>
+        </section>
+      ))}
+    </>
   );
 };
 

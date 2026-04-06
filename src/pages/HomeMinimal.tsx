@@ -34,7 +34,7 @@ const HomeMinimal = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="bg-[#f5f5f0] text-[#1a1a1a]">
+    <div ref={containerRef} className="bg-[#f5f5f0] text-[#1a1a1a] snap-y snap-mandatory overflow-y-scroll h-screen">
       {/* Navigation */}
       <motion.nav
         initial={{ y: -100 }}
@@ -68,7 +68,7 @@ const HomeMinimal = () => {
       </motion.nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-6 pt-24 pb-12">
+      <section className="min-h-screen flex items-center justify-center px-6 pt-24 pb-12 snap-start">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Text */}
           <motion.div
