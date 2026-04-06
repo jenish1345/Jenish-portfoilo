@@ -133,19 +133,19 @@ const HomeMinimal = () => {
               <img
                 src="/Profile-photoNEW.JPG"
                 alt="Antony Jenish"
-                className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
               />
               
               {/* Subtle gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
             </div>
 
-            {/* Floating "Scroll down" Badge */}
+            {/* Floating "Scroll down" Badge - Bottom Left */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="absolute bottom-8 left-1/2 -translate-x-1/2 bg-white rounded-full px-6 py-3 shadow-xl flex items-center gap-3 border border-black/5"
+              className="absolute bottom-8 left-8 bg-white rounded-full px-6 py-3 shadow-xl flex items-center gap-3 border border-black/5"
             >
               <motion.div
                 animate={{ rotate: 360 }}
