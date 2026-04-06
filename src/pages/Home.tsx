@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { portfolioData } from "@/data/portfolioData";
+import AnimatedAvatar from "@/components/AnimatedAvatar";
 import { 
   CheckCircle2, 
   ShieldCheck, 
@@ -157,37 +158,9 @@ const Home = () => {
             </div>
           </div>
 
-          {/* Right Side: Floating Image Cluster */}
-          <div className="lg:h-[650px] hidden md:block animate-on-scroll w-full h-[500px] z-50 pointer-events-auto relative" style={{ animation: "animationIn 0.8s ease-out 0.4s both" }}>
-            {[
-              { top: "5%", left: "5%", rotate: -4, size: "w-40 lg:w-48", aspect: "aspect-square", z: 61 },
-              { top: "15%", right: "5%", rotate: 3, size: "w-48 lg:w-56", aspect: "aspect-[4/3]", z: 62 },
-              { top: "40%", left: "0%", rotate: -2, size: "w-36 lg:w-44", aspect: "aspect-[3/4]", z: 63 },
-              { top: "35%", right: "15%", rotate: 2, size: "w-52 lg:w-64", aspect: "aspect-square", z: 64 },
-              { bottom: "5%", left: "20%", rotate: 4, size: "w-44 lg:w-52", aspect: "aspect-square", z: 62 },
-              { bottom: "0%", right: "10%", rotate: -3, size: "w-36 lg:w-44", aspect: "aspect-[4/3]", z: 61 }
-            ].map((card, i) => (
-              <div
-                key={i}
-                className={`glass-card absolute ${card.size} ${card.aspect} p-2 md:p-3 transition-all duration-500 ease-out hover:scale-105 hover:z-[100]`}
-                style={{
-                  top: card.top,
-                  left: card.left,
-                  right: card.right,
-                  bottom: card.bottom,
-                  transform: `rotate(${card.rotate}deg)`,
-                  zIndex: card.z
-                }}
-              >
-                <div className="relative w-full h-full rounded-xl overflow-hidden bg-zinc-900 shadow-[0_0_10px_rgba(0,0,0,0.5)]">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-black/40 to-transparent" />
-                  <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-20">
-                    {["💻", "🚀", "⚡", "🎯", "🔥", "✨"][i]}
-                  </div>
-                </div>
-                <div className="glass-highlight" />
-              </div>
-            ))}
+          {/* Right Side: Animated Avatar */}
+          <div className="lg:h-[650px] hidden md:flex items-center justify-center animate-on-scroll w-full h-[500px] z-50 pointer-events-auto relative" style={{ animation: "animationIn 0.8s ease-out 0.4s both" }}>
+            <AnimatedAvatar />
           </div>
         </div>
       </main>
