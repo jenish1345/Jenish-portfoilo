@@ -44,15 +44,15 @@ const ScrollFrameAnimation = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const unsubscribe = currentFrame.on("change", (latest) => {
-      const index = Math.min(Math.floor(latest), images.length - 1);
+    // Set initial canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const renderFrame = (frameIndex: number) => {
+      const index = Math.min(Math.max(0, Math.floor(frameIndex)), images.length - 1);
       const img = images[index];
 
       if (img && img.complete) {
-        // Set canvas size
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
         // Calculate dimensions to cover the canvas
         const scale = Math.max(
           canvas.width / img.width,
@@ -68,10 +68,10 @@ const ScrollFrameAnimation = () => {
         // Add film grain effect
         ctx.globalAlpha = 0.03;
         for (let i = 0; i < 3000; i++) {
-          const x = Math.random() * canvas.width;
-          const y = Math.random() * canvas.height;
+          const grainX = Math.random() * canvas.width;
+          const grainY = Math.random() * canvas.height;
           ctx.fillStyle = Math.random() > 0.5 ? "#fff" : "#000";
-          ctx.fillRect(x, y, 1, 1);
+          ctx.fillRect(grainX, grainY, 1, 1);
         }
         ctx.globalAlpha = 1;
 
@@ -89,7 +89,13 @@ const ScrollFrameAnimation = () => {
         ctx.fillStyle = gradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
       }
-    });
+    };
+
+    // Render initial frame
+    renderFrame(0);
+
+    // Subscribe to scroll changes
+    const unsubscribe = currentFrame.on("change", renderFrame);
 
     return () => unsubscribe();
   }, [currentFrame, images, imagesLoaded]);
@@ -108,7 +114,7 @@ const ScrollFrameAnimation = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative h-[400vh] bg-black">
+    <div ref={containerRef} className="relative h-[500vh] bg-black">
       {/* Fixed Canvas */}
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden">
         <canvas
