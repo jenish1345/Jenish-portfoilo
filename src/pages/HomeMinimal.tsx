@@ -128,16 +128,13 @@ const HomeMinimal = () => {
             className="relative flex items-center justify-center"
           >
             {/* Main Card Container */}
-            <div className="relative w-full max-w-[500px] aspect-[3/4] rounded-[3rem] overflow-hidden bg-white shadow-2xl group cursor-pointer">
+            <div className="relative w-full max-w-[500px] aspect-[3/4] rounded-[3rem] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 shadow-2xl group cursor-pointer p-8">
               {/* Photo */}
               <img
                 src="/Profile-photoNEW.JPG"
                 alt="Antony Jenish"
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+                className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105 rounded-2xl"
               />
-              
-              {/* Subtle gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
             </div>
 
             {/* Floating "Scroll down" Badge - Bottom Left */}
@@ -179,6 +176,71 @@ const HomeMinimal = () => {
         </div>
       </section>
 
+      {/* Freelancing Section */}
+      <section className="py-24 px-6 bg-[#f5f5f0]">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between mb-16">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 border-2 border-black rounded-lg flex items-center justify-center">
+                <span className="text-xs">💼</span>
+              </div>
+              <h2 className="text-sm uppercase tracking-wider">Freelance Projects</h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {projects.filter(p => p.id === "house-of-elleora").map((project, i) => (
+              <motion.a
+                key={project.id}
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10 }}
+                className="group"
+              >
+                <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 via-blue-50 to-pink-100 mb-4">
+                  <div className="absolute inset-0 p-8 flex flex-col items-center justify-center">
+                    <div className="text-8xl mb-4">{project.emoji}</div>
+                    <div className="w-full h-2 bg-white/50 rounded-full overflow-hidden">
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "100%" }}
+                        transition={{ delay: 0.5, duration: 1 }}
+                        className="h-full bg-gradient-to-r from-purple-500 to-blue-500"
+                      />
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors" />
+                  <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                    <ExternalLink className="w-5 h-5" />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs uppercase tracking-wider text-black/40">Freelance</span>
+                    <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full font-medium">Live</span>
+                  </div>
+                  <h3 className="text-2xl font-semibold group-hover:opacity-60 transition-opacity">{project.title}</h3>
+                  <p className="text-sm text-black/60 line-clamp-2">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {project.technologies.map((tech) => (
+                      <span key={tech} className="text-xs px-3 py-1 bg-white border border-black/10 rounded-full text-black/60">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Selected Works */}
       <section id="work" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -196,7 +258,7 @@ const HomeMinimal = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.slice(0, 6).map((project, i) => (
+            {projects.filter(p => p.id !== "house-of-elleora").slice(0, 6).map((project, i) => (
               <motion.a
                 key={project.id}
                 href={project.githubUrl}
