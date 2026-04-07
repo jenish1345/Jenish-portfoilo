@@ -40,12 +40,12 @@ const SkillsVisualization = () => {
     <div className="w-full">
       <div className="mb-12">
         <h3 className="text-2xl font-bold mb-2">Technical Skills</h3>
-        <p className="text-black/60">Proficiency levels across different technologies</p>
+        <p className="text-black/60 dark:text-white/60 transition-colors">Proficiency levels across different technologies</p>
       </div>
 
       {categories.map((category, catIndex) => (
         <div key={category} className="mb-12">
-          <h4 className="text-lg font-semibold mb-6 text-black/80">{category}</h4>
+          <h4 className="text-lg font-semibold mb-6 text-black/80 dark:text-white/80 transition-colors">{category}</h4>
           <div className="space-y-6">
             {skills
               .filter(skill => skill.category === category)
@@ -60,9 +60,9 @@ const SkillsVisualization = () => {
                 >
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm font-medium">{skill.name}</span>
-                    <span className="text-sm text-black/40">{skill.level}%</span>
+                    <span className="text-sm text-black/40 dark:text-white/40 transition-colors">{skill.level}%</span>
                   </div>
-                  <div className="h-2 bg-black/5 rounded-full overflow-hidden">
+                  <div className="h-2 bg-black/5 dark:bg-white/10 rounded-full overflow-hidden transition-colors">
                     <motion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: isVisible ? `${skill.level}%` : 0 }}

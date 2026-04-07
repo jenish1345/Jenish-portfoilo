@@ -120,7 +120,7 @@ const HomeMinimal = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-sm uppercase tracking-wider text-black/60 mb-6"
+              className="text-sm uppercase tracking-wider text-black/60 dark:text-white/60 mb-6 transition-colors"
             >
               Available for Work
             </motion.p>
@@ -141,7 +141,7 @@ const HomeMinimal = () => {
               className="mb-8 max-w-xl leading-relaxed"
             >
               <TypingAnimation />
-              <span className="block text-base text-black/60 mt-2">
+              <span className="block text-base text-black/60 dark:text-white/60 mt-2 transition-colors">
                 crafting intelligent solutions that transform data into actionable insights.
               </span>
             </motion.p>
@@ -154,12 +154,12 @@ const HomeMinimal = () => {
             >
               <div>
                 <div className="text-4xl font-bold">9+</div>
-                <div className="text-sm text-black/60">Projects Delivered</div>
+                <div className="text-sm text-black/60 dark:text-white/60 transition-colors">Projects Delivered</div>
               </div>
-              <div className="w-px h-12 bg-black/20" />
+              <div className="w-px h-12 bg-black/20 dark:bg-white/20 transition-colors" />
               <div>
                 <div className="text-4xl font-bold">3+</div>
-                <div className="text-sm text-black/60">Years Experience</div>
+                <div className="text-sm text-black/60 dark:text-white/60 transition-colors">Years Experience</div>
               </div>
             </motion.div>
           </motion.div>
@@ -361,23 +361,23 @@ const HomeMinimal = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <p className="text-sm uppercase tracking-wider text-black/40 mb-8">About Me</p>
+            <p className="text-sm uppercase tracking-wider text-black/40 dark:text-white/40 mb-8 transition-colors">About Me</p>
             <h2 className="text-4xl md:text-5xl font-bold mb-12 leading-tight">
               Passionate about transforming raw data into meaningful insights that drive decision-making and innovation.
             </h2>
 
             {/* Detailed Bio */}
             <div className="prose prose-lg max-w-none mb-16">
-              <p className="text-xl text-black/70 leading-relaxed mb-6">
+              <p className="text-xl text-black/70 dark:text-white/70 leading-relaxed mb-6 transition-colors">
                 I'm Antony Jenish Fernando, a Data Science enthusiast and AI/ML engineer currently pursuing B.Tech in Information Technology at Loyola-ICAM College of Engineering and Technology in Chennai, India.
               </p>
-              <p className="text-lg text-black/60 leading-relaxed mb-6">
+              <p className="text-lg text-black/60 dark:text-white/60 leading-relaxed mb-6 transition-colors">
                 My journey into data science began with a fascination for how data can tell stories and solve real-world problems. I specialize in building predictive models, analyzing complex datasets, and creating intelligent systems that learn and adapt. From customer churn prediction to autonomous diagnostic systems, I love working on projects that have tangible impact.
               </p>
-              <p className="text-lg text-black/60 leading-relaxed mb-6">
+              <p className="text-lg text-black/60 dark:text-white/60 leading-relaxed mb-6 transition-colors">
                 I'm proficient in Python, machine learning frameworks like TensorFlow and Scikit-learn, and data manipulation tools like Pandas and NumPy. I also have experience with data visualization using Matplotlib and building end-to-end ML pipelines. Beyond technical skills, I'm passionate about communicating insights effectively and collaborating with teams to turn data into actionable strategies.
               </p>
-              <p className="text-lg text-black/60 leading-relaxed">
+              <p className="text-lg text-black/60 dark:text-white/60 leading-relaxed transition-colors">
                 When I'm not analyzing data or training models, you'll find me exploring new AI research papers, contributing to open-source projects, or working on personal projects that push the boundaries of what's possible with machine learning.
               </p>
             </div>
@@ -404,13 +404,13 @@ const HomeMinimal = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1, duration: 0.6 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-2xl p-6 border border-black/5"
+                  className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 border border-black/5 dark:border-white/10 transition-colors"
                 >
                   <h3 className="text-lg font-semibold mb-4">{category.title}</h3>
                   <ul className="space-y-2">
                     {category.skills.map((skill) => (
-                      <li key={skill} className="text-sm text-black/60 flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 bg-black/30 rounded-full" />
+                      <li key={skill} className="text-sm text-black/60 dark:text-white/60 flex items-center gap-2 transition-colors">
+                        <span className="w-1.5 h-1.5 bg-black/30 dark:bg-white/30 rounded-full transition-colors" />
                         {skill}
                       </li>
                     ))}
@@ -420,7 +420,7 @@ const HomeMinimal = () => {
             </div>
 
             {/* Experience Timeline */}
-            <p className="text-sm uppercase tracking-wider text-black/40 mb-8">Experience & Education</p>
+            <p className="text-sm uppercase tracking-wider text-black/40 dark:text-white/40 mb-8 transition-colors">Experience & Education</p>
             <div className="space-y-6">
               {[
                 {
@@ -447,22 +447,22 @@ const HomeMinimal = () => {
                   transition={{ delay: i * 0.2, duration: 0.6 }}
                   viewport={{ once: true }}
                   whileHover={{ x: 10 }}
-                  className="bg-white rounded-2xl p-8 border border-black/5 hover:border-black/20 transition-all"
+                  className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 transition-all"
                 >
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
                     <div className="flex-1">
                       <h3 className="text-2xl font-semibold mb-1">{exp.role}</h3>
-                      <p className="text-black/60 mb-3">{exp.company}</p>
-                      <p className="text-sm text-black/60 leading-relaxed">{exp.description}</p>
+                      <p className="text-black/60 dark:text-white/60 mb-3 transition-colors">{exp.company}</p>
+                      <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed transition-colors">{exp.description}</p>
                     </div>
                     <div className="text-right flex-shrink-0">
                       <p className="font-medium whitespace-nowrap">{exp.period}</p>
-                      <p className="text-sm text-black/60">{exp.location}</p>
+                      <p className="text-sm text-black/60 dark:text-white/60 transition-colors">{exp.location}</p>
                     </div>
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {exp.tags.map((tag) => (
-                      <span key={tag} className="text-xs px-3 py-1 bg-black/5 rounded-full">
+                      <span key={tag} className="text-xs px-3 py-1 bg-black/5 dark:bg-white/10 rounded-full transition-colors">
                         {tag}
                       </span>
                     ))}
