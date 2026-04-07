@@ -22,41 +22,50 @@ interface HelloLoadingScreenProps {
 const HelloLoadingScreen = ({ onComplete }: HelloLoadingScreenProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
+  const [charIndex, setCharIndex] = useState(0);
   const [showTapPrompt, setShowTapPrompt] = useState(false);
+  const [canSkip, setCanSkip] = useState(false);
 
   const currentGreeting = greetings[currentIndex];
 
-  // Typing animation
+  // Typing animation effect
   useEffect(() => {
-    if (!isTyping) return;
-
-    if (displayedText.length < currentGreeting.text.length) {
+    if (charIndex < currentGreeting.text.length) {
       const timer = setTimeout(() => {
-        setDisplayedText(currentGreeting.text.slice(0, displayedText.length + 1));
-      }, 150); // Typing speed
+        setDisplayedText(currentGreeting.text.slice(0, charIndex + 1));
+        setCharIndex(charIndex + 1);
+      }, 150);
       return () => clearTimeout(timer);
     } else {
       // Finished typing current word
-      setIsTyping(false);
-      
       if (currentIndex < greetings.length - 1) {
         // Move to next greeting after a pause
         const timer = setTimeout(() => {
           setCurrentIndex(currentIndex + 1);
           setDisplayedText("");
-          setIsTyping(true);
+          setCharIndex(0);
         }, 1000);
         return () => clearTimeout(timer);
       } else {
         // Finished all greetings, show tap prompt
-        setTimeout(() => setShowTapPrompt(true), 500);
+        const timer = setTimeout(() => {
+          setShowTapPrompt(true);
+          setCanSkip(true);
+        }, 500);
+        return () => clearTimeout(timer);
       }
     }
-  }, [displayedText, currentGreeting, isTyping, currentIndex]);
+  }, [charIndex, currentGreeting, currentIndex]);
+
+  // Allow skipping after first greeting
+  useEffect(() => {
+    if (currentIndex > 0) {
+      setCanSkip(true);
+    }
+  }, [currentIndex]);
 
   const handleClick = () => {
-    if (showTapPrompt) {
+    if (canSkip) {
       onComplete();
     }
   };
@@ -68,13 +77,13 @@ const HelloLoadingScreen = ({ onComplete }: HelloLoadingScreenProps) => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
         onClick={handleClick}
-        className="fixed inset-0 z-[100] bg-white dark:bg-black flex flex-col items-center justify-center cursor-pointer"
+        className={`fixed inset-0 z-[100] bg-white dark:bg-black flex flex-col items-center justify-center ${canSkip ? 'cursor-pointer' : ''}`}
       >
         <div className="text-center">
           {/* Typing Text */}
           <div className="text-6xl md:text-8xl font-light tracking-tight mb-4 min-h-[120px] flex items-center justify-center">
             {displayedText}
-            {isTyping && (
+            {charIndex < currentGreeting.text.length && (
               <motion.span
                 animate={{ opacity: [1, 0] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
@@ -127,6 +136,19 @@ const HelloLoadingScreen = ({ onComplete }: HelloLoadingScreenProps) => {
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Skip hint (after first greeting) */}
+          {canSkip && !showTapPrompt && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.3 }}
+              className="mt-16"
+            >
+              <p className="text-xs uppercase tracking-wider text-black/40 dark:text-white/40">
+                Click to skip
+              </p>
+            </motion.div>
+          )}
         </div>
       </motion.div>
     </AnimatePresence>
