@@ -13,7 +13,6 @@ import ThemeToggle from "@/components/ThemeToggle";
 import TypingAnimation from "@/components/TypingAnimation";
 import ProjectFilters from "@/components/ProjectFilters";
 import CustomCursorTrail from "@/components/CustomCursorTrail";
-import Testimonials from "@/components/Testimonials";
 import HelloLoadingScreen from "@/components/HelloLoadingScreen";
 import QuoteSection from "@/components/QuoteSection";
 
@@ -507,9 +506,6 @@ const HomeMinimal = () => {
           <SkillsVisualization />
         </div>
       </section>
-
-      {/* Testimonials */}
-      <Testimonials />
 
       {/* Quote 3 */}
       <QuoteSection 
