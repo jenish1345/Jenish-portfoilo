@@ -14,11 +14,15 @@ import TypingAnimation from "@/components/TypingAnimation";
 import ProjectFilters from "@/components/ProjectFilters";
 import CustomCursorTrail from "@/components/CustomCursorTrail";
 import Testimonials from "@/components/Testimonials";
+import HelloLoadingScreen from "@/components/HelloLoadingScreen";
+import QuoteSection from "@/components/QuoteSection";
 
 const HomeMinimal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { projects, contact } = portfolioData;
   const [filteredProjects, setFilteredProjects] = useState(projects);
+  const [showHello, setShowHello] = useState(true);
+  const [showContent, setShowContent] = useState(false);
 
   const handleFilterChange = (filter: string) => {
     if (filter === 'all') {
@@ -36,6 +40,11 @@ const HomeMinimal = () => {
         p.technologies.some(t => t.toLowerCase().includes('react') || t.toLowerCase().includes('web') || t.toLowerCase().includes('next'))
       ));
     }
+  };
+
+  const handleHelloComplete = () => {
+    setShowHello(false);
+    setTimeout(() => setShowContent(true), 100);
   };
 
   useEffect(() => {
@@ -62,17 +71,23 @@ const HomeMinimal = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="bg-[#f5f5f0] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-[#f5f5f0] transition-colors duration-300">
-      {/* Scroll Progress */}
-      <ScrollProgress />
-      
-      {/* Custom Cursor Trail */}
-      <CustomCursorTrail />
-      
-      {/* Floating Contact Button */}
-      <FloatingContactButton />
+    <>
+      {/* Hello Loading Screen */}
+      {showHello && <HelloLoadingScreen onComplete={handleHelloComplete} />}
 
-      {/* Navigation */}
+      {/* Main Content */}
+      {showContent && (
+        <div ref={containerRef} className="bg-[#f5f5f0] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-[#f5f5f0] transition-colors duration-300">
+          {/* Scroll Progress */}
+          <ScrollProgress />
+          
+          {/* Custom Cursor Trail */}
+          <CustomCursorTrail />
+          
+          {/* Floating Contact Button */}
+          <FloatingContactButton />
+
+          {/* Navigation */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -225,7 +240,7 @@ const HomeMinimal = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-16">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 border-2 border-black rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 border-2 border-black dark:border-white rounded-lg flex items-center justify-center transition-colors">
                 <span className="text-xs">💼</span>
               </div>
               <h2 className="text-sm uppercase tracking-wider">Freelance Projects</h2>
@@ -284,6 +299,12 @@ const HomeMinimal = () => {
           </div>
         </div>
       </section>
+
+      {/* Quote 1 */}
+      <QuoteSection 
+        quote="Data is the new oil. It's valuable, but if unrefined it cannot really be used."
+        author="Clive Humby"
+      />
 
       {/* Selected Works */}
       <section id="work" className="py-24 px-6 bg-white dark:bg-[#111] transition-colors">
@@ -351,6 +372,12 @@ const HomeMinimal = () => {
           </div>
         </div>
       </section>
+
+      {/* Quote 2 */}
+      <QuoteSection 
+        quote="In God we trust. All others must bring data."
+        author="W. Edwards Deming"
+      />
 
       {/* About Section */}
       <section id="about" className="py-24 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a] transition-colors">
@@ -484,6 +511,12 @@ const HomeMinimal = () => {
       {/* Testimonials */}
       <Testimonials />
 
+      {/* Quote 3 */}
+      <QuoteSection 
+        quote="Without data, you're just another person with an opinion."
+        author="W. Edwards Deming"
+      />
+
       {/* Blog Section */}
       <BlogSection />
 
@@ -559,6 +592,8 @@ const HomeMinimal = () => {
         </div>
       </section>
     </div>
+      )}
+    </>
   );
 };
 
