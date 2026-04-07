@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { portfolioData } from "@/data/portfolioData";
 import { ExternalLink, ArrowRight } from "lucide-react";
@@ -7,10 +7,36 @@ import SkillsVisualization from "@/components/SkillsVisualization";
 import ContactFormSection from "@/components/ContactFormSection";
 import BlogSection from "@/components/BlogSection";
 import { trackProjectClick, trackEmailClick, trackSocialClick } from "@/components/Analytics";
+import ScrollProgress from "@/components/ScrollProgress";
+import FloatingContactButton from "@/components/FloatingContactButton";
+import ThemeToggle from "@/components/ThemeToggle";
+import TypingAnimation from "@/components/TypingAnimation";
+import ProjectFilters from "@/components/ProjectFilters";
+import CustomCursorTrail from "@/components/CustomCursorTrail";
+import Testimonials from "@/components/Testimonials";
 
 const HomeMinimal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { projects, contact } = portfolioData;
+  const [filteredProjects, setFilteredProjects] = useState(projects);
+
+  const handleFilterChange = (filter: string) => {
+    if (filter === 'all') {
+      setFilteredProjects(projects);
+    } else if (filter === 'ml') {
+      setFilteredProjects(projects.filter(p => 
+        p.technologies.some(t => t.toLowerCase().includes('ml') || t.toLowerCase().includes('machine') || t.toLowerCase().includes('ai'))
+      ));
+    } else if (filter === 'data') {
+      setFilteredProjects(projects.filter(p => 
+        p.technologies.some(t => t.toLowerCase().includes('data') || t.toLowerCase().includes('analytics'))
+      ));
+    } else if (filter === 'web') {
+      setFilteredProjects(projects.filter(p => 
+        p.technologies.some(t => t.toLowerCase().includes('react') || t.toLowerCase().includes('web') || t.toLowerCase().includes('next'))
+      ));
+    }
+  };
 
   useEffect(() => {
     // Initialize Lenis smooth scroll
@@ -37,6 +63,15 @@ const HomeMinimal = () => {
 
   return (
     <div ref={containerRef} className="bg-[#f5f5f0] text-[#1a1a1a]">
+      {/* Scroll Progress */}
+      <ScrollProgress />
+      
+      {/* Custom Cursor Trail */}
+      <CustomCursorTrail />
+      
+      {/* Floating Contact Button */}
+      <FloatingContactButton />
+
       {/* Navigation */}
       <motion.nav
         initial={{ y: -100 }}
@@ -57,15 +92,18 @@ const HomeMinimal = () => {
             <a href="#contact" className="hover:opacity-60 transition-opacity">Contact</a>
           </div>
 
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-black text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black/80 transition-colors flex items-center gap-2"
-          >
-            Let's Talk
-            <ArrowRight className="w-4 h-4" />
-          </motion.a>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+            <motion.a
+              href="#contact"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-black text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black/80 transition-colors flex items-center gap-2"
+            >
+              Let's Talk
+              <ArrowRight className="w-4 h-4" />
+            </motion.a>
+          </div>
         </div>
       </motion.nav>
 
@@ -100,9 +138,12 @@ const HomeMinimal = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-xl md:text-2xl text-black/70 mb-8 max-w-xl leading-relaxed"
+              className="mb-8 max-w-xl leading-relaxed"
             >
-              Data Scientist & AI/ML Engineer crafting intelligent solutions that transform data into actionable insights.
+              <TypingAnimation />
+              <span className="block text-base text-black/60 mt-2">
+                crafting intelligent solutions that transform data into actionable insights.
+              </span>
             </motion.p>
 
             <motion.div
@@ -247,7 +288,7 @@ const HomeMinimal = () => {
       {/* Selected Works */}
       <section id="work" className="py-24 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-16">
+          <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
               <div className="w-8 h-8 border-2 border-black rounded-lg flex items-center justify-center">
                 <span className="text-xs">📁</span>
@@ -260,8 +301,11 @@ const HomeMinimal = () => {
             </a>
           </div>
 
+          {/* Project Filters */}
+          <ProjectFilters onFilterChange={handleFilterChange} />
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.filter(p => p.id !== "house-of-elleora").slice(0, 6).map((project, i) => (
+            {filteredProjects.filter(p => p.id !== "house-of-elleora").slice(0, 6).map((project, i) => (
               <motion.a
                 key={project.id}
                 href={project.githubUrl}
@@ -436,6 +480,9 @@ const HomeMinimal = () => {
           <SkillsVisualization />
         </div>
       </section>
+
+      {/* Testimonials */}
+      <Testimonials />
 
       {/* Blog Section */}
       <BlogSection />
