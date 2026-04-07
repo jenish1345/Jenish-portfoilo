@@ -5,7 +5,6 @@ import { ExternalLink, ArrowRight } from "lucide-react";
 import Lenis from "lenis";
 import SkillsVisualization from "@/components/SkillsVisualization";
 import ContactFormSection from "@/components/ContactFormSection";
-import BlogSection from "@/components/BlogSection";
 import { trackProjectClick, trackEmailClick, trackSocialClick } from "@/components/Analytics";
 import ScrollProgress from "@/components/ScrollProgress";
 import FloatingContactButton from "@/components/FloatingContactButton";
@@ -512,9 +511,6 @@ const HomeMinimal = () => {
         quote="Without data, you're just another person with an opinion."
         author="W. Edwards Deming"
       />
-
-      {/* Blog Section */}
-      <BlogSection />
 
       {/* Contact Section - Full Screen */}
       <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-24 bg-black text-white">
