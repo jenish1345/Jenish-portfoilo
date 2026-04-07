@@ -16,7 +16,7 @@ const FloatingContactButton = () => {
       style={{ opacity, scale }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
-      className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-black text-white rounded-full shadow-2xl flex items-center justify-center hover:bg-black/80 transition-colors"
+      className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-black dark:bg-white text-white dark:text-black rounded-full shadow-2xl flex items-center justify-center hover:bg-black/80 dark:hover:bg-white/80 transition-colors"
     >
       <MessageCircle className="w-6 h-6" />
     </motion.button>

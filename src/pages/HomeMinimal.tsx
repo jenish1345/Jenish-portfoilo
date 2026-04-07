@@ -62,7 +62,7 @@ const HomeMinimal = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="bg-[#f5f5f0] text-[#1a1a1a]">
+    <div ref={containerRef} className="bg-[#f5f5f0] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-[#f5f5f0] transition-colors duration-300">
       {/* Scroll Progress */}
       <ScrollProgress />
       
@@ -76,11 +76,11 @@ const HomeMinimal = () => {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 bg-[#f5f5f0]/80 backdrop-blur-md border-b border-black/5"
+        className="fixed top-0 left-0 right-0 z-50 bg-[#f5f5f0]/80 dark:bg-[#0a0a0a]/80 backdrop-blur-md border-b border-black/5 dark:border-white/5 transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 border-2 border-black rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 border-2 border-black dark:border-white rounded-lg flex items-center justify-center transition-colors">
               <span className="text-sm font-bold">AJ</span>
             </div>
             <span className="text-lg font-semibold tracking-tight">ANTONY JENISH</span>
@@ -98,7 +98,7 @@ const HomeMinimal = () => {
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-black text-white px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black/80 transition-colors flex items-center gap-2"
+              className="bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black/80 dark:hover:bg-white/80 transition-colors flex items-center gap-2"
             >
               Let's Talk
               <ArrowRight className="w-4 h-4" />
@@ -207,9 +207,9 @@ const HomeMinimal = () => {
       </section>
 
       {/* Trusted By Section */}
-      <section className="py-20 px-6 border-t border-black/10">
+      <section className="py-20 px-6 border-t border-black/10 dark:border-white/10 transition-colors">
         <div className="max-w-7xl mx-auto">
-          <p className="text-sm uppercase tracking-wider text-black/40 text-center mb-12">
+          <p className="text-sm uppercase tracking-wider text-black/40 dark:text-white/40 text-center mb-12 transition-colors">
             Tech Stack & Tools
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center opacity-60">
@@ -221,7 +221,7 @@ const HomeMinimal = () => {
       </section>
 
       {/* Freelancing Section */}
-      <section className="py-24 px-6 bg-[#f5f5f0]">
+      <section className="py-24 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a] transition-colors">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-16">
             <div className="flex items-center gap-3">
@@ -286,7 +286,7 @@ const HomeMinimal = () => {
       </section>
 
       {/* Selected Works */}
-      <section id="work" className="py-24 px-6 bg-white">
+      <section id="work" className="py-24 px-6 bg-white dark:bg-[#111] transition-colors">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
@@ -353,7 +353,7 @@ const HomeMinimal = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-24 px-6 bg-[#f5f5f0]">
+      <section id="about" className="py-24 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a] transition-colors">
         <div className="max-w-5xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -475,7 +475,7 @@ const HomeMinimal = () => {
       </section>
 
       {/* Skills Visualization Section */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-white dark:bg-[#111] transition-colors">
         <div className="max-w-5xl mx-auto">
           <SkillsVisualization />
         </div>
