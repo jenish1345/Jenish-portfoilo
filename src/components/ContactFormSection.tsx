@@ -56,8 +56,8 @@ const ContactFormSection = ({ contact }: { contact: any }) => {
         </div>
 
         <div className="mt-20 pt-12 border-t border-white/10 text-sm text-white/40 text-center">
-          <p>© 2026 Antony Jenish. All rights reserved.</p>
-          <p className="mt-2">Designed in Chennai</p>
+          <p>Built with passion in Chennai ❤️</p>
+          <p className="mt-2">© 2026 Antony Jenish. All rights reserved.</p>
         </div>
       </motion.div>
     </div>
