@@ -76,7 +76,7 @@ const HomePremium = () => {
                 { category: "Frontend", icon: "🎨", skills: ["React", "Next.js", "Tailwind", "TypeScript"], color: "from-cyan-500 to-blue-500" },
                 { category: "Backend", icon: "⚙️", skills: ["Node.js", "Express", "PostgreSQL", "APIs"], color: "from-purple-500 to-pink-500" },
                 { category: "AI/ML", icon: "🤖", skills: ["Python", "ML Models", "Data Science", "Analytics"], color: "from-green-500 to-emerald-500" },
-                { category: "Tools", icon: "🛠️", skills: ["Git", "VS Code", "Vercel", "Figma"], color: "from-orange-500 to-red-500" },
+                { category: "Tools", icon: "🛠️", skills: ["Git", "VS Code", "Netlify", "Figma"], color: "from-orange-500 to-red-500" },
               ].map((skillSet, i) => (
                 <motion.div
                   key={i}

@@ -2,7 +2,7 @@
 
 A modern, elegant portfolio website featuring a stunning **Glassmorphism Aurora** theme with frosted glass effects and soft pastel gradients.
 
-[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://antonyjenish.vercel.app)
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://antonyjenish.netlify.app)
 [![GitHub](https://img.shields.io/badge/github-jenish1345-blue)](https://github.com/jenish1345)
 
 ## ✨ Features

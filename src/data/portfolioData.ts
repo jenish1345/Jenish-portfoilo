@@ -5,7 +5,8 @@ export const portfolioData: PortfolioData = {
     name: "Antony Jenish Fernando",
     title: "Full Stack Developer & Machine Learning Enthusiast",
     summary: "Information Technology student passionate about building scalable applications and exploring AI-driven solutions.",
-    profileImage: "/lovable-uploads/d737aef4-76c3-4c23-ab88-26d76a8d4b78.png"
+    profileImage: "/lovable-uploads/d737aef4-76c3-4c23-ab88-26d76a8d4b78.png",
+    portfolio: "https://antonyjenish.netlify.app"
   },
   education: [
     {

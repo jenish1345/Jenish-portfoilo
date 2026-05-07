@@ -4,7 +4,7 @@
 
 📧 antonyjenishfernando.27it@licet.ac.in | 📱 +91 9042679134  
 📍 Chennai, India  
-🌐 **Portfolio:** [antonyjenish.vercel.app](https://antonyjenish.vercel.app)  
+🌐 **Portfolio:** [antonyjenish.netlify.app](https://antonyjenish.netlify.app)  
 💼 [LinkedIn](https://www.linkedin.com/in/antony-jenish-5188ba290) | 💻 [GitHub](https://github.com/jenish1345)
 
 ---
@@ -37,7 +37,7 @@ BMC Matriculation Higher Secondary School | 2016 - 2023
 
 **AI/ML:** Machine Learning, Data Science, Data Analytics, Predictive Modeling
 
-**Tools & Technologies:** Git, GitHub, VS Code, Vercel, Vite, npm
+**Tools & Technologies:** Git, GitHub, VS Code, Netlify, Vite, npm
 
 **UI/UX Design:** Responsive Design, Glassmorphism, 3D Animations, Parallax Effects, Micro-interactions, Custom Cursors, Scroll Animations, Loading Screens, Hover Effects
 
@@ -116,7 +116,7 @@ BMC Matriculation Higher Secondary School | 2016 - 2023
 
 ## PORTFOLIO HIGHLIGHTS
 
-My portfolio website ([antonyjenish.vercel.app](https://antonyjenish.vercel.app)) demonstrates expertise in creating modern, high-end user experiences with advanced UI/UX features:
+My portfolio website ([antonyjenish.netlify.app](https://antonyjenish.netlify.app)) demonstrates expertise in creating modern, high-end user experiences with advanced UI/UX features:
 
 ### Advanced UI/UX Features Implemented:
 - **Smooth Loading Animations:** Custom loading screen with progress bar and fade-in transitions for optimal first impression

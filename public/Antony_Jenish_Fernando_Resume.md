@@ -37,7 +37,7 @@ BMC Matriculation Higher Secondary School | 2016 - 2023
 
 **AI/ML:** Machine Learning, Data Science, Data Analytics, Predictive Modeling
 
-**Tools & Technologies:** Git, GitHub, VS Code, Vercel, Vite, npm
+**Tools & Technologies:** Git, GitHub, VS Code, Netlify, Vite, npm
 
 **UI/UX Design:** Responsive Design, Glassmorphism, 3D Animations, Parallax Effects, Micro-interactions, Custom Cursors, Scroll Animations, Loading Screens, Hover Effects
 
