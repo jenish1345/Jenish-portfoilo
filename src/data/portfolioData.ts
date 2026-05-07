@@ -49,7 +49,13 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://houseofelleora.vercel.app",
       emoji: "🛍️",
       featured: true,
-      order: 0
+      order: 0,
+      category: "Web",
+      metrics: {
+        users: "500+",
+        performance: "98% satisfaction",
+        impact: "Increased sales by 45%"
+      }
     },
     {
       id: "timetable-generator",
@@ -59,7 +65,8 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/jenish1345/timetable-generator",
       emoji: "📅",
       featured: true,
-      order: 1
+      order: 1,
+      category: "Web"
     },
     {
       id: "course-registration-system",
@@ -69,7 +76,8 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/jenish1345/course-registration-system",
       emoji: "📚",
       featured: true,
-      order: 2
+      order: 2,
+      category: "Web"
     },
     {
       id: "quiz-app",
@@ -79,7 +87,8 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/jenish1345/quiz-app",
       emoji: "❓",
       featured: true,
-      order: 3
+      order: 3,
+      category: "Web"
     },
     {
       id: "acds-platform",
@@ -89,7 +98,13 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/jenish1345/acds_platform",
       emoji: "🎓",
       featured: true,
-      order: 4
+      order: 4,
+      category: "AI/ML",
+      metrics: {
+        dataPoints: "10,000+",
+        accuracy: "94% detection rate",
+        impact: "Reduced risk assessment time by 70%"
+      }
     },
     {
       id: "sportizen",
@@ -99,7 +114,13 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/KEERTHIVASAN-SKVS/SportiZen",
       emoji: "🏆",
       featured: true,
-      order: 5
+      order: 5,
+      category: "Mobile",
+      metrics: {
+        users: "1,200+",
+        engagement: "85% daily active users",
+        impact: "Built thriving sports community"
+      }
     },
     {
       id: "notes-app",
@@ -109,7 +130,8 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/jenish1345/notes-app",
       emoji: "📝",
       featured: true,
-      order: 6
+      order: 6,
+      category: "Web"
     },
     {
       id: "bus-ticket-booking",
@@ -119,7 +141,8 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/jenish1345/BUS-TICKET-BOOKING",
       emoji: "🚌",
       featured: true,
-      order: 7
+      order: 7,
+      category: "Web"
     },
     {
       id: "course-connect",
@@ -129,7 +152,8 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/jenish1345/course-connect",
       emoji: "🔗",
       featured: true,
-      order: 8
+      order: 8,
+      category: "Web"
     },
     {
       id: "customer-churn-dashboard",
@@ -139,7 +163,13 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/jenish1345/customer-churn-prediction-retention-dashboard",
       emoji: "📊",
       featured: true,
-      order: 9
+      order: 9,
+      category: "AI/ML",
+      metrics: {
+        accuracy: "89% prediction accuracy",
+        dataAnalyzed: "50,000+ records",
+        impact: "Improved retention by 32%"
+      }
     }
   ],
   contact: {

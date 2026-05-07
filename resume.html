@@ -21,6 +21,42 @@
             background: #fff;
         }
         
+        .download-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            font-size: 14px;
+        }
+        
+        .download-banner button {
+            background: white;
+            color: #10b981;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-banner button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .content-wrapper {
+            margin-top: 80px;
+        }
+        
         h1 {
             font-size: 32px;
             font-weight: 700;
@@ -167,6 +203,14 @@
         }
         
         @media print {
+            .download-banner {
+                display: none;
+            }
+            
+            .content-wrapper {
+                margin-top: 0;
+            }
+            
             body {
                 padding: 20px 40px;
             }
@@ -186,6 +230,14 @@
     </style>
 </head>
 <body>
+    <!-- Download Banner -->
+    <div class="download-banner" id="downloadBanner">
+        <strong>📄 Resume Viewer</strong> - 
+        <button onclick="window.print()">🖨️ Save as PDF</button>
+        <button onclick="window.close()">✕ Close</button>
+    </div>
+    
+    <div class="content-wrapper">
     <h1>ANTONY JENISH FERNANDO</h1>
     <div class="subtitle">Full Stack Developer & Machine Learning Enthusiast</div>
     
@@ -328,5 +380,18 @@
         <strong>References available upon request</strong><br>
         Last Updated: April 2026
     </p>
+    </div>
+    
+    <script>
+        // Auto-hide banner after 5 seconds
+        setTimeout(() => {
+            const banner = document.getElementById('downloadBanner');
+            if (banner) {
+                banner.style.transition = 'opacity 0.5s ease';
+                banner.style.opacity = '0';
+                setTimeout(() => banner.style.display = 'none', 500);
+            }
+        }, 5000);
+    </script>
 </body>
 </html>

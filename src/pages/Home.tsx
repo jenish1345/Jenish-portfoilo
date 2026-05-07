@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { portfolioData } from "@/data/portfolioData";
 import AnimatedAvatar from "@/components/AnimatedAvatar";
+import ProjectFilters from "@/components/ProjectFilters";
+import Timeline from "@/components/Timeline";
+import ACDSCaseStudy from "@/components/ACDSCaseStudy";
 import { 
   CheckCircle2, 
   ShieldCheck, 
@@ -9,14 +12,23 @@ import {
   Check,
   ArrowRight,
   Mail,
-  ExternalLink
+  ExternalLink,
+  Download,
+  ArrowUp
 } from "lucide-react";
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const { projects, contact } = portfolioData;
+
+  // Filter projects based on active filter
+  const filteredProjects = activeFilter === "all" 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -30,6 +42,14 @@ const Home = () => {
       });
     }, 20);
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 500);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -86,16 +106,32 @@ const Home = () => {
         
         <nav className="hidden md:flex items-center gap-10 text-base font-normal text-zinc-400">
           <a href="#about" className="hover:text-zinc-200 transition-colors">About</a>
+          <a href="#journey" className="hover:text-zinc-200 transition-colors">Journey</a>
           <a href="#projects" className="hover:text-zinc-200 transition-colors">Projects</a>
+          <a href="#case-study" className="hover:text-zinc-200 transition-colors">Case Study</a>
           <a href="#contact" className="hover:text-zinc-200 transition-colors">Contact</a>
         </nav>
 
         <div className="hidden md:flex items-center gap-6">
-          <a href={`mailto:${contact.email}`} className="text-base font-normal text-zinc-300 hover:text-white transition-colors px-4 py-2 bg-black/50 backdrop-blur-sm border border-zinc-700/50 rounded-full">
-            Resume
+          {/* Availability Status */}
+          <div className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 backdrop-blur-sm border border-emerald-500/20 rounded-full">
+            <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+            <span className="text-sm font-medium text-emerald-400">Open to Opportunities</span>
+          </div>
+
+          <a
+            href="/Antony_Jenish_Fernando_Resume.md"
+            download="Antony_Jenish_Fernando_Resume.md"
+            className="flex items-center gap-2 text-base font-normal text-zinc-300 hover:text-white transition-colors px-4 py-2 bg-black/50 backdrop-blur-sm border border-zinc-700/50 rounded-full hover:border-zinc-600 hover:bg-black/70"
+          >
+            <Download className="w-4 h-4" />
+            Download Resume
           </a>
           
-          <button className="group relative inline-flex min-w-[120px] cursor-pointer transition-all duration-1000 hover:-translate-y-[2px] hover:text-white shadow-[0_2.8px_2.2px_rgba(0,0,0,0.3),_0_6.7px_5.3px_rgba(0,0,0,0.35),_0_12.5px_10px_rgba(0,0,0,0.4)] overflow-hidden font-normal text-zinc-300 tracking-tight bg-[#09090b]/80 backdrop-blur-md border border-zinc-700/80 rounded-full px-5 py-2.5 items-center justify-center text-sm">
+          <a
+            href="#contact"
+            className="group relative inline-flex min-w-[120px] cursor-pointer transition-all duration-1000 hover:-translate-y-[2px] hover:text-white shadow-[0_2.8px_2.2px_rgba(0,0,0,0.3),_0_6.7px_5.3px_rgba(0,0,0,0.35),_0_12.5px_10px_rgba(0,0,0,0.4)] overflow-hidden font-normal text-zinc-300 tracking-tight bg-[#09090b]/80 backdrop-blur-md border border-zinc-700/80 rounded-full px-5 py-2.5 items-center justify-center text-sm"
+          >
             <span className="relative z-10 flex items-center gap-2 rounded-full transition-all duration-500 ease-out group-hover:translate-y-8 group-hover:opacity-0 group-hover:blur-md">
               Hire Me Today
               <ArrowRight className="w-4 h-4" />
@@ -106,7 +142,7 @@ const Home = () => {
             </span>
             <span className="absolute bottom-0 left-1/2 h-[1px] w-[70%] -translate-x-1/2 transition-all duration-1000 opacity-0 group-hover:opacity-80 bg-gradient-to-r from-transparent via-neutral-200 to-transparent rounded-full blur-[2px]" />
             <span className="absolute bottom-0 left-0 right-0 h-full opacity-0 group-hover:opacity-60 transition-all duration-1000 pointer-events-none bg-gradient-to-t from-white/20 via-white/10 to-transparent rounded-full" />
-          </button>
+          </a>
         </div>
       </header>
 
@@ -123,7 +159,10 @@ const Home = () => {
             </h1>
 
             <div className="flex flex-wrap items-center gap-4 animate-on-scroll" style={{ animation: "animationIn 0.8s ease-out 0.2s both" }}>
-              <button className="group relative inline-flex min-w-[120px] cursor-pointer transition-all duration-1000 hover:-translate-y-[3px] hover:text-white shadow-[0_2.8px_2.2px_rgba(0,0,0,0.3),_0_6.7px_5.3px_rgba(0,0,0,0.35),_0_12.5px_10px_rgba(0,0,0,0.4)] overflow-hidden font-normal text-zinc-300 tracking-tight bg-zinc-900 border border-zinc-700/80 rounded-full px-8 py-3.5 items-center justify-center text-lg">
+              <a
+                href="#projects"
+                className="group relative inline-flex min-w-[120px] cursor-pointer transition-all duration-1000 hover:-translate-y-[3px] hover:text-white shadow-[0_2.8px_2.2px_rgba(0,0,0,0.3),_0_6.7px_5.3px_rgba(0,0,0,0.35),_0_12.5px_10px_rgba(0,0,0,0.4)] overflow-hidden font-normal text-zinc-300 tracking-tight bg-zinc-900 border border-zinc-700/80 rounded-full px-8 py-3.5 items-center justify-center text-lg"
+              >
                 <span className="relative z-10 flex items-center gap-2 rounded-full transition-all duration-500 ease-out group-hover:translate-y-8 group-hover:opacity-0 group-hover:blur-md">
                   View My Work
                   <ArrowRight className="w-5 h-5" />
@@ -134,10 +173,15 @@ const Home = () => {
                 </span>
                 <span className="absolute bottom-0 left-1/2 h-[1px] w-[70%] -translate-x-1/2 transition-all duration-1000 opacity-0 group-hover:opacity-80 bg-gradient-to-r from-transparent via-neutral-200 to-transparent rounded-full blur-[2px]" />
                 <span className="absolute bottom-0 left-0 right-0 h-full opacity-0 group-hover:opacity-60 transition-all duration-1000 pointer-events-none bg-gradient-to-t from-white/20 via-white/10 to-transparent rounded-full" />
-              </button>
+              </a>
 
-              <a href="#contact" className="px-8 py-3.5 rounded-full border border-zinc-800 bg-transparent text-lg font-normal text-zinc-300 hover:bg-zinc-800/50 hover:text-white transition-colors backdrop-blur-sm inline-flex items-center justify-center">
-                Contact Me
+              <a
+                href="/Antony_Jenish_Fernando_Resume.md"
+                download="Antony_Jenish_Fernando_Resume.md"
+                className="px-8 py-3.5 rounded-full border border-zinc-800 bg-transparent text-lg font-normal text-zinc-300 hover:bg-zinc-800/50 hover:text-white transition-colors backdrop-blur-sm inline-flex items-center justify-center gap-2"
+              >
+                <Download className="w-5 h-5" />
+                Download Resume
               </a>
             </div>
 
@@ -232,41 +276,73 @@ const Home = () => {
           <p className="text-lg font-normal text-zinc-400 max-w-2xl">Building scalable applications and exploring AI-driven solutions</p>
         </div>
 
+        {/* Project Filters */}
+        <ProjectFilters activeFilter={activeFilter} onFilterChange={setActiveFilter} />
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.slice(0, 6).map((project, i) => (
+          {filteredProjects.map((project, i) => (
             <div
               key={project.id}
-              className="flex flex-col bg-[#0e0e11] border border-white/5 rounded-3xl p-6 hover:bg-white/[0.02] transition-all duration-500 ease-out hover:scale-[1.02] relative group shadow-[0_20px_40px_rgba(0,0,0,0.3)] animate-on-scroll"
+              className="flex flex-col bg-[#0e0e11] border border-white/5 rounded-3xl overflow-hidden hover:bg-white/[0.02] transition-all duration-500 ease-out hover:scale-[1.02] relative group shadow-[0_20px_40px_rgba(0,0,0,0.3)] animate-on-scroll"
               style={{ animation: `animationIn 0.8s ease-out ${0.1 + i * 0.1}s both` }}
             >
-              <div className="flex items-center justify-between mb-4">
-                <div className="text-4xl">{project.emoji}</div>
-                <div className="w-2 h-2 bg-white/20 rounded-full" />
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              <div className="p-6 relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="text-4xl">{project.emoji}</div>
+                  <div className="w-2 h-2 bg-white/20 rounded-full" />
+                </div>
+                
+                <h3 className="text-xl font-medium text-white tracking-tight mb-3">{project.title}</h3>
+                <p className="text-base text-zinc-400 leading-relaxed mb-4 line-clamp-3">{project.description}</p>
+                
+                {/* Project Metrics */}
+                {project.metrics && (
+                  <div className="mb-4 p-3 bg-white/5 border border-white/10 rounded-xl">
+                    <div className="grid grid-cols-1 gap-2 text-xs">
+                      {Object.entries(project.metrics).map(([key, value]) => (
+                        <div key={key} className="flex items-center justify-between">
+                          <span className="text-zinc-500 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}:</span>
+                          <span className="text-emerald-400 font-medium">{value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.slice(0, 3).map((tech) => (
+                    <span key={tech} className="text-xs px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-400 font-medium">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-zinc-300 text-sm font-medium hover:text-white transition-colors group-hover:gap-3"
+                >
+                  View Project
+                  <ExternalLink className="w-4 h-4" strokeWidth={1.5} />
+                </a>
               </div>
-              
-              <h3 className="text-xl font-medium text-white tracking-tight mb-3">{project.title}</h3>
-              <p className="text-base text-zinc-400 leading-relaxed mb-4 line-clamp-3">{project.description}</p>
-              
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.technologies.slice(0, 3).map((tech) => (
-                  <span key={tech} className="text-xs px-3 py-1 bg-white/5 border border-white/10 rounded-full text-zinc-400 font-medium">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-              
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-zinc-300 text-sm font-medium hover:text-white transition-colors group-hover:gap-3"
-              >
-                View Project
-                <ExternalLink className="w-4 h-4" strokeWidth={1.5} />
-              </a>
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Timeline Section */}
+      <section id="journey">
+        <Timeline />
+      </section>
+
+      {/* ACDS Case Study */}
+      <section id="case-study">
+        <ACDSCaseStudy />
       </section>
 
       {/* Contact Section */}
@@ -439,6 +515,17 @@ const Home = () => {
           <p className="text-zinc-400">© 2026 Antony Jenish. Crafted with passion and precision.</p>
         </div>
       </footer>
+
+      {/* Back to Top Button */}
+      {showBackToTop && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-[0_0_30px_rgba(255,255,255,0.1)] backdrop-blur-sm animate-on-scroll"
+          style={{ animation: "animationIn 0.5s ease-out both" }}
+        >
+          <ArrowUp className="w-5 h-5" strokeWidth={2} />
+        </button>
+      )}
 
       <style>{`
         @keyframes animationIn {

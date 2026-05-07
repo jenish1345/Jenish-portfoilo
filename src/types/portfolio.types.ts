@@ -9,6 +9,10 @@ export interface Project {
   emoji?: string;
   featured: boolean;
   order: number;
+  category?: string;
+  metrics?: {
+    [key: string]: string;
+  };
 }
 
 export interface Education {
