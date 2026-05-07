@@ -99,49 +99,34 @@ const Home = () => {
       </div>
 
       {/* Navigation */}
-      <header className="fixed flex md:px-12 z-50 pointer-events-auto pt-6 pr-6 pb-6 pl-6 top-0 right-0 left-0 items-center justify-between">
+      <header className="fixed flex md:px-12 z-50 pointer-events-auto pt-6 pr-6 pb-6 pl-6 top-0 right-0 left-0 items-center justify-between bg-[#09090b]/80 backdrop-blur-md border-b border-white/5">
         <a href="#" className="flex items-center gap-2.5 text-xl tracking-tight font-medium text-white hover:opacity-80 transition-opacity">
           Antony Jenish
         </a>
         
-        <nav className="hidden md:flex items-center gap-10 text-base font-normal text-zinc-400">
+        <nav className="hidden md:flex items-center gap-8 text-base font-normal text-zinc-400">
           <a href="#about" className="hover:text-zinc-200 transition-colors">About</a>
           <a href="#journey" className="hover:text-zinc-200 transition-colors">Journey</a>
           <a href="#projects" className="hover:text-zinc-200 transition-colors">Projects</a>
-          <a href="#case-study" className="hover:text-zinc-200 transition-colors">Case Study</a>
           <a href="#contact" className="hover:text-zinc-200 transition-colors">Contact</a>
         </nav>
 
-        <div className="hidden md:flex items-center gap-6">
+        <div className="flex items-center gap-4">
           {/* Availability Status */}
-          <div className="flex items-center gap-2 px-4 py-2 bg-emerald-500/10 backdrop-blur-sm border border-emerald-500/20 rounded-full">
+          <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-emerald-500/10 backdrop-blur-sm border border-emerald-500/20 rounded-full">
             <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
             <span className="text-sm font-medium text-emerald-400">Open to Opportunities</span>
           </div>
 
+          {/* RESUME DOWNLOAD BUTTON - VERY VISIBLE */}
           <a
             href="/Antony_Jenish_Fernando_Resume.md"
             download="Antony_Jenish_Fernando_Resume.md"
-            className="flex items-center gap-2 text-base font-normal text-zinc-300 hover:text-white transition-colors px-4 py-2 bg-black/50 backdrop-blur-sm border border-zinc-700/50 rounded-full hover:border-zinc-600 hover:bg-black/70"
+            className="flex items-center gap-2 text-base font-semibold text-white transition-all px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-lg hover:shadow-emerald-500/50 hover:scale-105"
           >
-            <Download className="w-4 h-4" />
-            Download Resume
-          </a>
-          
-          <a
-            href="#contact"
-            className="group relative inline-flex min-w-[120px] cursor-pointer transition-all duration-1000 hover:-translate-y-[2px] hover:text-white shadow-[0_2.8px_2.2px_rgba(0,0,0,0.3),_0_6.7px_5.3px_rgba(0,0,0,0.35),_0_12.5px_10px_rgba(0,0,0,0.4)] overflow-hidden font-normal text-zinc-300 tracking-tight bg-[#09090b]/80 backdrop-blur-md border border-zinc-700/80 rounded-full px-5 py-2.5 items-center justify-center text-sm"
-          >
-            <span className="relative z-10 flex items-center gap-2 rounded-full transition-all duration-500 ease-out group-hover:translate-y-8 group-hover:opacity-0 group-hover:blur-md">
-              Hire Me Today
-              <ArrowRight className="w-4 h-4" />
-            </span>
-            <span className="absolute inset-0 z-10 flex items-center justify-center gap-2 transition-all duration-300 ease-in-out transform -translate-y-8 group-hover:translate-y-0 group-hover:opacity-100 group-hover:blur-none opacity-0 rounded-full blur-md">
-              Hire Me Today
-              <ArrowRight className="w-4 h-4" />
-            </span>
-            <span className="absolute bottom-0 left-1/2 h-[1px] w-[70%] -translate-x-1/2 transition-all duration-1000 opacity-0 group-hover:opacity-80 bg-gradient-to-r from-transparent via-neutral-200 to-transparent rounded-full blur-[2px]" />
-            <span className="absolute bottom-0 left-0 right-0 h-full opacity-0 group-hover:opacity-60 transition-all duration-1000 pointer-events-none bg-gradient-to-t from-white/20 via-white/10 to-transparent rounded-full" />
+            <Download className="w-5 h-5" />
+            <span className="hidden md:inline">Download Resume</span>
+            <span className="md:hidden">Resume</span>
           </a>
         </div>
       </header>
@@ -175,10 +160,11 @@ const Home = () => {
                 <span className="absolute bottom-0 left-0 right-0 h-full opacity-0 group-hover:opacity-60 transition-all duration-1000 pointer-events-none bg-gradient-to-t from-white/20 via-white/10 to-transparent rounded-full" />
               </a>
 
+              {/* BIG VISIBLE RESUME DOWNLOAD BUTTON */}
               <a
                 href="/Antony_Jenish_Fernando_Resume.md"
                 download="Antony_Jenish_Fernando_Resume.md"
-                className="px-8 py-3.5 rounded-full border border-zinc-800 bg-transparent text-lg font-normal text-zinc-300 hover:bg-zinc-800/50 hover:text-white transition-colors backdrop-blur-sm inline-flex items-center justify-center gap-2"
+                className="px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-lg font-semibold transition-all backdrop-blur-sm inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/50 hover:scale-105"
               >
                 <Download className="w-5 h-5" />
                 Download Resume
