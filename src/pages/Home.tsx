@@ -427,17 +427,11 @@ const Home = () => {
             <div className="bg-[#0e0e11] border border-white/5 rounded-3xl p-8">
               <h3 className="text-2xl font-medium text-white mb-6">Send a Message</h3>
               
-              <form onSubmit={(e) => {
-                e.preventDefault();
-                const formData = new FormData(e.currentTarget);
-                const name = formData.get('name');
-                const email = formData.get('email');
-                const message = formData.get('message');
-                
-                const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-                const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-                window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
-              }} className="flex flex-col gap-5">
+              <form 
+                action="https://formspree.io/f/YOUR_FORM_ID" 
+                method="POST"
+                className="flex flex-col gap-5"
+              >
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="text-sm text-zinc-400">Your Name</label>
                   <input
