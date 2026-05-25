@@ -43,8 +43,8 @@ export const portfolioData: PortfolioData = {
   languages: ["English", "Tamil"],
   projects: [
     {
-      id: "house-of-elleora",
-      title: "House of Elleora",
+      id: "elleora-luxury",
+      title: "Elleora • Luxury E-Commerce",
       description: "Premium e-commerce platform for luxury fashion and lifestyle products. Full-stack freelance project featuring modern UI/UX, secure payment integration, and seamless shopping experience",
       technologies: ["React", "Next.js", "E-commerce", "Full Stack", "Freelance"],
       githubUrl: "https://houseofelleora.netlify.app",
@@ -59,9 +59,9 @@ export const portfolioData: PortfolioData = {
       }
     },
     {
-      id: "timetable-generator",
-      title: "Timetable Generator",
-      description: "Automated timetable generation system that creates optimized schedules for educational institutions, handling constraints and preferences efficiently",
+      id: "smartschedule-ai",
+      title: "SmartSchedule • AI Timetable Generator",
+      description: "Intelligent timetable generation system that creates optimized schedules for educational institutions, handling complex constraints and preferences efficiently with AI algorithms",
       technologies: ["Algorithm Design", "Scheduling", "Optimization", "Web Development"],
       githubUrl: "https://github.com/jenish1345/timetable-generator",
       emoji: "📅",
@@ -70,8 +70,8 @@ export const portfolioData: PortfolioData = {
       category: "Web"
     },
     {
-      id: "course-registration-system",
-      title: "Course Registration System",
+      id: "eduflow-registration",
+      title: "EduFlow • Course Registration System",
       description: "Comprehensive course registration platform enabling students to browse, select, and enroll in courses with real-time availability tracking and conflict detection",
       technologies: ["Database Management", "Web Development", "User Authentication", "Real-time Updates"],
       githubUrl: "https://github.com/jenish1345/course-registration-system",
@@ -81,8 +81,8 @@ export const portfolioData: PortfolioData = {
       category: "Web"
     },
     {
-      id: "quiz-app",
-      title: "Quiz App",
+      id: "quizmaster-pro",
+      title: "QuizMaster • Interactive Learning Platform",
       description: "Interactive quiz application with dynamic question generation, scoring system, and performance analytics for enhanced learning experiences",
       technologies: ["React", "JavaScript", "UI/UX Design", "State Management"],
       githubUrl: "https://github.com/jenish1345/quiz-app",
@@ -92,8 +92,8 @@ export const portfolioData: PortfolioData = {
       category: "Web"
     },
     {
-      id: "acds-platform",
-      title: "ACDS - Autonomous Company Diagnostic System",
+      id: "acds-intelligence",
+      title: "ACDS • Autonomous Diagnostic Intelligence",
       description: "AI-powered SaaS platform that monitors organizational health, detects risks, and provides strategic recommendations using Groq Llama 3.3 70B for automated anomaly detection and root cause analysis",
       technologies: ["AI/ML", "SaaS", "Business Intelligence", "Groq Llama 3.3", "Data Analytics"],
       githubUrl: "https://github.com/jenish1345/acds_platform",
@@ -108,8 +108,8 @@ export const portfolioData: PortfolioData = {
       }
     },
     {
-      id: "sportizen",
-      title: "SportiZen",
+      id: "sportizen-social",
+      title: "SportiZen • Athletes Social Network",
       description: "A sports-based social application that enables athletes and sports enthusiasts to share their achievements, connect with like-minded individuals, and celebrate sporting milestones",
       technologies: ["Mobile App", "Social Media", "Sports Tech", "Community"],
       githubUrl: "https://github.com/KEERTHIVASAN-SKVS/SportiZen",
@@ -124,8 +124,8 @@ export const portfolioData: PortfolioData = {
       }
     },
     {
-      id: "notes-app",
-      title: "Notes App",
+      id: "notesync-cloud",
+      title: "NoteSync • Cloud Note-Taking",
       description: "Feature-rich note-taking application with organization tools, search functionality, and cloud sync for seamless productivity across devices",
       technologies: ["React", "Local Storage", "Cloud Sync", "Markdown Support"],
       githubUrl: "https://github.com/jenish1345/notes-app",
@@ -135,8 +135,8 @@ export const portfolioData: PortfolioData = {
       category: "Web"
     },
     {
-      id: "bus-ticket-booking",
-      title: "Bus Ticket Booking System",
+      id: "travelease-booking",
+      title: "TravelEase • Bus Booking System",
       description: "Online bus ticket reservation platform with seat selection, payment integration, and booking management for seamless travel planning",
       technologies: ["Payment Gateway", "Booking System", "Database Design", "API Integration"],
       githubUrl: "https://github.com/jenish1345/BUS-TICKET-BOOKING",
@@ -146,8 +146,8 @@ export const portfolioData: PortfolioData = {
       category: "Web"
     },
     {
-      id: "course-connect",
-      title: "Course Connect",
+      id: "courseconnect-network",
+      title: "CourseConnect • Learning Network",
       description: "Platform connecting students with courses and instructors, facilitating seamless communication and collaborative learning experiences",
       technologies: ["Social Learning", "Real-time Chat", "Course Management", "Networking"],
       githubUrl: "https://github.com/jenish1345/course-connect",
@@ -157,8 +157,8 @@ export const portfolioData: PortfolioData = {
       category: "Web"
     },
     {
-      id: "customer-churn-dashboard",
-      title: "Customer Churn Prediction & Retention Dashboard",
+      id: "churnguard-ml",
+      title: "ChurnGuard • ML Retention Dashboard",
       description: "Machine learning-powered dashboard predicting customer churn with actionable insights, retention strategies, and business intelligence analytics",
       technologies: ["Python", "Machine Learning", "Data Visualization", "Business Intelligence", "Dashboard"],
       githubUrl: "https://github.com/jenish1345/customer-churn-prediction-retention-dashboard",
