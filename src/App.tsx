@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import HomeMinimal from "./pages/HomeMinimal";
+import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import Analytics from "./components/Analytics";
 
@@ -17,7 +17,7 @@ const App = () => (
       <BrowserRouter>
         <Analytics />
         <Routes>
-          <Route path="/" element={<HomeMinimal />} />
+          <Route path="/" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
