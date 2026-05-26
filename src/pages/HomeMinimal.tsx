@@ -501,39 +501,72 @@ const HomeMinimal = () => {
         </div>
       </section>
 
-      {/* Skills Visualization Section - Compact */}
-      <section className="py-16 px-6 bg-white dark:bg-[#111] transition-colors">
-        <div className="max-w-5xl mx-auto">
+      {/* Skills Section - Redesigned */}
+      <section className="py-20 px-6 bg-zinc-50 dark:bg-[#0a0a0a] transition-colors">
+        <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <p className="text-sm uppercase tracking-wider text-black/40 dark:text-white/40 mb-4 transition-colors">Technical Skills</p>
-            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white transition-colors">Core Competencies</h2>
+            <p className="text-sm uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-2 transition-colors">Expertise</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white transition-colors">Technical Skills</h2>
           </div>
           
-          {/* Compact Skills Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { name: "Python", icon: "🐍" },
-              { name: "TensorFlow", icon: "🧠" },
-              { name: "Scikit-learn", icon: "📊" },
-              { name: "Pandas", icon: "🐼" },
-              { name: "NumPy", icon: "🔢" },
-              { name: "Matplotlib", icon: "📈" },
-              { name: "Machine Learning", icon: "🤖" },
-              { name: "Data Analysis", icon: "📉" }
-            ].map((skill, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.05, duration: 0.3 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                className="bg-white dark:bg-[#1a1a1a] rounded-xl p-4 border border-black/5 dark:border-white/10 transition-all hover:border-emerald-500/30 dark:hover:border-emerald-500/30 cursor-pointer"
-              >
-                <div className="text-3xl mb-2">{skill.icon}</div>
-                <h3 className="text-sm font-semibold text-zinc-900 dark:text-white transition-colors">{skill.name}</h3>
-              </motion.div>
-            ))}
+          {/* Skills Categories */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Machine Learning */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 border border-zinc-200 dark:border-white/10 transition-colors"
+            >
+              <div className="text-4xl mb-4">🤖</div>
+              <h3 className="text-xl font-bold mb-4 text-zinc-900 dark:text-white transition-colors">Machine Learning</h3>
+              <div className="flex flex-wrap gap-2">
+                {["TensorFlow", "Scikit-learn", "Neural Networks", "Deep Learning"].map((skill) => (
+                  <span key={skill} className="text-xs px-3 py-1.5 bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 rounded-full border border-emerald-200 dark:border-emerald-500/30 transition-colors">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Data Science */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 border border-zinc-200 dark:border-white/10 transition-colors"
+            >
+              <div className="text-4xl mb-4">📊</div>
+              <h3 className="text-xl font-bold mb-4 text-zinc-900 dark:text-white transition-colors">Data Science</h3>
+              <div className="flex flex-wrap gap-2">
+                {["Python", "Pandas", "NumPy", "Matplotlib"].map((skill) => (
+                  <span key={skill} className="text-xs px-3 py-1.5 bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 rounded-full border border-blue-200 dark:border-blue-500/30 transition-colors">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Development */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-6 border border-zinc-200 dark:border-white/10 transition-colors"
+            >
+              <div className="text-4xl mb-4">💻</div>
+              <h3 className="text-xl font-bold mb-4 text-zinc-900 dark:text-white transition-colors">Development</h3>
+              <div className="flex flex-wrap gap-2">
+                {["React", "Next.js", "Git", "APIs"].map((skill) => (
+                  <span key={skill} className="text-xs px-3 py-1.5 bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 rounded-full border border-purple-200 dark:border-purple-500/30 transition-colors">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -544,8 +577,8 @@ const HomeMinimal = () => {
         author="W. Edwards Deming"
       />
 
-      {/* Contact Section - Full Screen */}
-      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-24 bg-zinc-900 dark:bg-[#09090b] text-white transition-colors">
+      {/* Contact Section - Full Screen with Dark Background */}
+      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-24 bg-black text-white">
         <ContactFormSection contact={contact} />
       </section>
     </div>
