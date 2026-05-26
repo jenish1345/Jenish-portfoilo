@@ -242,71 +242,6 @@ const HomeMinimal = () => {
         </div>
       </section>
 
-      {/* Freelancing Section */}
-      <section className="py-24 px-6 bg-[#f5f5f0] dark:bg-[#0a0a0a] transition-colors">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-16">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 border-2 border-black dark:border-white rounded-lg flex items-center justify-center transition-colors">
-                <span className="text-xs">💼</span>
-              </div>
-              <h2 className="text-sm uppercase tracking-wider">Freelance Projects</h2>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.filter(p => p.id === "elleora-luxury").map((project, i) => (
-              <motion.a
-                key={project.id}
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10 }}
-                className="group"
-              >
-                <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 via-blue-50 to-pink-100 dark:from-purple-900/50 dark:via-blue-900/50 dark:to-pink-900/50 mb-4 transition-colors">
-                  <div className="absolute inset-0 p-8 flex flex-col items-center justify-center">
-                    <div className="text-8xl mb-4">{project.emoji}</div>
-                    <div className="w-full h-2 bg-white/50 dark:bg-white/20 rounded-full overflow-hidden transition-colors">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "100%" }}
-                        transition={{ delay: 0.5, duration: 1 }}
-                        className="h-full bg-gradient-to-r from-purple-500 to-blue-500"
-                      />
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 dark:group-hover:bg-black/20 transition-colors" />
-                  <div className="absolute top-4 right-4 w-10 h-10 bg-white dark:bg-white/10 dark:backdrop-blur-sm rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg dark:border dark:border-white/20">
-                    <ExternalLink className="w-5 h-5" />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs uppercase tracking-wider text-black/40 dark:text-white/40 transition-colors">Freelance</span>
-                    <span className="text-xs px-2 py-1 bg-green-100 dark:bg-emerald-500/20 text-green-700 dark:text-emerald-400 rounded-full font-medium dark:border dark:border-emerald-500/30 transition-colors">Live</span>
-                  </div>
-                  <h3 className="text-2xl font-semibold group-hover:opacity-60 transition-opacity">{project.title}</h3>
-                  <p className="text-sm text-black/60 dark:text-white/60 line-clamp-2 transition-colors">{project.description}</p>
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {project.technologies.map((tech) => (
-                      <span key={tech} className="text-xs px-3 py-1 bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-full text-black/60 dark:text-white/60 transition-colors">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Quote 1 */}
       <QuoteSection 
         quote="Data is the new oil. It's valuable, but if unrefined it cannot really be used."
@@ -314,59 +249,47 @@ const HomeMinimal = () => {
       />
 
       {/* Selected Works - Terminal Style */}
-      <section id="work" className="py-24 px-6 bg-black text-white">
+      <section id="work" className="py-24 px-6 bg-white dark:bg-[#0a0a0a] transition-colors">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">
-            <p className="text-sm text-emerald-400 font-mono mb-2 tracking-wider">PORTFOLIO</p>
+            <p className="text-sm text-emerald-500 font-mono mb-2 tracking-wider">PORTFOLIO</p>
             <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
               FEATURED PROJECTS
             </h2>
-            <p className="text-zinc-500 text-lg">Click to explore. Pop out to compare.</p>
+            <p className="text-zinc-500 dark:text-zinc-400 text-lg transition-colors">Click to explore. Pop out to compare.</p>
           </div>
 
           {/* Terminal Container */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Left Sidebar - Explorer */}
-            <div className="lg:col-span-4 bg-[#0d0d0d] border border-emerald-500/20 rounded-lg overflow-hidden">
+            <div className="lg:col-span-4 bg-white dark:bg-[#0d0d0d] border border-zinc-200 dark:border-emerald-500/20 rounded-lg overflow-hidden transition-colors">
               {/* Terminal Header */}
-              <div className="bg-[#0a0a0a] border-b border-emerald-500/20 px-4 py-3 flex items-center justify-between">
-                <span className="text-xs font-mono text-emerald-400">~/mithilesh/projects</span>
+              <div className="bg-zinc-50 dark:bg-[#0a0a0a] border-b border-zinc-200 dark:border-emerald-500/20 px-4 py-3 flex items-center justify-between transition-colors">
+                <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 transition-colors">~/projects</span>
                 <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
-                  <div className="w-3 h-3 rounded-full bg-emerald-500/50" />
+                  <div className="w-3 h-3 rounded-full bg-red-400" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-400" />
                 </div>
               </div>
 
               {/* Explorer Content */}
               <div className="p-4">
-                <div className="text-xs font-mono text-emerald-400 mb-3 uppercase tracking-wider">Explorer</div>
+                <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mb-3 uppercase tracking-wider transition-colors">Explorer</div>
                 
-                {/* Freelancing Folder */}
-                <div className="mb-4">
-                  <div className="flex items-center gap-2 mb-2 text-zinc-400">
-                    <span className="text-yellow-500">📁</span>
-                    <span className="text-sm font-mono">Freelancing</span>
-                  </div>
-                  <div className="ml-6">
-                    {projects.filter(p => p.id === "elleora-luxury").map((project) => (
-                      <div key={project.id} className="px-3 py-2 bg-emerald-500/20 text-emerald-400 border-l-2 border-emerald-400 rounded text-sm font-mono">
-                        {project.emoji} {project.title.split("•")[0].trim()}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
                 {/* Projects Folder */}
                 <div>
-                  <div className="flex items-center gap-2 mb-2 text-zinc-400">
+                  <div className="flex items-center gap-2 mb-2 text-zinc-700 dark:text-zinc-400 transition-colors">
                     <span className="text-blue-500">📁</span>
                     <span className="text-sm font-mono">Projects</span>
                   </div>
                   <div className="ml-6 space-y-1">
-                    {projects.filter(p => p.id !== "elleora-luxury").slice(0, 6).map((project) => (
-                      <div key={project.id} className="px-3 py-2 text-zinc-500 hover:text-zinc-300 hover:bg-white/5 rounded text-sm font-mono transition-all cursor-pointer">
+                    {projects.map((project) => (
+                      <div 
+                        key={project.id} 
+                        className="px-3 py-2 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/5 rounded text-sm font-mono transition-all cursor-pointer"
+                      >
                         {project.emoji} {project.title.split("•")[0].trim()}
                       </div>
                     ))}
@@ -376,58 +299,67 @@ const HomeMinimal = () => {
             </div>
 
             {/* Right Panel - Project Details */}
-            <div className="lg:col-span-8 bg-[#0d0d0d] border border-emerald-500/20 rounded-lg overflow-hidden">
+            <div className="lg:col-span-8 bg-white dark:bg-[#0d0d0d] border border-zinc-200 dark:border-emerald-500/20 rounded-lg overflow-hidden transition-colors">
               {/* Terminal Header */}
-              <div className="bg-[#0a0a0a] border-b border-emerald-500/20 px-4 py-3 flex items-center justify-between">
+              <div className="bg-zinc-50 dark:bg-[#0a0a0a] border-b border-zinc-200 dark:border-emerald-500/20 px-4 py-3 flex items-center justify-between transition-colors">
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-zinc-500">kalyanakonnection</span>
-                  <span className="text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded border border-emerald-500/30 font-mono">
-                    Social Impact
+                  <span className="text-xs font-mono text-zinc-700 dark:text-zinc-500 transition-colors">{projects[0].title.split("•")[0].trim()}</span>
+                  <span className="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded border border-emerald-200 dark:border-emerald-500/30 font-mono transition-colors">
+                    {projects[0].category}
                   </span>
                 </div>
-                <button className="text-zinc-500 hover:text-emerald-400 transition-colors">
+                <a 
+                  href={projects[0].githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-zinc-500 dark:text-zinc-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                >
                   <ExternalLink className="w-4 h-4" />
-                </button>
+                </a>
               </div>
 
               {/* Project Content */}
               <div className="p-8 space-y-6">
                 {/* Project Header */}
                 <div>
-                  <h3 className="text-3xl font-bold mb-4">KALYANAKONNECTION</h3>
-                  <p className="text-zinc-400 leading-relaxed">
-                    Role-based food surplus redistribution platform connecting event food providers with NGOs for fast, verified, and transparent pickup of excess food.
+                  <h3 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white transition-colors">{projects[0].title.toUpperCase()}</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed transition-colors">
+                    {projects[0].description}
                   </p>
                 </div>
 
                 {/* Details */}
                 <div className="space-y-2 font-mono text-sm">
                   <div className="flex items-start gap-3">
-                    <span className="text-emerald-400">&gt; type:</span>
-                    <span className="text-zinc-400">Social Impact / Platform</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 transition-colors">&gt; type:</span>
+                    <span className="text-zinc-600 dark:text-zinc-400 transition-colors">{projects[0].category}</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <span className="text-emerald-400">&gt; stack:</span>
-                    <span className="text-zinc-400">HTML • Full Stack</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 transition-colors">&gt; stack:</span>
+                    <span className="text-zinc-600 dark:text-zinc-400 transition-colors">{projects[0].technologies.join(" • ")}</span>
                   </div>
                   <div className="flex items-start gap-3">
-                    <span className="text-emerald-400">&gt; status:</span>
-                    <span className="text-zinc-400">completed</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 transition-colors">&gt; status:</span>
+                    <span className="text-zinc-600 dark:text-zinc-400 transition-colors">completed</span>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <span className="text-emerald-400">&gt; impact:</span>
-                    <span className="text-zinc-400">Reduces food waste by connecting surplus to NGOs</span>
-                  </div>
+                  {projects[0].metrics && (
+                    <div className="flex items-start gap-3">
+                      <span className="text-emerald-600 dark:text-emerald-400 transition-colors">&gt; impact:</span>
+                      <span className="text-zinc-600 dark:text-zinc-400 transition-colors">{projects[0].metrics.impact || 'High-quality delivery'}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2 pt-4">
-                  <span className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 rounded text-xs font-mono text-emerald-400">
-                    HTML
-                  </span>
-                  <span className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 rounded text-xs font-mono text-emerald-400">
-                    Full Stack
-                  </span>
+                  {projects[0].technologies.map((tech) => (
+                    <span 
+                      key={tech} 
+                      className="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded text-xs font-mono text-emerald-700 dark:text-emerald-400 transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
                 </div>
               </div>
             </div>
