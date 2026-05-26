@@ -21,6 +21,7 @@ const HomeMinimal = () => {
   const [filteredProjects, setFilteredProjects] = useState(projects);
   const [showHello, setShowHello] = useState(true);
   const [showContent, setShowContent] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(projects[0]);
 
   const handleFilterChange = (filter: string) => {
     if (filter === 'all') {
@@ -254,10 +255,10 @@ const HomeMinimal = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <p className="text-sm text-emerald-500 font-mono mb-2 tracking-wider">PORTFOLIO</p>
-            <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight text-zinc-900 dark:text-white transition-colors">
               FEATURED PROJECTS
             </h2>
-            <p className="text-zinc-500 dark:text-zinc-400 text-lg transition-colors">Click to explore. Pop out to compare.</p>
+            <p className="text-zinc-600 dark:text-zinc-400 text-lg transition-colors">Click to explore. Pop out to compare.</p>
           </div>
 
           {/* Terminal Container */}
@@ -287,8 +288,13 @@ const HomeMinimal = () => {
                   <div className="ml-6 space-y-1">
                     {projects.map((project) => (
                       <div 
-                        key={project.id} 
-                        className="px-3 py-2 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/5 rounded text-sm font-mono transition-all cursor-pointer"
+                        key={project.id}
+                        onClick={() => setSelectedProject(project)}
+                        className={`px-3 py-2 rounded text-sm font-mono transition-all cursor-pointer ${
+                          selectedProject.id === project.id
+                            ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-l-2 border-emerald-500'
+                            : 'text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/5'
+                        }`}
                       >
                         {project.emoji} {project.title.split("•")[0].trim()}
                       </div>
@@ -303,13 +309,13 @@ const HomeMinimal = () => {
               {/* Terminal Header */}
               <div className="bg-zinc-50 dark:bg-[#0a0a0a] border-b border-zinc-200 dark:border-emerald-500/20 px-4 py-3 flex items-center justify-between transition-colors">
                 <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-zinc-700 dark:text-zinc-500 transition-colors">{projects[0].title.split("•")[0].trim()}</span>
+                  <span className="text-xs font-mono text-zinc-700 dark:text-zinc-500 transition-colors">{selectedProject.title.split("•")[0].trim()}</span>
                   <span className="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded border border-emerald-200 dark:border-emerald-500/30 font-mono transition-colors">
-                    {projects[0].category}
+                    {selectedProject.category}
                   </span>
                 </div>
                 <a 
-                  href={projects[0].githubUrl}
+                  href={selectedProject.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-zinc-500 dark:text-zinc-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
@@ -322,9 +328,9 @@ const HomeMinimal = () => {
               <div className="p-8 space-y-6">
                 {/* Project Header */}
                 <div>
-                  <h3 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white transition-colors">{projects[0].title.toUpperCase()}</h3>
+                  <h3 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white transition-colors">{selectedProject.title.toUpperCase()}</h3>
                   <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed transition-colors">
-                    {projects[0].description}
+                    {selectedProject.description}
                   </p>
                 </div>
 
@@ -332,27 +338,27 @@ const HomeMinimal = () => {
                 <div className="space-y-2 font-mono text-sm">
                   <div className="flex items-start gap-3">
                     <span className="text-emerald-600 dark:text-emerald-400 transition-colors">&gt; type:</span>
-                    <span className="text-zinc-600 dark:text-zinc-400 transition-colors">{projects[0].category}</span>
+                    <span className="text-zinc-600 dark:text-zinc-400 transition-colors">{selectedProject.category}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="text-emerald-600 dark:text-emerald-400 transition-colors">&gt; stack:</span>
-                    <span className="text-zinc-600 dark:text-zinc-400 transition-colors">{projects[0].technologies.join(" • ")}</span>
+                    <span className="text-zinc-600 dark:text-zinc-400 transition-colors">{selectedProject.technologies.join(" • ")}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="text-emerald-600 dark:text-emerald-400 transition-colors">&gt; status:</span>
                     <span className="text-zinc-600 dark:text-zinc-400 transition-colors">completed</span>
                   </div>
-                  {projects[0].metrics && (
+                  {selectedProject.metrics && (
                     <div className="flex items-start gap-3">
                       <span className="text-emerald-600 dark:text-emerald-400 transition-colors">&gt; impact:</span>
-                      <span className="text-zinc-600 dark:text-zinc-400 transition-colors">{projects[0].metrics.impact || 'High-quality delivery'}</span>
+                      <span className="text-zinc-600 dark:text-zinc-400 transition-colors">{selectedProject.metrics.impact || 'High-quality delivery'}</span>
                     </div>
                   )}
                 </div>
 
                 {/* Tech Stack */}
                 <div className="flex flex-wrap gap-2 pt-4">
-                  {projects[0].technologies.map((tech) => (
+                  {selectedProject.technologies.map((tech) => (
                     <span 
                       key={tech} 
                       className="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded text-xs font-mono text-emerald-700 dark:text-emerald-400 transition-colors"
@@ -495,10 +501,40 @@ const HomeMinimal = () => {
         </div>
       </section>
 
-      {/* Skills Visualization Section */}
-      <section className="py-24 px-6 bg-white dark:bg-[#111] transition-colors">
+      {/* Skills Visualization Section - Compact */}
+      <section className="py-16 px-6 bg-white dark:bg-[#111] transition-colors">
         <div className="max-w-5xl mx-auto">
-          <SkillsVisualization />
+          <div className="text-center mb-12">
+            <p className="text-sm uppercase tracking-wider text-black/40 dark:text-white/40 mb-4 transition-colors">Technical Skills</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white transition-colors">Core Competencies</h2>
+          </div>
+          
+          {/* Compact Skills Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { name: "Python", icon: "🐍" },
+              { name: "TensorFlow", icon: "🧠" },
+              { name: "Scikit-learn", icon: "📊" },
+              { name: "Pandas", icon: "🐼" },
+              { name: "NumPy", icon: "🔢" },
+              { name: "Matplotlib", icon: "📈" },
+              { name: "Machine Learning", icon: "🤖" },
+              { name: "Data Analysis", icon: "📉" }
+            ].map((skill, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.05, duration: 0.3 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.05 }}
+                className="bg-white dark:bg-[#1a1a1a] rounded-xl p-4 border border-black/5 dark:border-white/10 transition-all hover:border-emerald-500/30 dark:hover:border-emerald-500/30 cursor-pointer"
+              >
+                <div className="text-3xl mb-2">{skill.icon}</div>
+                <h3 className="text-sm font-semibold text-zinc-900 dark:text-white transition-colors">{skill.name}</h3>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
