@@ -10,10 +10,16 @@ interface ProjectFolder {
 }
 
 const ProjectExplorer = () => {
-  const [openFolders, setOpenFolders] = useState<string[]>(["AI & Intelligence"]);
+  const [openFolders, setOpenFolders] = useState<string[]>(["Freelance Projects"]);
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
 
   const folders: ProjectFolder[] = [
+    {
+      name: "Freelance Projects",
+      icon: "💼",
+      color: "from-yellow-500/20 to-orange-500/20",
+      projects: portfolioData.projects.filter(p => p.category === "Freelance")
+    },
     {
       name: "AI & Intelligence",
       icon: "🤖",
