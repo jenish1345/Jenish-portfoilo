@@ -545,7 +545,7 @@ const HomeMinimal = () => {
       />
 
       {/* Contact Section - Full Screen */}
-      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-24 bg-[#f5f5f0] dark:bg-[#09090b] dark:text-white transition-colors">
+      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-24 bg-zinc-900 dark:bg-[#09090b] text-white transition-colors">
         <ContactFormSection contact={contact} />
       </section>
     </div>
