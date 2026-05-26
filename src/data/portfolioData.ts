@@ -51,7 +51,7 @@ export const portfolioData: PortfolioData = {
       emoji: "🛍️",
       featured: true,
       order: 0,
-      category: "Freelance",
+      category: "Web",
       metrics: {
         users: "500+",
         performance: "98% satisfaction",

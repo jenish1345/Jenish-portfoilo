@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { portfolioData } from "@/data/portfolioData";
 import AnimatedAvatar from "@/components/AnimatedAvatar";
-import ProjectExplorer from "@/components/ProjectExplorer";
+import MinimalistProjects from "@/components/MinimalistProjects";
 import Timeline from "@/components/Timeline";
 import ACDSCaseStudy from "@/components/ACDSCaseStudy";
 import { 
@@ -257,12 +257,7 @@ const Home = () => {
 
       {/* Projects Section */}
       <section id="projects" className="relative z-20 container mx-auto px-6 md:px-8 py-24 pointer-events-auto">
-        <div className="flex flex-col items-center justify-center text-center mb-16 relative animate-on-scroll" style={{ animation: "animationIn 0.8s ease-out 0.1s both" }}>
-          <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-white mb-4">Project Explorer</h2>
-          <p className="text-lg font-normal text-zinc-400 max-w-2xl">Browse through my work like a code repository</p>
-        </div>
-
-        <ProjectExplorer />
+        <MinimalistProjects />
       </section>
 
       {/* Timeline Section */}
