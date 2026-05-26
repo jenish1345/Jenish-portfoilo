@@ -304,69 +304,124 @@ const HomeMinimal = () => {
         author="Clive Humby"
       />
 
-      {/* Selected Works */}
-      <section id="work" className="py-24 px-6 bg-white dark:bg-[#111] transition-colors">
+      {/* Selected Works - Terminal Style */}
+      <section id="work" className="py-24 px-6 bg-black text-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 border-2 border-black rounded-lg flex items-center justify-center">
-                <span className="text-xs">📁</span>
-              </div>
-              <h2 className="text-sm uppercase tracking-wider">Selected Works</h2>
-            </div>
-            <a href="#contact" className="text-sm hover:opacity-60 transition-opacity flex items-center gap-2">
-              View All
-              <ArrowRight className="w-4 h-4" />
-            </a>
+          {/* Header */}
+          <div className="text-center mb-12">
+            <p className="text-sm text-emerald-400 font-mono mb-2 tracking-wider">PORTFOLIO</p>
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+              FEATURED PROJECTS
+            </h2>
+            <p className="text-zinc-500 text-lg">Click to explore. Pop out to compare.</p>
           </div>
 
-          {/* Project Filters */}
-          <ProjectFilters onFilterChange={handleFilterChange} />
+          {/* Terminal Container */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Left Sidebar - Explorer */}
+            <div className="lg:col-span-4 bg-[#0d0d0d] border border-emerald-500/20 rounded-lg overflow-hidden">
+              {/* Terminal Header */}
+              <div className="bg-[#0a0a0a] border-b border-emerald-500/20 px-4 py-3 flex items-center justify-between">
+                <span className="text-xs font-mono text-emerald-400">~/mithilesh/projects</span>
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/50" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/50" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-500/50" />
+                </div>
+              </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.filter(p => p.id !== "house-of-elleora").slice(0, 6).map((project, i) => (
-              <motion.a
-                key={project.id}
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.1, duration: 0.6 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -10 }}
-                className="group"
-              >
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-purple-100 via-blue-50 to-pink-100 mb-4">
-                  {/* Project visual representation */}
-                  <div className="absolute inset-0 p-8 flex flex-col items-center justify-center">
-                    <div className="text-7xl mb-4">{project.emoji}</div>
-                    <div className="w-full h-2 bg-white/50 rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: "85%" }}
-                        transition={{ delay: i * 0.1 + 0.5, duration: 1 }}
-                        className="h-full bg-gradient-to-r from-purple-500 to-blue-500"
-                      />
-                    </div>
+              {/* Explorer Content */}
+              <div className="p-4">
+                <div className="text-xs font-mono text-emerald-400 mb-3 uppercase tracking-wider">Explorer</div>
+                
+                {/* Freelancing Folder */}
+                <div className="mb-4">
+                  <div className="flex items-center gap-2 mb-2 text-zinc-400">
+                    <span className="text-yellow-500">📁</span>
+                    <span className="text-sm font-mono">Freelancing</span>
                   </div>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors" />
-                  <div className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
-                    <ExternalLink className="w-5 h-5" />
+                  <div className="ml-6">
+                    {projects.filter(p => p.id === "elleora-luxury").map((project) => (
+                      <div key={project.id} className="px-3 py-2 bg-emerald-500/20 text-emerald-400 border-l-2 border-emerald-400 rounded text-sm font-mono">
+                        {project.emoji} {project.title.split("•")[0].trim()}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <p className="text-xs uppercase tracking-wider text-black/40">
-                    {project.technologies[0]}
+                {/* Projects Folder */}
+                <div>
+                  <div className="flex items-center gap-2 mb-2 text-zinc-400">
+                    <span className="text-blue-500">📁</span>
+                    <span className="text-sm font-mono">Projects</span>
+                  </div>
+                  <div className="ml-6 space-y-1">
+                    {projects.filter(p => p.id !== "elleora-luxury").slice(0, 6).map((project) => (
+                      <div key={project.id} className="px-3 py-2 text-zinc-500 hover:text-zinc-300 hover:bg-white/5 rounded text-sm font-mono transition-all cursor-pointer">
+                        {project.emoji} {project.title.split("•")[0].trim()}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Panel - Project Details */}
+            <div className="lg:col-span-8 bg-[#0d0d0d] border border-emerald-500/20 rounded-lg overflow-hidden">
+              {/* Terminal Header */}
+              <div className="bg-[#0a0a0a] border-b border-emerald-500/20 px-4 py-3 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-mono text-zinc-500">kalyanakonnection</span>
+                  <span className="text-xs px-2 py-0.5 bg-emerald-500/20 text-emerald-400 rounded border border-emerald-500/30 font-mono">
+                    Social Impact
+                  </span>
+                </div>
+                <button className="text-zinc-500 hover:text-emerald-400 transition-colors">
+                  <ExternalLink className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Project Content */}
+              <div className="p-8 space-y-6">
+                {/* Project Header */}
+                <div>
+                  <h3 className="text-3xl font-bold mb-4">KALYANAKONNECTION</h3>
+                  <p className="text-zinc-400 leading-relaxed">
+                    Role-based food surplus redistribution platform connecting event food providers with NGOs for fast, verified, and transparent pickup of excess food.
                   </p>
-                  <h3 className="text-xl font-semibold group-hover:opacity-60 transition-opacity">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-black/60 line-clamp-2">{project.description}</p>
                 </div>
-              </motion.a>
-            ))}
+
+                {/* Details */}
+                <div className="space-y-2 font-mono text-sm">
+                  <div className="flex items-start gap-3">
+                    <span className="text-emerald-400">&gt; type:</span>
+                    <span className="text-zinc-400">Social Impact / Platform</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-emerald-400">&gt; stack:</span>
+                    <span className="text-zinc-400">HTML • Full Stack</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-emerald-400">&gt; status:</span>
+                    <span className="text-zinc-400">completed</span>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <span className="text-emerald-400">&gt; impact:</span>
+                    <span className="text-zinc-400">Reduces food waste by connecting surplus to NGOs</span>
+                  </div>
+                </div>
+
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2 pt-4">
+                  <span className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 rounded text-xs font-mono text-emerald-400">
+                    HTML
+                  </span>
+                  <span className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 rounded text-xs font-mono text-emerald-400">
+                    Full Stack
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
