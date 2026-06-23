@@ -4,10 +4,10 @@ import AnimatedAvatar from "@/components/AnimatedAvatar";
 import MinimalistProjects from "@/components/MinimalistProjects";
 import Timeline from "@/components/Timeline";
 import ACDSCaseStudy from "@/components/ACDSCaseStudy";
-import { 
-  CheckCircle2, 
-  ShieldCheck, 
-  Database, 
+import {
+  CheckCircle2,
+  ShieldCheck,
+  Database,
   Globe,
   Check,
   ArrowRight,
@@ -26,8 +26,8 @@ const Home = () => {
   const { projects, contact } = portfolioData;
 
   // Filter projects based on active filter
-  const filteredProjects = activeFilter === "all" 
-    ? projects 
+  const filteredProjects = activeFilter === "all"
+    ? projects
     : projects.filter(project => project.category === activeFilter);
 
   useEffect(() => {
@@ -87,7 +87,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden selection:bg-white/10 text-white bg-[#09090b] relative">
-      
+
       {/* Background Glow Effects */}
       <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-[60vh] bg-gradient-to-b from-zinc-400/30 via-zinc-500/5 to-transparent z-10" />
@@ -103,7 +103,7 @@ const Home = () => {
         <a href="#" className="flex items-center gap-2.5 text-xl tracking-tight font-medium text-white hover:opacity-80 transition-opacity">
           Antony Jenish
         </a>
-        
+
         <nav className="hidden md:flex items-center gap-8 text-base font-normal text-zinc-400">
           <a href="#about" className="hover:text-zinc-200 transition-colors">About</a>
           <a href="#journey" className="hover:text-zinc-200 transition-colors">Journey</a>
@@ -119,9 +119,9 @@ const Home = () => {
           </div>
 
           {/* RESUME DOWNLOAD BUTTON - VERY VISIBLE */}
-          <a 
+          <a
             href="/Antony_Jenish_Fernando_Resume_v2.pdf"
-            download="Antony_Jenish_Fernando_Resume.pdf"
+            download="Antony_Jenish_Fernando_Resume_v2.pdf"
             className="flex items-center gap-2 bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8b77e5] hover:to-[#6E599B] text-white px-6 py-3 rounded-full font-medium transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             <Download className="w-5 h-5" />
@@ -134,7 +134,7 @@ const Home = () => {
       {/* Main Hero Content */}
       <main className="relative z-20 container mx-auto px-6 md:px-12 flex flex-col justify-center pt-32 pb-10 md:pb-16 pointer-events-none">
         <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-12 pointer-events-auto min-h-[70vh] gap-x-16 gap-y-16 items-center">
-          
+
           {/* Left Side */}
           <div className="flex flex-col gap-10 lg:pr-8 text-left">
             <h1 className="sm:text-6xl md:text-7xl leading-[1.1] animate-on-scroll text-5xl font-medium text-white/95 tracking-tight" style={{ animation: "animationIn 0.8s ease-out 0.1s both" }}>
@@ -161,7 +161,7 @@ const Home = () => {
               </a>
 
               {/* BIG VISIBLE RESUME DOWNLOAD BUTTON */}
-              <a 
+              <a
                 href="/Antony_Jenish_Fernando_Resume_v2.pdf"
                 download="Antony_Jenish_Fernando_Resume.pdf"
                 className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 animate-fade-in text-lg"
@@ -225,7 +225,7 @@ const Home = () => {
             >
               <div className="h-64 rounded-[1.25rem] relative overflow-hidden flex items-center justify-center bg-[#131316] border border-white/5">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04)_0%,transparent_60%)] pointer-events-none" />
-                
+
                 <div className="relative w-[85%] max-w-[260px] bg-[#09090b] border border-white/10 rounded-xl p-4 shadow-2xl z-10 flex flex-col group-hover:-translate-y-1 transition-transform duration-500">
                   <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/5">
                     <div className="flex items-center gap-2">
@@ -234,7 +234,7 @@ const Home = () => {
                     </div>
                     <span className="text-[10px] bg-emerald-400/10 text-emerald-400 px-1.5 py-0.5 rounded border border-emerald-400/20 font-medium">Active</span>
                   </div>
-                  
+
                   <div className="flex flex-col gap-3">
                     {skill.items.map((item, idx) => (
                       <div key={idx} className="flex items-center justify-between">
@@ -245,7 +245,7 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="px-5 py-6 flex flex-col gap-2">
                 <h3 className="text-xl font-medium text-white tracking-tight">{skill.title}</h3>
                 <p className="text-base font-normal text-zinc-400 leading-relaxed">{skill.desc}</p>
@@ -282,7 +282,7 @@ const Home = () => {
           <div className="flex flex-col gap-8 animate-on-scroll" style={{ animation: "animationIn 0.8s ease-out 0.2s both" }}>
             <div className="bg-[#0e0e11] border border-white/5 rounded-3xl p-8">
               <h3 className="text-2xl font-medium text-white mb-6">Contact Information</h3>
-              
+
               <div className="flex flex-col gap-6">
                 {/* Email */}
                 <div className="flex items-start gap-4 group">
@@ -330,7 +330,7 @@ const Home = () => {
                 <div className="flex items-start gap-4 group">
                   <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-white/10 transition-colors">
                     <svg className="w-5 h-5 text-zinc-400 group-hover:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                     </svg>
                   </div>
                   <div className="flex flex-col">
@@ -365,9 +365,9 @@ const Home = () => {
           <div className="animate-on-scroll" style={{ animation: "animationIn 0.8s ease-out 0.3s both" }}>
             <div className="bg-[#0e0e11] border border-white/5 rounded-3xl p-8">
               <h3 className="text-2xl font-medium text-white mb-6">Send a Message</h3>
-              
-              <form 
-                action="https://formspree.io/f/YOUR_FORM_ID" 
+
+              <form
+                action="https://formspree.io/f/YOUR_FORM_ID"
                 method="POST"
                 className="flex flex-col gap-5"
               >
