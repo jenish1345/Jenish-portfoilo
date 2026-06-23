@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { portfolioData } from "@/data/portfolioData";
 import { ExternalLink, ArrowRight } from "lucide-react";
+import AnimatedAvatar from "@/components/AnimatedAvatar";
 import Lenis from "lenis";
 import SkillsVisualization from "@/components/SkillsVisualization";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -109,7 +110,7 @@ const HomeMinimal = () => {
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <motion.a
-              href="/Resume.pdf"
+              href="/Antony_Jenish_Fernando_Resume.pdf"
               download="Antony_Jenish_Fernando_Resume.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

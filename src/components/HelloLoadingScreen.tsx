@@ -80,6 +80,39 @@ const HelloLoadingScreen = ({ onComplete }: HelloLoadingScreenProps) => {
         className={`fixed inset-0 z-[100] bg-white dark:bg-black flex flex-col items-center justify-center ${canSkip ? 'cursor-pointer' : ''}`}
       >
         <div className="text-center">
+          {/* Bitmoji/Avatar - Add your bitmoji image here */}
+          <motion.div
+            initial={{ scale: 0, rotate: -10 }}
+            animate={{ scale: 1, rotate: 0 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 200, 
+              damping: 15,
+              delay: 0.1 
+            }}
+            className="mb-8 flex items-center justify-center"
+          >
+            {/* Waving animation */}
+            <motion.div
+              animate={{ 
+                rotate: [0, 14, -8, 14, -4, 10, 0],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                repeatDelay: 3,
+                ease: "easeInOut"
+              }}
+              className="transform-gpu"
+            >
+              {/* Replace this div with your bitmoji image */}
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-900/30 dark:to-emerald-800/30 flex items-center justify-center border-4 border-emerald-500/20">
+                {/* Placeholder - Replace with: <img src="/your-bitmoji.png" alt="Antony Jenish" className="w-full h-full object-cover rounded-full" /> */}
+                <span className="text-5xl">👋</span>
+              </div>
+            </motion.div>
+          </motion.div>
+
           {/* Typing Text */}
           <div className="text-6xl md:text-8xl font-light tracking-tight mb-4 min-h-[120px] flex items-center justify-center">
             {displayedText}

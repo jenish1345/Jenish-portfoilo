@@ -119,10 +119,10 @@ const Home = () => {
           </div>
 
           {/* RESUME DOWNLOAD BUTTON - VERY VISIBLE */}
-          <a
-            href="/Antony_Jenish_Fernando_Resume.md"
-            download="Antony_Jenish_Fernando_Resume.md"
-            className="flex items-center gap-2 text-base font-semibold text-white transition-all px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-lg hover:shadow-emerald-500/50 hover:scale-105"
+          <a 
+            href="/Antony_Jenish_Fernando_Resume.pdf"
+            download="Antony_Jenish_Fernando_Resume.pdf"
+            className="flex items-center gap-2 bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8b77e5] hover:to-[#6E599B] text-white px-6 py-3 rounded-full font-medium transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             <Download className="w-5 h-5" />
             <span className="hidden md:inline">Download Resume</span>
@@ -161,10 +161,10 @@ const Home = () => {
               </a>
 
               {/* BIG VISIBLE RESUME DOWNLOAD BUTTON */}
-              <a
-                href="/Antony_Jenish_Fernando_Resume.md"
-                download="Antony_Jenish_Fernando_Resume.md"
-                className="px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white text-lg font-semibold transition-all backdrop-blur-sm inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/50 hover:scale-105"
+              <a 
+                href="/Antony_Jenish_Fernando_Resume.pdf"
+                download="Antony_Jenish_Fernando_Resume.pdf"
+                className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 animate-fade-in text-lg"
               >
                 <Download className="w-5 h-5" />
                 Download Resume
