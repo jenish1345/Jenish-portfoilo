@@ -110,7 +110,7 @@ const HomeMinimal = () => {
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <motion.a
-              href="/Antony_Jenish_Fernando_Resume.pdf"
+              href="/Antony_Jenish_Fernando_Resume_v2.pdf"
               download="Antony_Jenish_Fernando_Resume.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
