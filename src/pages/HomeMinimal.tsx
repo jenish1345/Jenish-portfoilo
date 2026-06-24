@@ -110,15 +110,6 @@ const HomeMinimal = () => {
           <div className="flex items-center gap-4">
             <ThemeToggle />
             <motion.a
-              href="/Antony_Jenish_Fernando_Resume_Final.pdf"
-              download="Antony_Jenish_Fernando_Resume.pdf"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-2.5 rounded-full text-sm font-medium transition-colors flex items-center gap-2"
-            >
-              Download Resume
-            </motion.a>
-            <motion.a
               href="#contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

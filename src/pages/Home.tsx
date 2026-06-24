@@ -117,17 +117,6 @@ const Home = () => {
             <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
             <span className="text-sm font-medium text-emerald-400">Open to Opportunities</span>
           </div>
-
-          {/* RESUME DOWNLOAD BUTTON - VERY VISIBLE */}
-          <a
-            href="/Antony_Jenish_Fernando_Resume_Final.pdf"
-            download="Antony_Jenish_Fernando_Resume.pdf"
-            className="flex items-center gap-2 bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8b77e5] hover:to-[#6E599B] text-white px-6 py-3 rounded-full font-medium transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            <Download className="w-5 h-5" />
-            <span className="hidden md:inline">Download Resume</span>
-            <span className="md:hidden">Resume</span>
-          </a>
         </div>
       </header>
 
@@ -158,16 +147,6 @@ const Home = () => {
                 </span>
                 <span className="absolute bottom-0 left-1/2 h-[1px] w-[70%] -translate-x-1/2 transition-all duration-1000 opacity-0 group-hover:opacity-80 bg-gradient-to-r from-transparent via-neutral-200 to-transparent rounded-full blur-[2px]" />
                 <span className="absolute bottom-0 left-0 right-0 h-full opacity-0 group-hover:opacity-60 transition-all duration-1000 pointer-events-none bg-gradient-to-t from-white/20 via-white/10 to-transparent rounded-full" />
-              </a>
-
-              {/* BIG VISIBLE RESUME DOWNLOAD BUTTON */}
-              <a
-                href="/Antony_Jenish_Fernando_Resume_Final.pdf"
-                download="Antony_Jenish_Fernando_Resume.pdf"
-                className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 animate-fade-in text-lg"
-              >
-                <Download className="w-5 h-5" />
-                Download Resume
               </a>
             </div>
 
