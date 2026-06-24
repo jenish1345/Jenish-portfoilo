@@ -13,12 +13,15 @@ import ThemeToggle from "@/components/ThemeToggle";
 import TypingAnimation from "@/components/TypingAnimation";
 import ProjectFilters from "@/components/ProjectFilters";
 import CustomCursorTrail from "@/components/CustomCursorTrail";
+import HelloLoadingScreen from "@/components/HelloLoadingScreen";
 import QuoteSection from "@/components/QuoteSection";
 
 const HomeMinimal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { projects, contact } = portfolioData;
   const [filteredProjects, setFilteredProjects] = useState(projects);
+  const [showHello, setShowHello] = useState(true);
+  const [showContent, setShowContent] = useState(false);
   const [selectedProject, setSelectedProject] = useState(projects[0]);
 
   const handleFilterChange = (filter: string) => {
@@ -39,7 +42,10 @@ const HomeMinimal = () => {
     }
   };
 
-
+  const handleHelloComplete = () => {
+    setShowHello(false);
+    setTimeout(() => setShowContent(true), 100);
+  };
 
   useEffect(() => {
     // Initialize Lenis smooth scroll
@@ -66,7 +72,13 @@ const HomeMinimal = () => {
 
   return (
     <>
+      {/* Hello Loading Screen */}
+      <AnimatePresence>
+        {showHello && <HelloLoadingScreen onComplete={handleHelloComplete} />}
+      </AnimatePresence>
+
       {/* Main Content */}
+      {showContent && (
         <div ref={containerRef} className="bg-[#f5f5f0] dark:bg-[#0a0a0a] text-[#1a1a1a] dark:text-[#f5f5f0] transition-colors duration-300">
           {/* Scroll Progress */}
           <ScrollProgress />
@@ -564,6 +576,7 @@ const HomeMinimal = () => {
         <ContactFormSection contact={contact} />
       </section>
     </div>
+      )}
     </>
   );
 };
