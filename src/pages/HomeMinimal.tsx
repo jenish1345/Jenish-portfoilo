@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { portfolioData } from "@/data/portfolioData";
 import { ExternalLink, ArrowRight } from "lucide-react";
 import AnimatedAvatar from "@/components/AnimatedAvatar";
