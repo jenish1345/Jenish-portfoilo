@@ -120,8 +120,8 @@ const Home = () => {
 
           {/* RESUME DOWNLOAD BUTTON - VERY VISIBLE */}
           <a
-            href="/Antony_Jenish_Fernando_Resume_v2.pdf"
-            download="Antony_Jenish_Fernando_Resume_v2.pdf"
+            href="/Antony_Jenish_Fernando_Resume_Final.pdf"
+            download="Antony_Jenish_Fernando_Resume.pdf"
             className="flex items-center gap-2 bg-gradient-to-r from-[#9b87f5] to-[#7E69AB] hover:from-[#8b77e5] hover:to-[#6E599B] text-white px-6 py-3 rounded-full font-medium transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
             <Download className="w-5 h-5" />
@@ -162,7 +162,7 @@ const Home = () => {
 
               {/* BIG VISIBLE RESUME DOWNLOAD BUTTON */}
               <a
-                href="/Antony_Jenish_Fernando_Resume_v2.pdf"
+                href="/Antony_Jenish_Fernando_Resume_Final.pdf"
                 download="Antony_Jenish_Fernando_Resume.pdf"
                 className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-white px-8 py-4 rounded-full font-semibold transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 animate-fade-in text-lg"
               >
