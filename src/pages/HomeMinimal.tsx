@@ -146,7 +146,7 @@ const HomeMinimal = () => {
     {
       id: 1,
       quote: "Jenish built our House of Elleora e-commerce platform from scratch and delivered beyond our expectations. The design was premium, the experience was smooth, and the whole process was seamless. Highly recommend him for any serious web project.",
-      author: "Jenish Jeyakumar",
+      author: "Antony Jeyakumar",
       role: "Founder",
       company: "House of Elleora",
       stars: 5
