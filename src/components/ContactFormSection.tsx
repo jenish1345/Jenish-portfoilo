@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, MessageSquare } from "lucide-react";
+import { ArrowRight, Mail, MessageSquare, MapPin, Clock, Github, Linkedin, CheckCircle } from "lucide-react";
 import { useState } from "react";
 
 const ContactFormSection = ({ contact }: { contact: any }) => {
@@ -10,7 +10,6 @@ const ContactFormSection = ({ contact }: { contact: any }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Create mailto link with subject and body
     const subject = encodeURIComponent(`Message from ${formData.email}`);
     const body = encodeURIComponent(formData.message);
     window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
@@ -34,12 +33,37 @@ const ContactFormSection = ({ contact }: { contact: any }) => {
       >
         <p className="text-sm uppercase tracking-wider text-white/40 mb-8 flex items-center justify-center gap-2">
           <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-          Available for Work
+          {contact.availability || "Available for Work"}
         </p>
 
         <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
           Let's create<br />something<br />extraordinary<br />together.
         </h2>
+      </motion.div>
+
+      {/* Quick Info Cards */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        viewport={{ once: true }}
+        className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12 max-w-2xl mx-auto"
+      >
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
+          <Clock className="w-5 h-5 text-white/50 mx-auto mb-2" />
+          <div className="text-xs text-white/40 uppercase tracking-wider mb-1">Response Time</div>
+          <div className="text-sm font-medium">{contact.responseTime || "Within 24 Hours"}</div>
+        </div>
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
+          <MapPin className="w-5 h-5 text-white/50 mx-auto mb-2" />
+          <div className="text-xs text-white/40 uppercase tracking-wider mb-1">Location</div>
+          <div className="text-sm font-medium">{contact.location}</div>
+        </div>
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 text-center">
+          <CheckCircle className="w-5 h-5 text-green-500 mx-auto mb-2" />
+          <div className="text-xs text-white/40 uppercase tracking-wider mb-1">Status</div>
+          <div className="text-sm font-medium text-green-400">Open to Projects</div>
+        </div>
       </motion.div>
 
       {/* Contact Form */}
@@ -97,28 +121,41 @@ const ContactFormSection = ({ contact }: { contact: any }) => {
       </motion.form>
 
       {/* Footer Links */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left max-w-2xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left max-w-2xl mx-auto">
         <div>
           <h3 className="text-sm uppercase tracking-wider text-white/40 mb-6">Navigation</h3>
           <div className="space-y-3">
             <a href="#work" className="block hover:opacity-60 transition-opacity">Work</a>
             <a href="#about" className="block hover:opacity-60 transition-opacity">About</a>
+            <a href="#services" className="block hover:opacity-60 transition-opacity">Services</a>
             <a href="#contact" className="block hover:opacity-60 transition-opacity">Contact</a>
           </div>
         </div>
 
         <div>
-          <h3 className="text-sm uppercase tracking-wider text-white/40 mb-6">Socials</h3>
+          <h3 className="text-sm uppercase tracking-wider text-white/40 mb-6">Connect</h3>
           <div className="space-y-3">
-            <a href="https://github.com/jenish1345" target="_blank" rel="noopener noreferrer" className="block hover:opacity-60 transition-opacity">
+            <a href="https://github.com/jenish1345" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-60 transition-opacity">
+              <Github className="w-4 h-4" />
               GitHub
             </a>
-            <a href={contact.linkedIn} target="_blank" rel="noopener noreferrer" className="block hover:opacity-60 transition-opacity">
+            <a href={contact.linkedIn} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-60 transition-opacity">
+              <Linkedin className="w-4 h-4" />
               LinkedIn
             </a>
-            <a href={`mailto:${contact.email}`} className="block hover:opacity-60 transition-opacity">
+            <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:opacity-60 transition-opacity">
+              <Mail className="w-4 h-4" />
               Email
             </a>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-sm uppercase tracking-wider text-white/40 mb-6">Info</h3>
+          <div className="space-y-3 text-sm text-white/60">
+            <p>📍 {contact.location}</p>
+            <p>⚡ {contact.responseTime || "Within 24 Hours"}</p>
+            <p>🟢 {contact.availability || "Available for Work"}</p>
           </div>
         </div>
       </div>

@@ -3,8 +3,14 @@ export interface Project {
   title: string;
   description: string;
   longDescription?: string;
+  problem?: string;
+  solution?: string;
+  features?: string[];
+  businessImpact?: string;
+  duration?: string;
   technologies: string[];
   githubUrl: string;
+  liveUrl?: string;
   icon?: string;
   emoji?: string;
   featured: boolean;
@@ -28,6 +34,9 @@ export interface ContactInfo {
   phone: string;
   location: string;
   linkedIn: string;
+  github?: string;
+  availability?: string;
+  responseTime?: string;
 }
 
 export interface PortfolioData {
@@ -36,6 +45,7 @@ export interface PortfolioData {
     title: string;
     summary: string;
     profileImage: string;
+    portfolio?: string;
   };
   education: Education[];
   skills: string[];

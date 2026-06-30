@@ -4,19 +4,21 @@ const TypingAnimation = () => {
   return (
     <TypeAnimation
       sequence={[
-        'Data Scientist',
+        'Full Stack Web Developer',
         2000,
-        'AI/ML Engineer',
+        'Oracle APEX Developer',
         2000,
-        'Machine Learning Expert',
+        'AI Engineer',
         2000,
-        'Data Analyst',
+        'Enterprise Application Builder',
+        2000,
+        'Knowledge Graph Engineer',
         2000,
       ]}
       wrapper="span"
       speed={50}
       repeat={Infinity}
-      className="text-xl md:text-2xl text-black/70 font-medium"
+      className="text-xl md:text-2xl text-black/70 dark:text-white/70 font-medium"
     />
   );
 };
