@@ -1,25 +1,74 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Mail, MessageSquare, MapPin, Clock, Github, Linkedin, CheckCircle } from "lucide-react";
+import { ArrowRight, Mail, MessageSquare, MapPin, Clock, Github, Linkedin, CheckCircle, Loader2 } from "lucide-react";
 import { useState } from "react";
+import emailjs from "@emailjs/browser";
+import { EMAILJS_CONFIG, isEmailJSConfigured } from "@/lib/emailjs";
+
+const validateEmail = (email: string) => {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+};
 
 const ContactFormSection = ({ contact }: { contact: any }) => {
-  const [formData, setFormData] = useState({
-    email: "",
-    message: ""
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const subject = encodeURIComponent(`Message from ${formData.email}`);
-    const body = encodeURIComponent(formData.message);
-    window.location.href = `mailto:${contact.email}?subject=${subject}&body=${body}`;
-  };
+  const [formData, setFormData] = useState({ email: "", message: "" });
+  const [emailError, setEmailError] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+
+    if (name === "email") {
+      if (value && !validateEmail(value)) {
+        setEmailError("Please enter a valid email address.");
+      } else {
+        setEmailError("");
+      }
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validateEmail(formData.email)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    }
+
+    if (!formData.message.trim()) return;
+
+    setStatus("sending");
+
+    try {
+      if (isEmailJSConfigured()) {
+        // Send via EmailJS — lands directly in antonyjenishfernando@gmail.com
+        await emailjs.send(
+          EMAILJS_CONFIG.SERVICE_ID,
+          EMAILJS_CONFIG.TEMPLATE_ID,
+          {
+            from_email: formData.email,
+            from_name: formData.email,
+            message: formData.message,
+            to_email: EMAILJS_CONFIG.TO_EMAIL,
+            reply_to: formData.email,
+          },
+          { publicKey: EMAILJS_CONFIG.PUBLIC_KEY }
+        );
+        setStatus("success");
+        setFormData({ email: "", message: "" });
+      } else {
+        // Fallback: open default mail client until EmailJS is configured
+        const subject = encodeURIComponent(`Portfolio message from ${formData.email}`);
+        const body = encodeURIComponent(`From: ${formData.email}\n\n${formData.message}`);
+        window.open(
+          `mailto:antonyjenishfernando@gmail.com?subject=${subject}&body=${body}`,
+          "_blank"
+        );
+        setStatus("success");
+        setFormData({ email: "", message: "" });
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -74,49 +123,108 @@ const ContactFormSection = ({ contact }: { contact: any }) => {
         transition={{ duration: 0.6, delay: 0.2 }}
         viewport={{ once: true }}
         className="max-w-2xl mx-auto space-y-6 mb-20"
+        noValidate
       >
+        {/* Email Field */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium mb-2 flex items-center gap-2 text-white/80">
+          <label htmlFor="contact-email" className="block text-sm font-medium mb-2 flex items-center gap-2 text-white/80">
             <Mail className="w-4 h-4" />
             Your Email
           </label>
           <input
             type="email"
-            id="email"
+            id="contact-email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-white/40 transition-colors text-white placeholder:text-white/40"
+            aria-describedby={emailError ? "email-error" : undefined}
+            aria-invalid={!!emailError}
+            className={`w-full px-4 py-3 bg-white/10 border rounded-lg focus:outline-none transition-colors text-white placeholder:text-white/40 ${
+              emailError
+                ? "border-red-400 focus:border-red-400"
+                : "border-white/20 focus:border-white/40"
+            }`}
             placeholder="your.email@example.com"
           />
+          {emailError && (
+            <p id="email-error" role="alert" className="mt-1.5 text-xs text-red-400 flex items-center gap-1">
+              <span>⚠</span> {emailError}
+            </p>
+          )}
         </div>
 
+        {/* Message Field */}
         <div>
-          <label htmlFor="message" className="block text-sm font-medium mb-2 flex items-center gap-2 text-white/80">
+          <label htmlFor="contact-message" className="block text-sm font-medium mb-2 flex items-center gap-2 text-white/80">
             <MessageSquare className="w-4 h-4" />
             Your Message
           </label>
           <textarea
-            id="message"
+            id="contact-message"
             name="message"
             value={formData.message}
             onChange={handleChange}
             required
+            minLength={10}
             rows={6}
             className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg focus:outline-none focus:border-white/40 transition-colors text-white placeholder:text-white/40 resize-none"
             placeholder="Tell me about your project..."
           />
         </div>
 
+        {/* Status Messages */}
+        {status === "success" && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            role="status"
+            aria-live="polite"
+            className="flex items-center gap-2 text-green-400 text-sm bg-green-400/10 border border-green-400/20 rounded-lg px-4 py-3"
+          >
+            <CheckCircle className="w-4 h-4 shrink-0" />
+            Message sent! I'll get back to you within 24 hours.
+          </motion.div>
+        )}
+
+        {status === "error" && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            role="alert"
+            aria-live="assertive"
+            className="flex items-center gap-2 text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-lg px-4 py-3"
+          >
+            <span>⚠</span>
+            Something went wrong. Please try emailing me directly at{" "}
+            <a
+              href="mailto:antonyjenishfernando@gmail.com"
+              className="underline hover:text-red-300 transition-colors"
+            >
+              antonyjenishfernando@gmail.com
+            </a>
+          </motion.div>
+        )}
+
         <motion.button
           type="submit"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full bg-white text-black px-6 py-4 rounded-lg font-medium hover:bg-white/90 transition-colors flex items-center justify-center gap-2"
+          disabled={status === "sending" || !!emailError || !formData.email || !formData.message}
+          whileHover={{ scale: status === "sending" ? 1 : 1.02 }}
+          whileTap={{ scale: status === "sending" ? 1 : 0.98 }}
+          className="w-full bg-white text-black px-6 py-4 rounded-lg font-medium hover:bg-white/90 transition-colors flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          aria-label="Send message"
         >
-          Send Message
-          <ArrowRight className="w-5 h-5" />
+          {status === "sending" ? (
+            <>
+              <Loader2 className="w-5 h-5 animate-spin" />
+              Sending…
+            </>
+          ) : (
+            <>
+              Send Message
+              <ArrowRight className="w-5 h-5" />
+            </>
+          )}
         </motion.button>
       </motion.form>
 
@@ -143,7 +251,7 @@ const ContactFormSection = ({ contact }: { contact: any }) => {
               <Linkedin className="w-4 h-4" />
               LinkedIn
             </a>
-            <a href={`mailto:${contact.email}`} className="flex items-center gap-2 hover:opacity-60 transition-opacity">
+            <a href={`mailto:antonyjenishfernando@gmail.com`} className="flex items-center gap-2 hover:opacity-60 transition-opacity">
               <Mail className="w-4 h-4" />
               Email
             </a>
