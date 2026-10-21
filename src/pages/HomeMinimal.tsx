@@ -11,6 +11,7 @@ import {
 import Lenis from "lenis";
 import ContactFormSection from "@/components/ContactFormSection";
 import FeaturedProjects from "@/components/FeaturedProjects";
+import { AboutAccordion, ExperienceAccordion, EducationAccordion } from "@/components/AboutLists";
 import { trackProjectClick, trackEmailClick, trackSocialClick } from "@/components/Analytics";
 import ScrollProgress from "@/components/ScrollProgress";
 import FloatingContactButton from "@/components/FloatingContactButton";
@@ -733,103 +734,19 @@ const HomeMinimal = () => {
                   <ScrollRevealText text="Versatile technology professional — building modern web experiences, enterprise applications, and AI-powered solutions." mode="words" delay={0.1} />
                 </h2>
 
-                <div className="prose prose-lg max-w-none mb-16">
-                  <p className="text-xl text-black/70 dark:text-white/70 leading-relaxed mb-6 transition-colors">
-                    I'm Antony Jenish Fernando — a Full Stack Developer, Oracle APEX Developer, and AI Engineer pursuing B.Tech in Information Technology at Loyola-ICAM College of Engineering and Technology in Chennai, India.
-                  </p>
-                  <p className="text-lg text-black/60 dark:text-white/60 leading-relaxed mb-6 transition-colors">
-                    I'm actively seeking full-time roles, internships, and freelance collaborations in Software Engineering, AI/ML, Oracle APEX, and Data. I build modern responsive websites, enterprise Oracle APEX applications, and AI-powered systems — bringing both technical depth and a product mindset to every engagement.
-                  </p>
-                  <p className="text-lg text-black/60 dark:text-white/60 leading-relaxed transition-colors">
-                    Through my internship at Ontographica, I work on Knowledge Graph engineering, Semantic Web technologies (RDF, OWL, SPARQL), and AI data pipelines. My project portfolio spans luxury e-commerce platforms, AI-powered SaaS systems, and ML dashboards — each driven by real business outcomes.
-                  </p>
+                <div className="mb-16">
+                  <AboutAccordion />
                 </div>
 
                 {/* Experience Timeline with animated line */}
                 <p className="text-sm uppercase tracking-wider text-black/40 dark:text-white/40 mb-8 transition-colors">Professional Experience</p>
-                <div className="relative pl-6 mb-16">
-                  <TimelineLine />
-                  <div className="space-y-6">
-                    {internships.map((exp, i) => (
-                      <RevealCard
-                        key={i}
-                        delay={i * 0.18}
-                        direction="left"
-                        className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 transition-all"
-                      >
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-1">
-                              <h3 className="text-2xl font-semibold">{exp.role}</h3>
-                              {exp.status === "current" && (
-                                <span className="flex items-center gap-1 text-xs px-3 py-1 bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-500/30 rounded-full font-medium">
-                                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                  Currently Working
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-black/60 dark:text-white/60 mb-3 font-medium transition-colors">{exp.company}</p>
-                            <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed mb-4 transition-colors">{exp.description}</p>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                              {exp.responsibilities.map((r, j) => (
-                                <span key={j} className="text-xs px-3 py-1.5 bg-black/5 dark:bg-white/5 rounded-lg flex items-center gap-1.5 transition-colors">
-                                  <span className="w-1 h-1 bg-black/40 dark:bg-white/40 rounded-full" />
-                                  {r}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          <div className="text-right flex-shrink-0">
-                            <p className="font-medium whitespace-nowrap">{exp.period}</p>
-                            <p className="text-sm text-black/60 dark:text-white/60 transition-colors">{exp.location}</p>
-                            {exp.duration && (
-                              <span className="inline-block mt-2 text-xs px-3 py-1 bg-black/5 dark:bg-white/10 rounded-full font-medium transition-colors">
-                                <Clock className="w-3 h-3 inline-block mr-1" />{exp.duration}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {exp.tags.map((tag) => (
-                            <span key={tag} className="text-xs px-3 py-1 bg-black/5 dark:bg-white/10 rounded-full transition-colors">{tag}</span>
-                          ))}
-                        </div>
-                      </RevealCard>
-                    ))}
-                  </div>
+                <div className="mb-16">
+                  <ExperienceAccordion internships={internships} />
                 </div>
 
                 {/* Education */}
                 <p className="text-sm uppercase tracking-wider text-black/40 dark:text-white/40 mb-8 transition-colors">Education</p>
-                <div className="space-y-6">
-                  {[{
-                    role: "B.Tech Information Technology",
-                    company: "Loyola-ICAM College of Engineering",
-                    period: "2023 — 2027",
-                    location: "Chennai, India",
-                    description: "Specializing in Data Science, Machine Learning, and AI. Active participant in tech events, hackathons, and collaborative projects. Strong foundation in algorithms, data structures, and statistical analysis.",
-                    tags: ["Education", "AI/ML", "Data Science", "Full Stack"]
-                  }].map((exp, i) => (
-                    <RevealCard key={i} delay={0.1} direction="up" className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 transition-all">
-                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                        <div className="flex-1">
-                          <h3 className="text-2xl font-semibold mb-1">{exp.role}</h3>
-                          <p className="text-black/60 dark:text-white/60 mb-3 transition-colors">{exp.company}</p>
-                          <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed transition-colors">{exp.description}</p>
-                        </div>
-                        <div className="text-right flex-shrink-0">
-                          <p className="font-medium whitespace-nowrap">{exp.period}</p>
-                          <p className="text-sm text-black/60 dark:text-white/60 transition-colors">{exp.location}</p>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.tags.map((tag) => (
-                          <span key={tag} className="text-xs px-3 py-1 bg-black/5 dark:bg-white/10 rounded-full transition-colors">{tag}</span>
-                        ))}
-                      </div>
-                    </RevealCard>
-                  ))}
-                </div>
+                <EducationAccordion />
               </motion.div>
             </div>
           </section>
