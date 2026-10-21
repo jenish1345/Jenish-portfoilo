@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import Lenis from "lenis";
 import ContactFormSection from "@/components/ContactFormSection";
+import FeaturedProjects from "@/components/FeaturedProjects";
+import { AboutAccordion, ExperienceAccordion, EducationAccordion } from "@/components/AboutLists";
 import { trackProjectClick, trackEmailClick, trackSocialClick } from "@/components/Analytics";
 import ScrollProgress from "@/components/ScrollProgress";
 import FloatingContactButton from "@/components/FloatingContactButton";
@@ -202,11 +204,9 @@ const RevealCard = ({
 const HomeMinimal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const { projects, contact } = portfolioData;
-  const [filteredProjects, setFilteredProjects] = useState(projects);
+  const { contact } = portfolioData;
   const [showHello, setShowHello] = useState(true);
   const [showContent, setShowContent] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(projects[0]);
   const [scrollY, setScrollY] = useState(0);
 
   // Parallax scroll tracking
@@ -479,7 +479,7 @@ const HomeMinimal = () => {
                   className="text-sm uppercase tracking-wider text-black/60 dark:text-white/60 mb-6 transition-colors flex items-center gap-2"
                 >
                   <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                  Open to Full-Time Roles &amp; Freelance Collaborations
+                  Open to Full-Time Roles, Internships &amp; Freelance
                 </motion.p>
 
                 <motion.h1
@@ -506,8 +506,29 @@ const HomeMinimal = () => {
                   transition={{ delay: 0.6 }}
                   className="text-base text-black/60 dark:text-white/60 mb-8 max-w-xl leading-relaxed transition-colors"
                 >
-                  I build modern websites, enterprise applications, and AI-powered solutions — and I'm actively seeking full-time, internship, and freelance opportunities in Software Engineering, AI/ML, Oracle APEX, and Data.
+                  Final-year B.Tech IT student at Loyola-ICAM. I build AI-agent systems and full-stack products, and I've interned on Oracle APEX and knowledge-graph projects.
                 </motion.p>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.65 }}
+                  className="flex flex-wrap gap-3 mb-10"
+                >
+                  <a
+                    href="#work"
+                    className="inline-flex min-h-[44px] items-center gap-2 bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-full text-sm font-medium hover:bg-black/80 dark:hover:bg-white/80 transition-colors"
+                  >
+                    View projects
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                  <a
+                    href="/Antony_Jenish_Fernando_Resume_Final.pdf"
+                    className="inline-flex min-h-[44px] items-center gap-2 border border-black/20 dark:border-white/20 px-6 py-2.5 rounded-full text-sm font-medium hover:border-black dark:hover:border-white transition-colors"
+                  >
+                    Résumé (PDF)
+                  </a>
+                </motion.div>
 
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -516,18 +537,18 @@ const HomeMinimal = () => {
                   className="flex items-center gap-6"
                 >
                   <div>
-                    <div className="text-4xl font-bold">12+</div>
-                    <div className="text-sm text-black/60 dark:text-white/60 transition-colors">Projects Delivered</div>
+                    <div className="text-4xl font-bold">6</div>
+                    <div className="text-sm text-black/60 dark:text-white/60 transition-colors">Featured Projects</div>
                   </div>
                   <div className="w-px h-12 bg-black/20 dark:bg-white/20 transition-colors" />
                   <div>
-                    <div className="text-4xl font-bold">2</div>
+                    <div className="text-4xl font-bold">3</div>
                     <div className="text-sm text-black/60 dark:text-white/60 transition-colors">Internships</div>
                   </div>
                   <div className="w-px h-12 bg-black/20 dark:bg-white/20 transition-colors" />
                   <div>
-                    <div className="text-4xl font-bold">10+</div>
-                    <div className="text-sm text-black/60 dark:text-white/60 transition-colors">Technologies</div>
+                    <div className="text-4xl font-bold">4</div>
+                    <div className="text-sm text-black/60 dark:text-white/60 transition-colors">Hackathon Builds</div>
                   </div>
                 </motion.div>
 
@@ -562,8 +583,8 @@ const HomeMinimal = () => {
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   <img
-                    src="/Profile-photoNEW.JPG"
-                    alt="Antony Jenish"
+                    src="/profile.jpg"
+                    alt="Portrait of Antony Jenish Fernando"
                     className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105 rounded-2xl"
                   />
 
@@ -684,132 +705,12 @@ const HomeMinimal = () => {
                 <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight text-zinc-900 dark:text-white transition-colors">
                   <ScrollRevealText text="FEATURED PROJECTS" mode="words" />
                 </h2>
-                <p className="text-zinc-600 dark:text-zinc-400 text-lg transition-colors">Click to explore. Pop out to compare.</p>
+                <p className="text-zinc-600 dark:text-zinc-400 text-lg transition-colors">
+                  Six projects. Each one says what I built, and when it was a hackathon, a team effort or built on someone else's code.
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                {/* Left Sidebar */}
-                <RevealCard delay={0} direction="left" className="lg:col-span-4 bg-white dark:bg-[#0d0d0d] border border-zinc-200 dark:border-emerald-500/20 rounded-lg overflow-hidden transition-colors">
-                  <div className="bg-zinc-50 dark:bg-[#0a0a0a] border-b border-zinc-200 dark:border-emerald-500/20 px-4 py-3 flex items-center justify-between transition-colors">
-                    <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 transition-colors">~/projects</span>
-                    <div className="flex gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-400" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                      <div className="w-3 h-3 rounded-full bg-emerald-400" />
-                    </div>
-                  </div>
-                  <div className="p-4">
-                    <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mb-3 uppercase tracking-wider transition-colors">Explorer</div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-2 text-zinc-700 dark:text-zinc-400 transition-colors">
-                        <span className="text-blue-500">📁</span>
-                        <span className="text-sm font-mono">Projects</span>
-                      </div>
-                      <div className="ml-6 space-y-1">
-                        {projects.map((project, idx) => (
-                          <motion.div
-                            key={project.id}
-                            initial={{ opacity: 0, x: -15 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: idx * 0.05, duration: 0.4 }}
-                            viewport={{ once: true }}
-                            onClick={() => setSelectedProject(project)}
-                            className={`px-3 py-2 rounded text-sm font-mono transition-all cursor-pointer ${
-                              selectedProject.id === project.id
-                                ? "bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border-l-2 border-emerald-500"
-                                : "text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/5"
-                            }`}
-                          >
-                            {project.emoji} {project.title.split("•")[0].trim()}
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </RevealCard>
-
-                {/* Right Panel */}
-                <RevealCard delay={0.15} direction="right" className="lg:col-span-8 bg-white dark:bg-[#0d0d0d] border border-zinc-200 dark:border-emerald-500/20 rounded-lg overflow-hidden transition-colors">
-                  <div className="bg-zinc-50 dark:bg-[#0a0a0a] border-b border-zinc-200 dark:border-emerald-500/20 px-4 py-3 flex items-center justify-between transition-colors">
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs font-mono text-zinc-700 dark:text-zinc-500 transition-colors">{selectedProject.title.split("•")[0].trim()}</span>
-                      <span className="text-xs px-2 py-0.5 bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 rounded border border-emerald-200 dark:border-emerald-500/30 font-mono transition-colors">{selectedProject.category}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      {selectedProject.liveUrl && (
-                        <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" title="Live Demo">
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      )}
-                      <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors" title="GitHub">
-                        <Github className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
-
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={selectedProject.id}
-                      initial={{ opacity: 0, y: 12 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -12 }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      className="p-8 space-y-6"
-                    >
-                      <div>
-                        <h3 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white transition-colors">{selectedProject.title.toUpperCase()}</h3>
-                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed transition-colors">{selectedProject.description}</p>
-                      </div>
-
-                      {(selectedProject.problem || selectedProject.solution) && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          {selectedProject.problem && (
-                            <div className="bg-zinc-50 dark:bg-zinc-900/50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-700">
-                              <div className="text-xs font-mono text-red-500 dark:text-red-400 mb-2 uppercase tracking-wider">&gt; problem:</div>
-                              <p className="text-sm text-zinc-600 dark:text-zinc-400">{selectedProject.problem}</p>
-                            </div>
-                          )}
-                          {selectedProject.solution && (
-                            <div className="bg-zinc-50 dark:bg-zinc-900/50 rounded-lg p-4 border border-zinc-200 dark:border-zinc-700">
-                              <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mb-2 uppercase tracking-wider">&gt; solution:</div>
-                              <p className="text-sm text-zinc-600 dark:text-zinc-400">{selectedProject.solution}</p>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      <div className="space-y-2 font-mono text-sm">
-                        <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400">&gt; type:</span><span className="text-zinc-600 dark:text-zinc-400">{selectedProject.category}</span></div>
-                        <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400">&gt; stack:</span><span className="text-zinc-600 dark:text-zinc-400">{selectedProject.technologies.join(" • ")}</span></div>
-                        {selectedProject.duration && <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400">&gt; duration:</span><span className="text-zinc-600 dark:text-zinc-400">{selectedProject.duration}</span></div>}
-                        {selectedProject.metrics && <div className="flex items-start gap-3"><span className="text-emerald-600 dark:text-emerald-400">&gt; impact:</span><span className="text-zinc-600 dark:text-zinc-400">{selectedProject.metrics.impact || "High-quality delivery"}</span></div>}
-                      </div>
-
-                      {selectedProject.features && selectedProject.features.length > 0 && (
-                        <div>
-                          <div className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mb-3 uppercase tracking-wider">&gt; features:</div>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedProject.features.map((feature, i) => (
-                              <span key={i} className="px-3 py-1 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded text-xs font-mono text-zinc-600 dark:text-zinc-400 flex items-center gap-1">
-                                <CheckCircle className="w-3 h-3 text-emerald-500" />
-                                {feature}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      <div className="flex flex-wrap gap-2 pt-2">
-                        {selectedProject.technologies.map((tech) => (
-                          <span key={tech} className="px-3 py-1.5 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 rounded text-xs font-mono text-emerald-700 dark:text-emerald-400 transition-colors">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                </RevealCard>
-              </div>
+              <FeaturedProjects />
             </div>
           </section>
 
@@ -833,103 +734,19 @@ const HomeMinimal = () => {
                   <ScrollRevealText text="Versatile technology professional — building modern web experiences, enterprise applications, and AI-powered solutions." mode="words" delay={0.1} />
                 </h2>
 
-                <div className="prose prose-lg max-w-none mb-16">
-                  <p className="text-xl text-black/70 dark:text-white/70 leading-relaxed mb-6 transition-colors">
-                    I'm Antony Jenish Fernando — a Full Stack Developer, Oracle APEX Developer, and AI Engineer pursuing B.Tech in Information Technology at Loyola-ICAM College of Engineering and Technology in Chennai, India.
-                  </p>
-                  <p className="text-lg text-black/60 dark:text-white/60 leading-relaxed mb-6 transition-colors">
-                    I'm actively seeking full-time roles, internships, and freelance collaborations in Software Engineering, AI/ML, Oracle APEX, and Data. I build modern responsive websites, enterprise Oracle APEX applications, and AI-powered systems — bringing both technical depth and a product mindset to every engagement.
-                  </p>
-                  <p className="text-lg text-black/60 dark:text-white/60 leading-relaxed transition-colors">
-                    Through my internship at Ontographica, I work on Knowledge Graph engineering, Semantic Web technologies (RDF, OWL, SPARQL), and AI data pipelines. My project portfolio spans luxury e-commerce platforms, AI-powered SaaS systems, and ML dashboards — each driven by real business outcomes.
-                  </p>
+                <div className="mb-16">
+                  <AboutAccordion />
                 </div>
 
                 {/* Experience Timeline with animated line */}
                 <p className="text-sm uppercase tracking-wider text-black/40 dark:text-white/40 mb-8 transition-colors">Professional Experience</p>
-                <div className="relative pl-6 mb-16">
-                  <TimelineLine />
-                  <div className="space-y-6">
-                    {internships.map((exp, i) => (
-                      <RevealCard
-                        key={i}
-                        delay={i * 0.18}
-                        direction="left"
-                        className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 transition-all"
-                      >
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                          <div className="flex-1">
-                            <div className="flex items-center gap-3 mb-1">
-                              <h3 className="text-2xl font-semibold">{exp.role}</h3>
-                              {exp.status === "current" && (
-                                <span className="flex items-center gap-1 text-xs px-3 py-1 bg-green-50 dark:bg-green-500/10 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-500/30 rounded-full font-medium">
-                                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                  Currently Working
-                                </span>
-                              )}
-                            </div>
-                            <p className="text-black/60 dark:text-white/60 mb-3 font-medium transition-colors">{exp.company}</p>
-                            <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed mb-4 transition-colors">{exp.description}</p>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                              {exp.responsibilities.map((r, j) => (
-                                <span key={j} className="text-xs px-3 py-1.5 bg-black/5 dark:bg-white/5 rounded-lg flex items-center gap-1.5 transition-colors">
-                                  <span className="w-1 h-1 bg-black/40 dark:bg-white/40 rounded-full" />
-                                  {r}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                          <div className="text-right flex-shrink-0">
-                            <p className="font-medium whitespace-nowrap">{exp.period}</p>
-                            <p className="text-sm text-black/60 dark:text-white/60 transition-colors">{exp.location}</p>
-                            {exp.duration && (
-                              <span className="inline-block mt-2 text-xs px-3 py-1 bg-black/5 dark:bg-white/10 rounded-full font-medium transition-colors">
-                                <Clock className="w-3 h-3 inline-block mr-1" />{exp.duration}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {exp.tags.map((tag) => (
-                            <span key={tag} className="text-xs px-3 py-1 bg-black/5 dark:bg-white/10 rounded-full transition-colors">{tag}</span>
-                          ))}
-                        </div>
-                      </RevealCard>
-                    ))}
-                  </div>
+                <div className="mb-16">
+                  <ExperienceAccordion internships={internships} />
                 </div>
 
                 {/* Education */}
                 <p className="text-sm uppercase tracking-wider text-black/40 dark:text-white/40 mb-8 transition-colors">Education</p>
-                <div className="space-y-6">
-                  {[{
-                    role: "B.Tech Information Technology",
-                    company: "Loyola-ICAM College of Engineering",
-                    period: "2023 — 2027",
-                    location: "Chennai, India",
-                    description: "Specializing in Data Science, Machine Learning, and AI. Active participant in tech events, hackathons, and collaborative projects. Strong foundation in algorithms, data structures, and statistical analysis.",
-                    tags: ["Education", "AI/ML", "Data Science", "Full Stack"]
-                  }].map((exp, i) => (
-                    <RevealCard key={i} delay={0.1} direction="up" className="bg-white dark:bg-[#1a1a1a] rounded-2xl p-8 border border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/20 transition-all">
-                      <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
-                        <div className="flex-1">
-                          <h3 className="text-2xl font-semibold mb-1">{exp.role}</h3>
-                          <p className="text-black/60 dark:text-white/60 mb-3 transition-colors">{exp.company}</p>
-                          <p className="text-sm text-black/60 dark:text-white/60 leading-relaxed transition-colors">{exp.description}</p>
-                        </div>
-                        <div className="text-right flex-shrink-0">
-                          <p className="font-medium whitespace-nowrap">{exp.period}</p>
-                          <p className="text-sm text-black/60 dark:text-white/60 transition-colors">{exp.location}</p>
-                        </div>
-                      </div>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.tags.map((tag) => (
-                          <span key={tag} className="text-xs px-3 py-1 bg-black/5 dark:bg-white/10 rounded-full transition-colors">{tag}</span>
-                        ))}
-                      </div>
-                    </RevealCard>
-                  ))}
-                </div>
+                <EducationAccordion />
               </motion.div>
             </div>
           </section>

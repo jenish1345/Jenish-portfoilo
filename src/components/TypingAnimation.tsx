@@ -4,13 +4,11 @@ const TypingAnimation = () => {
   return (
     <TypeAnimation
       sequence={[
-        'Full Stack Web Developer',
+        'AI Agent Systems Builder',
+        2000,
+        'Full Stack Developer',
         2000,
         'Oracle APEX Developer',
-        2000,
-        'AI Engineer',
-        2000,
-        'Enterprise Application Builder',
         2000,
         'Knowledge Graph Engineer',
         2000,
